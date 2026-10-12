@@ -26,21 +26,25 @@ describe('Contato dentro do footer, em uma cor só', () => {
     expect(main).not.toContain('<Outro');
   });
 
-  it('o footer empilha: Contato centralizado em cima e os links embaixo, à esquerda, antes da linha', () => {
+  it('o footer tem uma faixa: links à esquerda e o Contato no meio, os dois alinhados pela base (colados na linha)', () => {
     const footer = src('components/Footer.astro');
     expect(footer).toContain('<slot name="contact" />');
-    expect(footer.indexOf('<slot name="contact"')).toBeLessThan(footer.indexOf('class="links"'));
-    expect(footer.indexOf('class="links"')).toBeLessThan(footer.indexOf('<Divider'));
-    expect(footer).toMatch(/\.top\s*\{[^}]*grid-template-columns:\s*1fr;/);
-    expect(footer).not.toContain('minmax(0, 81rem)');
-    expect(footer).not.toContain('order: -1');
-    expect(footer).toMatch(/\.links\s*\{[^}]*justify-items:\s*start/);
+    expect(footer.indexOf('class="links"')).toBeLessThan(footer.indexOf('<slot name="contact"'));
+    expect(footer.indexOf('<slot name="contact"')).toBeLessThan(footer.indexOf('<Divider'));
+    expect(footer).toMatch(/\.top\s*\{[^}]*grid-template-columns:\s*1fr\s+minmax\(0,\s*81rem\)\s+1fr/);
+    expect(footer).toMatch(/\.top\s*\{[^}]*align-items:\s*end/);
+    expect(footer).toMatch(/\.links\s*\{[^}]*grid-column:\s*1/);
+    expect(footer).toMatch(/\.contact\s*\{[^}]*grid-column:\s*2/);
   });
 
-  it('o bloco do Contato desce para perto dos links (pouco espaço entre eles; o topo absorve a diferença)', () => {
+  it('no mobile o Contato vem antes dos links, em uma coluna', () => {
     const footer = src('components/Footer.astro');
-    expect(footer).toMatch(/\.top\s*\{[^}]*gap:\s*5rem;/);
-    expect(footer).toMatch(/\.Footer\.-with-contact\s*\{[^}]*padding-top:\s*16rem;/);
+    expect(footer).toMatch(/@media[^{]*\{[\s\S]*\.top\s*\{[^}]*grid-template-columns:\s*1fr;/);
+    expect(footer).toMatch(/@media[^{]*\{[\s\S]*\.contact\s*\{[^}]*order:\s*-1/);
+  });
+
+  it('o espaço do topo do footer continua enxuto (16rem)', () => {
+    expect(src('components/Footer.astro')).toMatch(/\.Footer\.-with-contact\s*\{[^}]*padding-top:\s*16rem;/);
   });
 
   it('o bloco do Contato é centralizado', () => {

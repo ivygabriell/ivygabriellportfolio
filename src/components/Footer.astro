@@ -18,10 +18,10 @@ const links = [
 
 <footer class:list={['Footer', { '-with-contact': withContact }]}>
   <div class="container--narrow top">
-    {withContact && <div class="contact"><slot name="contact" /></div>}
     <nav class="links" aria-label={t.footer.navLabel}>
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
+    {withContact && <div class="contact"><slot name="contact" /></div>}
   </div>
   <div class="container--narrow rule"><Divider /></div>
   <div class="container--narrow bottom">
@@ -47,12 +47,19 @@ const links = [
   .Footer.-with-contact {
     padding-top: 16rem;
   }
+  /* Faixa: links à esquerda e o Contato no meio, alinhados pela base (colados na linha divisória). */
   .top {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 5rem;
+    grid-template-columns: 1fr minmax(0, 81rem) 1fr;
+    align-items: end;
+    gap: 4rem;
+  }
+  .contact {
+    grid-column: 2;
   }
   .links {
+    grid-column: 1;
+    grid-row: 1;
     display: grid;
     gap: 1.2rem;
     justify-items: start;
@@ -96,7 +103,16 @@ const links = [
       padding-top: 11rem;
     }
     .top {
+      grid-template-columns: 1fr;
       gap: 3rem;
+    }
+    .contact {
+      grid-column: 1;
+      order: -1;
+    }
+    .links {
+      grid-column: 1;
+      grid-row: auto;
     }
     .rule {
       margin-top: 3rem;
