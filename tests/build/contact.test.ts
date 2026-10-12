@@ -21,13 +21,19 @@ describe('contato', () => {
     }
   });
 
-  it('o e-mail novo aparece e o de exemplo, o da conta e o Instagram não', () => {
+  it('o e-mail novo aparece e o de exemplo e o da conta não', () => {
     for (const lang of ['pt', 'en']) {
       const html = readDecoded(`${lang}/index.html`).toLowerCase();
       expect(html).toContain(site.email);
       expect(html).not.toContain('ola@example.com');
       expect(html).not.toContain('gcivy');
-      expect(html).not.toContain('instagram');
     }
+  });
+
+  it.each(['pt', 'en'])('%s: o Instagram aparece no Sobre e no footer, com o link informado e sem o link de exemplo', (lang) => {
+    const html = readDecoded(`${lang}/index.html`);
+    const links = html.match(/href="https:\/\/www\.instagram\.com\/ivygabriell_\/"/g) ?? [];
+    expect(links).toHaveLength(2);
+    expect(html).not.toContain('href="https://www.instagram.com/"');
   });
 });

@@ -21,7 +21,7 @@ Complementa `2026-10-12-portfolio-design.md`. Aquele spec define a estrutura e o
 2. **Destaque**: painel em código. O vídeo/motion fica para depois (`highlightVideo: null`); o painel funciona sem ele.
 3. **Sobre**: texto curto, **sem** habilidades (mantém o bloco de redes).
 4. **Selected work** (título igual nos dois idiomas): 4 cartões, um por serviço (Sites e landing pages, Aplicações web, Apps mobile, Automações e integrações), no layout de grade dos antigos cartões de projeto, com arte em cobalto, título (`h3`) e descrição. Sem links.
-5. **Contato + footer**: e-mail e WhatsApp como botões principais; LinkedIn e GitHub como links secundários; sem formulário. Navbar e footer: Sobre, Serviços, Contato.
+5. **Contato + footer**: e-mail e WhatsApp como botões principais; LinkedIn, GitHub e Instagram como links secundários; sem formulário. Navbar e footer: Sobre, Serviços, Contato.
 
 `services.ts` (rolagem guiada) e as páginas de projeto continuam no código sem uso na home; a limpeza fica para depois.
 
@@ -55,7 +55,7 @@ Sem Depoimentos, Processo, FAQ, Currículo nem Blog.
 
 **Contato.** Título: *Tem uma ideia para tirar do papel?* / *Have an idea to get off the ground?* Botões: *Copiar e-mail* e *Chamar no WhatsApp* / *Copy email* e *Message on WhatsApp*. Mensagem inicial do WhatsApp: *Olá, Ivy! Vi seu portfólio e quero conversar sobre um projeto.* / *Hi Ivy! I saw your portfolio and I'd like to talk about a project.*
 
-**Contatos (públicos no site):** e-mail `ivy.gabriel@icloud.com`; WhatsApp **somente como botão com link de redirecionamento** (`https://wa.me/5562995024778?text=<mensagem codificada no idioma da página>`); o número **não aparece como texto** em nenhuma página; LinkedIn `https://www.linkedin.com/in/ivygabriel`; GitHub `https://github.com/ivygabriell`. O Instagram sai.
+**Contatos (públicos no site):** e-mail `ivy.gabriel@icloud.com`; WhatsApp **somente como botão com link de redirecionamento** (`https://wa.me/5562995024778?text=<mensagem codificada no idioma da página>`); o número **não aparece como texto** em nenhuma página; LinkedIn `https://www.linkedin.com/in/ivygabriel`; GitHub `https://github.com/ivygabriell`. Instagram `https://www.instagram.com/ivygabriell_/` (incluído depois, a pedido da usuária; aparece no Sobre e no footer como as outras redes).
 
 ## 4. Dados e código
 
