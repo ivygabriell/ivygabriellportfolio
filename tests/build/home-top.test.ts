@@ -15,6 +15,14 @@ describe('topo da home', () => {
     expect(html).toContain('data-reveal="words"');
   });
 
+  it('o logo do cabeçalho mostra IG, uma letra por elemento', () => {
+    const html = read('pt/index.html');
+    const logo = html.match(/<a class="logo"[^>]*>([\s\S]*?)<\/a>/);
+    expect(logo, 'link do logo').not.toBeNull();
+    const letters = [...logo![1].matchAll(/class="logo__ch[^"]*"[^>]*>([^<]*)</g)].map((m) => m[1]);
+    expect(letters).toEqual(['I', 'G']);
+  });
+
   it('a navbar tem links por âncora, pílula de contato e troca de idioma', () => {
     const html = read('pt/index.html');
     expect(html).toContain('href="#sobre"');

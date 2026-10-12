@@ -7,6 +7,10 @@ describe('dados do site', () => {
     expect(site.email).toBe('ivy.gabriel@icloud.com');
   });
 
+  it('o logo do cabeçalho é "IG"', () => {
+    expect(site.wordmark).toBe('IG');
+  });
+
   it('tem só GitHub e LinkedIn, com as URLs informadas', () => {
     expect(site.socials.map((s) => [s.id, s.url])).toEqual([
       ['github', 'https://github.com/ivygabriell'],

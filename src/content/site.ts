@@ -2,7 +2,7 @@
 // enquanto for true, as páginas levam `noindex`.
 export const site = {
   name: 'Ivy Gabriel',
-  wordmark: 'ivy',
+  wordmark: 'IG',
   email: 'ivy.gabriel@icloud.com',
   // Só dígitos, com o código do país. Aparece apenas dentro do link do botão (wa.me), nunca como texto.
   whatsapp: '5562995024778',
