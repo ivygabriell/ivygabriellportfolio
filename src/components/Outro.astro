@@ -1,12 +1,14 @@
 ---
 import { copy } from '../lib/copy';
 import { site } from '../content/site';
+import { whatsappUrl } from '../lib/whatsapp';
 import type { Locale } from '../lib/i18n';
 import GradientArt from './GradientArt.astro';
 import Pill from './Pill.astro';
 
 interface Props { locale: Locale }
 const t = copy[Astro.props.locale].outro;
+const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
 ---
 
 <section class="Outro -inverse" id="contato">
@@ -14,14 +16,17 @@ const t = copy[Astro.props.locale].outro;
   <div class="container inner">
     <h2 data-reveal="words">{t.title}</h2>
     <p data-reveal="words">{t.text}</p>
-    <Pill
-      variant="light"
-      type="button"
-      data-clipboard-copy={site.email}
-      data-copied={t.copied}
-      data-failed={t.copyFailed}
-      data-cursor-icon="arrow-up-right">{t.cta}</Pill
-    >
+    <div class="actions">
+      <Pill
+        variant="light"
+        type="button"
+        data-clipboard-copy={site.email}
+        data-copied={t.copied}
+        data-failed={t.copyFailed}
+        data-cursor-icon="arrow-up-right">{t.cta}</Pill
+      >
+      <Pill variant="outline" href={whatsapp} target="_blank" rel="noopener" data-cursor-icon="arrow-up-right">{t.whatsappCta}</Pill>
+    </div>
     <a class="mail" href={`mailto:${site.email}`}>{site.email}</a>
   </div>
 </section>
@@ -57,6 +62,12 @@ const t = copy[Astro.props.locale].outro;
     font-size: var(--fs-sub);
     line-height: 1.15;
   }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.6rem;
+  }
   .mail {
     font-size: 2rem;
     border-bottom: 1px solid currentColor;
@@ -68,6 +79,9 @@ const t = copy[Astro.props.locale].outro;
     }
     .inner {
       justify-items: start;
+    }
+    .actions {
+      justify-content: flex-start;
     }
   }
 </style>

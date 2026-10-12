@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Ivy Gabriel — desenvolvimento e criação digital",
-    "description": "Portfólio de Ivy Gabriel: sites, interfaces e experimentos feitos com código e cuidado com o detalhe."
+    "title": "Ivy Gabriel — Desenvolvedor Full Stack",
+    "description": "Sites, sistemas, apps e automações sob medida. Fale com Ivy Gabriel e transforme sua ideia em produto."
   },
   "nav": {
     "about": "Sobre",
@@ -13,8 +13,8 @@
     "langAria": "Mudar para inglês"
   },
   "hero": {
-    "title": "Eu crio sites e produtos digitais que parecem vivos.",
-    "subtitle": "Eu sou Ivy Gabriel. Desenvolvo interfaces, experimentos e projetos próprios, do código ao detalhe."
+    "title": "Ivy Gabriel, Desenvolvedor Full Stack.",
+    "subtitle": "Eu transformo a sua ideia em um produto digital além do convencional."
   },
   "highlight": {
     "title": "Código, movimento e detalhe.",
@@ -22,24 +22,42 @@
   },
   "about": {
     "label": "Sobre",
-    "text": "Eu transformo ideias em interfaces rápidas, acessíveis e com personalidade. Gosto de começar pelo problema, desenhar com calma e só então escrever o código que o resolve.",
-    "skillsLabel": "Habilidades",
-    "skills": ["TypeScript", "JavaScript", "Astro", "GSAP", "CSS", "Node.js", "Figma", "Acessibilidade"],
+    "text": "Eu sou desenvolvedor full stack e trabalho do banco de dados à tela. Gosto de começar pelo problema, conversar com calma e só então escrever o código que o resolve. Explico cada etapa em linguagem simples, sem jargão. Se você tem um processo manual, um sistema lento ou uma ideia sem time técnico, é aqui que eu ajudo.",
     "socialLabel": "Redes"
   },
   "services": {
     "title": "Serviços",
     "explore": "Explorar",
     "items": [
-      { "title": "Sites e experiências web", "text": "Eu construo sites rápidos e bem acabados, do primeiro rascunho ao deploy, com atenção a desempenho e acessibilidade.", "href": "#projetos" },
-      { "title": "Interfaces interativas", "text": "Eu dou vida às interfaces com movimento, rolagem e microinterações que explicam em vez de enfeitar.", "href": "#projetos" },
-      { "title": "Design de interfaces", "text": "Eu desenho telas e sistemas visuais consistentes, prontos para virar código sem surpresas.", "href": "#projetos" },
-      { "title": "Protótipos e experimentos", "text": "Eu testo ideias rápido com protótipos funcionais, para decidir com algo na mão e não só no papel.", "href": "#projetos" }
+      {
+        "title": "Sites e landing pages",
+        "text": "Sua marca com um site que tem desempenho, passa confiança e leva o visitante a falar com você.",
+        "href": "#contato"
+      },
+      {
+        "title": "Aplicações web",
+        "text": "Troque planilhas e tarefas manuais por um sistema feito para o jeito como o seu negócio funciona.",
+        "href": "#contato"
+      },
+      {
+        "title": "Apps mobile",
+        "text": "Seu serviço no bolso do cliente, com um app rápido, fácil de usar e pronto para crescer.",
+        "href": "#contato"
+      },
+      {
+        "title": "Automações e integrações",
+        "text": "Ferramentas conectadas e tarefas repetitivas no automático.",
+        "href": "#contato"
+      }
     ]
   },
   "projects": {
     "title": "Projetos",
-    "view": "Ver projeto"
+    "view": "Ver projeto",
+    "soon": [
+      "Em breve: um projeto que estou finalizando agora.",
+      "Em breve: o próximo projeto pode ser o seu."
+    ]
   },
   "project": {
     "overview": "Visão geral",
@@ -51,7 +69,9 @@
     "text": "Conte onde você está, o que quer alcançar e o que está no caminho. Eu respondo pessoalmente.",
     "cta": "Copiar e-mail",
     "copied": "Copiado!",
-    "copyFailed": "Não consegui copiar. O e-mail é:"
+    "copyFailed": "Não consegui copiar. O e-mail é:",
+    "whatsappCta": "Chamar no WhatsApp",
+    "whatsappMessage": "Olá, Ivy! Vi seu portfólio e quero conversar sobre um projeto."
   },
   "footer": {
     "emailLabel": "E-mail",

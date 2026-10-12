@@ -37,3 +37,48 @@ describe('projetos reais', () => {
         expect(existsSync(`public${file}`), `${p.slug}: ${file}`).toBe(true);
   });
 });
+
+describe('textos finais', () => {
+  it('o hero mostra o nome, o cargo e a frase aprovados', () => {
+    expect(pt.hero.title).toBe('Ivy Gabriel, Desenvolvedor Full Stack.');
+    expect(pt.hero.subtitle).toBe('Eu transformo a sua ideia em um produto digital além do convencional.');
+    expect(en.hero.title).toBe('Ivy Gabriel, Full Stack Developer.');
+    expect(en.hero.subtitle).toBe('I turn your idea into a digital product beyond the conventional.');
+  });
+
+  it('o Sobre não tem habilidades', () => {
+    for (const about of [pt.about, en.about]) {
+      expect(about).not.toHaveProperty('skills');
+      expect(about).not.toHaveProperty('skillsLabel');
+    }
+  });
+
+  it('há 4 serviços com os títulos aprovados, todos levando ao contato', () => {
+    expect(pt.services.items.map((i) => i.title)).toEqual([
+      'Sites e landing pages',
+      'Aplicações web',
+      'Apps mobile',
+      'Automações e integrações',
+    ]);
+    expect(en.services.items.map((i) => i.title)).toEqual([
+      'Websites and landing pages',
+      'Web applications',
+      'Mobile apps',
+      'Automations and integrations',
+    ]);
+    for (const item of [...pt.services.items, ...en.services.items]) expect(item.href).toBe('#contato');
+  });
+
+  it('Projetos tem dois cartões "Em breve" em cada idioma', () => {
+    expect(pt.projects.soon).toHaveLength(2);
+    expect(en.projects.soon).toHaveLength(2);
+  });
+
+  it('o contato tem o botão e a mensagem de WhatsApp em cada idioma', () => {
+    expect(pt.outro.whatsappCta).toBe('Chamar no WhatsApp');
+    expect(en.outro.whatsappCta).toBe('Message on WhatsApp');
+    expect(pt.outro.whatsappMessage).toContain('Ivy');
+    expect(en.outro.whatsappMessage).toContain('Ivy');
+    expect(en.outro.title).toBe('Have an idea to get off the ground?');
+  });
+});

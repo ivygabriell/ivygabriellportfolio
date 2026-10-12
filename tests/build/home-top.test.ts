@@ -4,12 +4,14 @@ import pt from '../../src/content/pt.json';
 import { read } from './dist';
 
 describe('topo da home', () => {
-  it.each([['pt', pt], ['en', en]] as const)('%s: hero, destaque e sobre com habilidades', (lang, t) => {
+  it.each([['pt', pt], ['en', en]] as const)('%s: hero, destaque e sobre (sem habilidades)', (lang, t) => {
     const html = read(`${lang}/index.html`);
     expect(html).toContain(t.hero.title);
+    expect(html).toContain(t.hero.subtitle);
     expect(html).toContain('id="destaque"');
     expect(html).toContain('id="sobre"');
-    for (const skill of t.about.skills) expect(html).toContain(skill);
+    expect(html).not.toMatch(/class="[^"]*\bskills\b/);
+    expect(html).not.toMatch(/class="[^"]*\bSkill\b/);
     expect(html).toContain('data-reveal="words"');
   });
 

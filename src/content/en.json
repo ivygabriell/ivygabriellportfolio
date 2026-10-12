@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Ivy Gabriel — development and digital craft",
-    "description": "Ivy Gabriel's portfolio: websites, interfaces and experiments built with code and care for detail."
+    "title": "Ivy Gabriel — Full Stack Developer",
+    "description": "Custom websites, systems, apps and automations. Talk to Ivy Gabriel and turn your idea into a product."
   },
   "nav": {
     "about": "About",
@@ -13,8 +13,8 @@
     "langAria": "Switch to Portuguese"
   },
   "hero": {
-    "title": "I build websites and digital products that feel alive.",
-    "subtitle": "I'm Ivy Gabriel. I develop interfaces, experiments and personal projects, from code to detail."
+    "title": "Ivy Gabriel, Full Stack Developer.",
+    "subtitle": "I turn your idea into a digital product beyond the conventional."
   },
   "highlight": {
     "title": "Code, motion and detail.",
@@ -22,24 +22,42 @@
   },
   "about": {
     "label": "About",
-    "text": "I turn ideas into fast, accessible interfaces with personality. I like to start from the problem, design with patience and only then write the code that solves it.",
-    "skillsLabel": "Skills",
-    "skills": ["TypeScript", "JavaScript", "Astro", "GSAP", "CSS", "Node.js", "Figma", "Accessibility"],
+    "text": "I'm a full stack developer and I work from the database to the screen. I like to start from the problem, talk things through and only then write the code that solves it. I explain every step in plain language, no jargon. If you have a manual process, a slow system or an idea without a technical team, that's where I help.",
     "socialLabel": "Social"
   },
   "services": {
     "title": "Services",
     "explore": "Explore",
     "items": [
-      { "title": "Websites and web experiences", "text": "I build fast, polished websites from first draft to deploy, with attention to performance and accessibility.", "href": "#projetos" },
-      { "title": "Interactive interfaces", "text": "I bring interfaces to life with motion, scroll and microinteractions that explain instead of decorate.", "href": "#projetos" },
-      { "title": "Interface design", "text": "I design screens and consistent visual systems that are ready to become code without surprises.", "href": "#projetos" },
-      { "title": "Prototypes and experiments", "text": "I test ideas fast with working prototypes, so decisions are made with something in hand and not only on paper.", "href": "#projetos" }
+      {
+        "title": "Websites and landing pages",
+        "text": "Your brand with a site that performs, inspires trust and leads visitors to get in touch.",
+        "href": "#contato"
+      },
+      {
+        "title": "Web applications",
+        "text": "Replace spreadsheets and manual tasks with a system built around how your business works.",
+        "href": "#contato"
+      },
+      {
+        "title": "Mobile apps",
+        "text": "Your service in your customer's pocket, with a fast, easy-to-use app ready to grow.",
+        "href": "#contato"
+      },
+      {
+        "title": "Automations and integrations",
+        "text": "Connected tools and repetitive tasks on autopilot.",
+        "href": "#contato"
+      }
     ]
   },
   "projects": {
     "title": "Projects",
-    "view": "View project"
+    "view": "View project",
+    "soon": [
+      "Coming soon: a project I'm finishing right now.",
+      "Coming soon: the next project could be yours."
+    ]
   },
   "project": {
     "overview": "Overview",
@@ -47,11 +65,13 @@
     "next": "Next project"
   },
   "outro": {
-    "title": "Have an idea to take off the paper?",
+    "title": "Have an idea to get off the ground?",
     "text": "Tell me where you are, what you want to achieve and what is in the way. I reply personally.",
     "cta": "Copy email",
     "copied": "Copied!",
-    "copyFailed": "I couldn't copy it. The email is:"
+    "copyFailed": "I couldn't copy it. The email is:",
+    "whatsappCta": "Message on WhatsApp",
+    "whatsappMessage": "Hi Ivy! I saw your portfolio and I'd like to talk about a project."
   },
   "footer": {
     "emailLabel": "Email",

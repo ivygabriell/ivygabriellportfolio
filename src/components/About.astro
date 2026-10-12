@@ -13,12 +13,6 @@ const t = copy[Astro.props.locale].about;
     <p class="lead" data-reveal="words">{t.text}</p>
   </div>
   <div class="grid">
-    <h2 class="label" data-reveal="fade">{t.skillsLabel}</h2>
-    <ul class="skills">
-      {t.skills.map((s) => <li class="Skill" data-reveal="scale">{s}</li>)}
-    </ul>
-  </div>
-  <div class="grid">
     <h2 class="label" data-reveal="fade">{t.socialLabel}</h2>
     <ul class="socials">
       {site.socials.map((s) => (
@@ -44,17 +38,10 @@ const t = copy[Astro.props.locale].about;
     font-size: var(--fs-lead);
     line-height: 1.1;
   }
-  .skills,
   .socials {
     display: flex;
     flex-wrap: wrap;
     gap: 1.2rem;
-  }
-  .Skill {
-    padding: 1.2rem 2.4rem;
-    border: 1px solid var(--c-ink);
-    border-radius: var(--r-pill);
-    font-size: 2rem;
   }
   .socials a {
     display: inline-flex;

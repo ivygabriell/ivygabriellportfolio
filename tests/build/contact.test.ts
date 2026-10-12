@@ -1,0 +1,33 @@
+import { describe, expect, it } from 'vitest';
+import en from '../../src/content/en.json';
+import pt from '../../src/content/pt.json';
+import { site } from '../../src/content/site';
+import { whatsappUrl } from '../../src/lib/whatsapp';
+import { readDecoded } from './dist';
+
+describe('contato', () => {
+  it.each([['pt', pt], ['en', en]] as const)('%s: botão de WhatsApp com a mensagem no idioma da página', (lang, t) => {
+    const html = readDecoded(`${lang}/index.html`);
+    expect(html).toContain(`href="${whatsappUrl(site.whatsapp, t.outro.whatsappMessage)}"`);
+    expect(html).toContain(t.outro.whatsappCta);
+  });
+
+  it('o número de WhatsApp só aparece dentro do href do botão', () => {
+    for (const lang of ['pt', 'en']) {
+      const withoutLinks = readDecoded(`${lang}/index.html`).replace(/href="https:\/\/wa\.me\/[^"]*"/g, '');
+      expect(withoutLinks).not.toContain(site.whatsapp);
+      expect(withoutLinks).not.toContain('99502');
+      expect(withoutLinks).not.toContain('95024778');
+    }
+  });
+
+  it('o e-mail novo aparece e o de exemplo, o da conta e o Instagram não', () => {
+    for (const lang of ['pt', 'en']) {
+      const html = readDecoded(`${lang}/index.html`).toLowerCase();
+      expect(html).toContain(site.email);
+      expect(html).not.toContain('ola@example.com');
+      expect(html).not.toContain('gcivy');
+      expect(html).not.toContain('instagram');
+    }
+  });
+});
