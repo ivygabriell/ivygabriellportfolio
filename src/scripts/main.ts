@@ -2,6 +2,7 @@ import { motionFlags, readEnv } from '../lib/capabilities';
 import { gsap, ScrollTrigger } from './gsap';
 import { mount, unmount } from './registry';
 import './smooth-scroll';
+import './reveal';
 
 interface SwapEvent extends Event {
   newDocument: Document;
