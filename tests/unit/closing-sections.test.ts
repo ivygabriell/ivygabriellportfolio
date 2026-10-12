@@ -37,6 +37,12 @@ describe('Contato dentro do footer, em uma cor só', () => {
     expect(footer).toMatch(/\.links\s*\{[^}]*justify-items:\s*start/);
   });
 
+  it('o bloco do Contato desce para perto dos links (pouco espaço entre eles; o topo absorve a diferença)', () => {
+    const footer = src('components/Footer.astro');
+    expect(footer).toMatch(/\.top\s*\{[^}]*gap:\s*6rem;/);
+    expect(footer).toMatch(/\.Footer\.-with-contact\s*\{[^}]*padding-top:\s*26rem;/);
+  });
+
   it('o bloco do Contato é centralizado', () => {
     const outro = src('components/Outro.astro');
     expect(outro).toMatch(/\.inner\s*\{[^}]*justify-items:\s*center/);
