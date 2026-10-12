@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" width="1000" height="1250">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+<filter id="s"><feGaussianBlur stdDeviation="50"/></filter></defs>
+<rect width="1000" height="1250" fill="url(#g)"/>
+<g filter="url(#s)"><circle cx="411" cy="1122" r="150" fill="#fbbf24" opacity=".55"/><circle cx="587" cy="470" r="127" fill="#a78bfa" opacity=".55"/><circle cx="796" cy="768" r="189" fill="#fbbf24" opacity=".55"/><circle cx="694" cy="787" r="272" fill="#a78bfa" opacity=".55"/><circle cx="18" cy="651" r="331" fill="#fbbf24" opacity=".55"/></g>
+<rect x="190" y="312.5" width="620" height="625" rx="24.8" fill="#fff" opacity=".92"/>
+<rect x="227.2" y="375" width="248" height="56.25" rx="28.125" fill="#4f46e5"/>
+<rect x="227.2" y="500" width="434" height="31.25" rx="15.625" fill="#000" opacity="0.14"/><rect x="227.2" y="575" width="341" height="31.25" rx="15.625" fill="#000" opacity="0.1"/><rect x="227.2" y="650" width="384.4" height="31.25" rx="15.625" fill="#000" opacity="0.1"/>
+<rect x="227.2" y="762.5" width="148.79999999999998" height="75" rx="37.5" fill="#000"/>
+</svg>

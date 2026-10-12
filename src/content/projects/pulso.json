@@ -1,0 +1,20 @@
+{
+  "slug": "pulso", "order": 3, "year": 2025, "example": true,
+  "tags": ["Design", "Prototype"],
+  "palette": ["#ec4899", "#8b5cf6", "#22d3ee"],
+  "cover": "/media/projects/pulso/cover.svg",
+  "shots": ["/media/projects/pulso/shot-1.svg", "/media/projects/pulso/shot-2.svg", "/media/projects/pulso/shot-3.svg", "/media/projects/pulso/shot-4.svg"],
+  "video": null, "link": null,
+  "pt": {
+    "title": "Pulso", "role": "Design e protótipo",
+    "caption": "Um app de hábitos que recompensa a constância em vez da perfeição",
+    "overview": "Eu desenhei e prototipei um app de hábitos. A ideia central: pequenas vitórias visíveis todos os dias, sem culpa quando um dia falha.",
+    "shotCaptions": ["Tela inicial com o dia em um relance", "Registro de hábito em dois toques", "Histórico em calendário de calor", "Conquistas discretas, sem excesso"]
+  },
+  "en": {
+    "title": "Pulso", "role": "Design and prototype",
+    "caption": "A habits app that rewards consistency instead of perfection",
+    "overview": "I designed and prototyped a habits app. The core idea: small visible wins every day, with no guilt when a day fails.",
+    "shotCaptions": ["Home screen with the day at a glance", "Habit logging in two taps", "History as a heat calendar", "Quiet achievements, no excess"]
+  }
+}

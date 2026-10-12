@@ -1,0 +1,20 @@
+{
+  "slug": "nimbus", "order": 4, "year": 2025, "example": true,
+  "tags": ["Experiment", "WebGL"],
+  "palette": ["#111827", "#6366f1", "#f472b6"],
+  "cover": "/media/projects/nimbus/cover.svg",
+  "shots": ["/media/projects/nimbus/shot-1.svg", "/media/projects/nimbus/shot-2.svg", "/media/projects/nimbus/shot-3.svg", "/media/projects/nimbus/shot-4.svg"],
+  "video": null, "link": null,
+  "pt": {
+    "title": "Nimbus", "role": "Experimento pessoal",
+    "caption": "Um experimento de partículas que reage ao cursor e ao ritmo da música",
+    "overview": "Eu criei Nimbus para testar até onde o navegador vai com partículas e áudio. É um projeto pessoal, sem cliente, feito para aprender e brincar.",
+    "shotCaptions": ["Nuvem de partículas em repouso", "Reação ao movimento do cursor", "Modo com áudio ligado", "Paletas que mudam com o tempo"]
+  },
+  "en": {
+    "title": "Nimbus", "role": "Personal experiment",
+    "caption": "A particle experiment that reacts to the cursor and the rhythm of the music",
+    "overview": "I made Nimbus to test how far the browser goes with particles and audio. It's a personal project, with no client, made to learn and play.",
+    "shotCaptions": ["Particle cloud at rest", "Reaction to cursor movement", "Audio-on mode", "Palettes that change over time"]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "aurora", "order": 1, "year": 2026, "example": true,
+  "tags": ["Astro", "GSAP"],
+  "palette": ["#4f46e5", "#a78bfa", "#fbbf24"],
+  "cover": "/media/projects/aurora/cover.svg",
+  "shots": ["/media/projects/aurora/shot-1.svg", "/media/projects/aurora/shot-2.svg", "/media/projects/aurora/shot-3.svg", "/media/projects/aurora/shot-4.svg"],
+  "video": null, "link": null,
+  "pt": {
+    "title": "Aurora", "role": "Design e desenvolvimento",
+    "caption": "Um site de lançamento que conta a história do produto rolando a página",
+    "overview": "Eu desenhei e construí um site de lançamento em que cada seção revela uma parte da história do produto. O desafio era manter a página leve mesmo com muito movimento.",
+    "shotCaptions": ["Hero com tipografia em movimento", "Seção de recursos com rolagem guiada", "Página de preços simples e clara", "Versão mobile pensada em primeiro lugar"]
+  },
+  "en": {
+    "title": "Aurora", "role": "Design and development",
+    "caption": "A launch site that tells the product story as you scroll",
+    "overview": "I designed and built a launch site where each section reveals a piece of the product story. The challenge was keeping the page light despite the amount of motion.",
+    "shotCaptions": ["Hero with moving typography", "Features section with guided scroll", "Simple, clear pricing page", "Mobile version designed first"]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "title": "Ivy Gabriel — development and digital craft",
+    "description": "Ivy Gabriel's portfolio: websites, interfaces and experiments built with code and care for detail."
+  },
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "langAria": "Switch to Portuguese"
+  },
+  "hero": {
+    "title": "I build websites and digital products that feel alive.",
+    "subtitle": "I'm Ivy Gabriel. I develop interfaces, experiments and personal projects, from code to detail."
+  },
+  "highlight": {
+    "title": "Code, motion and detail.",
+    "label": "Highlight panel"
+  },
+  "about": {
+    "label": "About",
+    "text": "I turn ideas into fast, accessible interfaces with personality. I like to start from the problem, design with patience and only then write the code that solves it.",
+    "skillsLabel": "Skills",
+    "skills": ["TypeScript", "JavaScript", "Astro", "GSAP", "CSS", "Node.js", "Figma", "Accessibility"],
+    "socialLabel": "Social"
+  },
+  "services": {
+    "title": "Services",
+    "explore": "Explore",
+    "items": [
+      { "title": "Websites and web experiences", "text": "I build fast, polished websites from first draft to deploy, with attention to performance and accessibility.", "href": "#projetos" },
+      { "title": "Interactive interfaces", "text": "I bring interfaces to life with motion, scroll and microinteractions that explain instead of decorate.", "href": "#projetos" },
+      { "title": "Interface design", "text": "I design screens and consistent visual systems that are ready to become code without surprises.", "href": "#projetos" },
+      { "title": "Prototypes and experiments", "text": "I test ideas fast with working prototypes, so decisions are made with something in hand and not only on paper.", "href": "#projetos" }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "view": "View project"
+  },
+  "project": {
+    "overview": "Overview",
+    "role": "My role",
+    "next": "Next project"
+  },
+  "outro": {
+    "title": "Have an idea to take off the paper?",
+    "text": "Tell me where you are, what you want to achieve and what is in the way. I reply personally.",
+    "cta": "Copy email",
+    "copied": "Copied!",
+    "copyFailed": "I couldn't copy it. The email is:"
+  },
+  "footer": {
+    "emailLabel": "Email",
+    "locationLabel": "Location",
+    "location": "Brazil",
+    "navLabel": "Navigation",
+    "socialLabel": "Social",
+    "rights": "© 2026 Ivy Gabriel"
+  }
+}
