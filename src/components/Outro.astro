@@ -35,7 +35,7 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
   .inner {
     display: grid;
     justify-items: center;
-    gap: 4rem;
+    gap: 3rem;
   }
   h2 {
     max-width: 90rem;
@@ -48,6 +48,11 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
     max-width: 70rem;
     font-size: var(--fs-sub);
     line-height: 1.15;
+  }
+  /* No footer cobalto o preenchimento do hover precisa ser escuro, senão some no fundo. */
+  .Outro :global(.Pill.-light) {
+    --pill-hover-bg: var(--c-ink);
+    --pill-hover-fg: #fff;
   }
   .actions {
     display: flex;

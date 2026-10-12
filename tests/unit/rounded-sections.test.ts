@@ -18,14 +18,21 @@ describe('entrada arredondada das seções escuras', () => {
     expect(Number(mobile![1])).toBeLessThan(Number(desktop));
   });
 
-  it('só o Selected work (entrando do claro) usa a entrada arredondada; nada sobrepõe nada', () => {
-    for (const file of ['components/Outro.astro', 'components/Footer.astro', 'components/ProjectPage.astro'])
-      expect(src(file), file).not.toMatch(/margin-top:\s*calc\(-1/);
-    expect(src('components/Work.astro')).not.toContain('var(--r-top)');
+  it('o footer entra arredondado por cima dos Serviços: sobrepõe pelo raio e fica acima na pilha', () => {
+    const footer = src('components/Footer.astro');
+    expect(footer).toMatch(/\.Footer\s*\{[^}]*border-radius:\s*var\(--r-top\)\s+var\(--r-top\)\s+0\s+0/);
+    expect(footer).toMatch(/\.Footer\s*\{[^}]*margin-top:\s*calc\(-1 \* var\(--r-top\)\)/);
+    expect(footer).toMatch(/\.Footer\s*\{[^}]*position:\s*relative/);
   });
 
-  it('o footer é reto', () => {
-    expect(src('components/Footer.astro')).toMatch(/\.Footer\s*\{[^}]*border-radius:\s*0/);
+  it('o fim dos Serviços e do "próximo projeto" reserva o raio, para o footer sobrepor sem comer o espaçamento', () => {
+    expect(src('components/Work.astro')).toContain('calc(16rem + var(--r-top))');
+    expect(src('components/ProjectPage.astro')).toContain('calc(14rem + var(--r-top))');
+  });
+
+  it('nenhuma outra seção sobrepõe a anterior', () => {
+    for (const file of ['components/Outro.astro', 'components/Work.astro'])
+      expect(src(file), file).not.toMatch(/margin-top:\s*calc\(-1/);
   });
 
   it('o footer não desenha mais a linha de topo (ela seguiria a curva)', () => {

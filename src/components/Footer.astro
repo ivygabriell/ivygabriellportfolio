@@ -16,7 +16,7 @@ const links = [
 ];
 ---
 
-<footer class:list={['Footer', '-inverse', { '-with-contact': withContact }]}>
+<footer class:list={['Footer', { '-with-contact': withContact }]}>
   <div class="container--narrow top">
     {withContact && <div class="contact"><slot name="contact" /></div>}
     <nav class="links" aria-label={t.footer.navLabel}>
@@ -35,36 +35,41 @@ const links = [
 </footer>
 
 <style>
+  /* Cobalto da marca, entrando por cima do azul-noite dos Serviços com os cantos de cima arredondados. */
   .Footer {
-    padding-block: 8rem;
-    border-radius: 0;
+    position: relative;
+    margin-top: calc(-1 * var(--r-top));
+    padding-block: 5rem;
+    color: #fff;
+    background: var(--c-accent);
+    border-radius: var(--r-top) var(--r-top) 0 0;
   }
   .Footer.-with-contact {
-    padding-top: 26rem;
+    padding-top: 16rem;
   }
   .top {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 6rem;
+    gap: 5rem;
   }
   .links {
     display: grid;
-    gap: 1.6rem;
+    gap: 1.2rem;
     justify-items: start;
     font-size: 2.4rem;
   }
   .rule {
-    margin-top: 6rem;
+    margin-top: 4rem;
   }
   .bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 8rem;
+    margin-top: 5rem;
   }
   .rights {
     font-size: 1.6rem;
-    color: var(--c-paper-soft);
+    color: rgb(255 255 255 / 0.9);
   }
   .socials {
     display: flex;
@@ -85,22 +90,22 @@ const links = [
   }
   @media (max-width: 767px) {
     .Footer {
-      padding-block: 6rem;
+      padding-block: 4rem;
     }
     .Footer.-with-contact {
-      padding-top: 14rem;
+      padding-top: 11rem;
     }
     .top {
-      gap: 4rem;
+      gap: 3rem;
     }
     .rule {
-      margin-top: 4rem;
+      margin-top: 3rem;
     }
     .bottom {
       flex-direction: column;
       align-items: flex-start;
-      gap: 3rem;
-      margin-top: 5rem;
+      gap: 2.4rem;
+      margin-top: 4rem;
     }
   }
 </style>

@@ -54,4 +54,16 @@ describe('paleta cobalto', () => {
     for (const name of ['--c-mint', '--c-lavender'])
       expect(ratio(rgb(hex('--c-ink')), rgb(hex(name)))).toBeGreaterThanOrEqual(4.5);
   });
+
+  it('o texto do © no footer cobalto (branco a 90%) passa de 4,5:1', () => {
+    const accent = rgb(hex('--c-accent'));
+    const text = blend([255, 255, 255], 0.9, accent);
+    expect(ratio(text, accent)).toBeGreaterThanOrEqual(4.5);
+    expect(readFileSync('src/components/Footer.astro', 'utf8')).toContain('rgb(255 255 255 / 0.9)');
+  });
+
+  it('branco puro sobre o footer cobalto e o --c-ink sobre a pílula clara hover passam de 4,5:1', () => {
+    expect(ratio([255, 255, 255], rgb(hex('--c-accent')))).toBeGreaterThanOrEqual(4.5);
+    expect(ratio([255, 255, 255], rgb(hex('--c-ink')))).toBeGreaterThanOrEqual(4.5);
+  });
 });
