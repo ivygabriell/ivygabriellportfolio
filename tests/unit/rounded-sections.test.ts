@@ -18,23 +18,26 @@ describe('entrada arredondada das seções escuras', () => {
     expect(Number(mobile![1])).toBeLessThan(Number(desktop));
   });
 
-  it.each(['components/Outro.astro', 'components/Footer.astro'])(
-    '%s sobrepõe a seção anterior pelo raio, para os cantos revelarem a cor dela',
-    (file) => {
-      expect(src(file)).toContain('margin-top: calc(-1 * var(--r-top))');
-    },
-  );
-
-  it('o footer fica acima da seção anterior na sobreposição (position: relative)', () => {
-    expect(src('components/Footer.astro')).toMatch(/\.Footer\s*\{[^}]*position:\s*relative/);
+  it('o Contato sobrepõe o Selected work pelo raio, para os cantos revelarem a cor dele', () => {
+    expect(src('components/Outro.astro')).toContain('margin-top: calc(-1 * var(--r-top))');
   });
 
-  it.each(['components/Work.astro', 'components/Outro.astro', 'components/ProjectPage.astro'])(
-    '%s reserva o raio no fim para a seção seguinte sobrepor sem comer o espaçamento',
-    (file) => {
-      expect(src(file)).toContain('var(--r-top)');
-    },
-  );
+  it('o Selected work reserva o raio no fim para o Contato sobrepor sem comer o espaçamento', () => {
+    expect(src('components/Work.astro')).toContain('calc(16rem + var(--r-top))');
+  });
+
+  it('o footer não é arredondado nem sobrepõe o Contato', () => {
+    const footer = src('components/Footer.astro');
+    expect(footer).toMatch(/\.Footer\s*\{[^}]*border-radius:\s*0/);
+    expect(footer).not.toContain('var(--r-top)');
+    expect(footer).not.toMatch(/\.Footer\s*\{[^}]*position:\s*relative/);
+  });
+
+  it('o Contato e o próximo projeto não reservam mais o raio no fim (o footer não sobrepõe)', () => {
+    expect(src('components/Outro.astro')).toContain('padding-block: 18rem 16rem;');
+    expect(src('components/Outro.astro')).toContain('padding-block: 10rem 8rem;');
+    expect(src('components/ProjectPage.astro')).not.toContain('var(--r-top)');
+  });
 
   it('o footer não desenha mais a linha de topo (ela seguiria a curva)', () => {
     expect(src('components/Footer.astro')).not.toContain('border-top');
