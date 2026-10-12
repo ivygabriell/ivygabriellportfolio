@@ -17,7 +17,7 @@ Complementa `2026-10-12-portfolio-design.md`. Aquele spec define a estrutura e o
 
 A **ordem das seções é a do site atual** (a usuária pediu para não alterar a estrutura): Hero → Destaque → Sobre → Serviços → Projetos → Contato.
 
-1. **Hero**: *Ivy Gabriel, Desenvolvedor Full Stack.* + frase de impacto + CTA "Vamos conversar". Sem link de currículo.
+1. **Hero**: *Ivy Gabriel, Desenvolvedor Full Stack.* + frase de impacto. **Sem botão no hero** (o hero original nunca teve; o acesso ao contato é a pílula "Contato" da navbar e a seção final) e sem link de currículo.
 2. **Destaque**: painel em código. O vídeo/motion fica para depois (`highlightVideo: null`); o painel funciona sem ele.
 3. **Sobre**: texto curto, **sem** habilidades (mantém o bloco de redes).
 4. **Serviços**: 4 cartões.
@@ -58,7 +58,7 @@ Sem Depoimentos, Processo, FAQ, Currículo nem Blog.
 - `src/content/projects/`: remover `aurora`, `atlas`, `pulso`, `nimbus` e as capas/capturas SVG de exemplo em `public/media/projects/`. A pasta fica vazia até haver projeto real.
 - `Projects.astro`: se `loadProjects()` devolver lista vazia, renderiza os cartões "Em breve" (mesma classe `Card` e mesma revelação, sem `<a>`, sem ícone de cursor de link); com 1 ou mais projetos, renderiza os reais e **não** mostra "Em breve". As rotas `[slug]` não geram páginas quando não há projetos.
 - `About.astro`: remover o bloco de habilidades; manter o bloco de redes.
-- `Outro.astro` e `Footer.astro`: acrescentar o botão de WhatsApp (mesmo componente `Pill`); footer lista só GitHub e LinkedIn.
+- `Outro.astro`: acrescentar o botão de WhatsApp (mesmo componente `Pill`). `Footer.astro` não ganha botão: mantém a pílula de e-mail e lista só GitHub e LinkedIn (os dados vêm de `site.socials`).
 - `site.example` permanece `true` (e, com ele, `noindex`) **até a usuária aprovar os textos publicados**; só então vira `false`. `SITE_URL` é definido no deploy.
 
 ## 5. Paleta (somente `tokens.css` e cores soltas)
