@@ -1,6 +1,5 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { loadProjects } from '../../src/lib/projects';
 import { read } from './dist';
 
 function allCss(): string {
@@ -16,7 +15,7 @@ function allCss(): string {
 
 describe('nomes acessíveis', () => {
   it('o link de e-mail do footer expõe o endereço visível (sem aria-label que o esconda)', () => {
-    const html = read(`pt/projetos/${loadProjects()[0].slug}/index.html`);
+    const html = read('pt/index.html');
     const pill = html.match(/<a[^>]*class="pill"[^>]*>[^<]*<\/a>/);
     expect(pill, 'pílula de e-mail do footer').not.toBeNull();
     expect(pill![0]).not.toContain('aria-label');

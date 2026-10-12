@@ -15,7 +15,7 @@ describe('base da home', () => {
     for (const item of t.services.items) expect(html).toContain(item.title);
   });
 
-  it('lista todos os projetos, cada um apontando para a página do idioma', () => {
+  it.skipIf(loadProjects().length === 0)('lista todos os projetos, cada um apontando para a página do idioma', () => {
     const projects = loadProjects();
     const pt = read('pt/index.html');
     const en = read('en/index.html');

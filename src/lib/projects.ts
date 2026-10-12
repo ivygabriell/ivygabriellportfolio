@@ -95,6 +95,10 @@ export function loadProjects(): Project[] {
   return buildProjects(entries as Record<string, unknown>);
 }
 
+export function showComingSoon(projects: Project[]): boolean {
+  return projects.length === 0;
+}
+
 export function nextProject(projects: Project[], slug: string): Project | null {
   const index = projects.findIndex((p) => p.slug === slug);
   if (index === -1) throw new Error(`unknown project slug "${slug}"`);

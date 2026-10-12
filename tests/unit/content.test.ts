@@ -23,12 +23,11 @@ describe('textos', () => {
   });
 });
 
-describe('projetos reais', () => {
+describe('projetos', () => {
   const projects = loadProjects();
 
-  it('há de 3 a 4 projetos válidos', () => {
-    expect(projects.length).toBeGreaterThanOrEqual(3);
-    expect(projects.length).toBeLessThanOrEqual(4);
+  it('nenhum projeto de exemplo é publicado', () => {
+    for (const p of projects) expect(p.example, p.slug).toBe(false);
   });
 
   it('toda mídia referenciada existe em public/', () => {

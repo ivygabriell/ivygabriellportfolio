@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildProjects, nextProject, parseProject } from '../../src/lib/projects';
+import { buildProjects, nextProject, parseProject, showComingSoon } from '../../src/lib/projects';
 
 const text = (t: string) => ({
   title: t, caption: `${t} caption`, overview: `${t} overview`, role: `${t} role`,
@@ -61,5 +61,12 @@ describe('nextProject', () => {
   });
   it('slug desconhecido lança', () => {
     expect(() => nextProject(list, 'zzz')).toThrow(/zzz/);
+  });
+});
+
+describe('showComingSoon', () => {
+  it('mostra "Em breve" só quando não há nenhum projeto', () => {
+    expect(showComingSoon([])).toBe(true);
+    expect(showComingSoon(buildProjects({ 'a.json': base('a', 1) }))).toBe(false);
   });
 });
