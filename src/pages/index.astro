@@ -1,10 +1,24 @@
 ---
-import '@fontsource/instrument-sans/400.css';
-import '@fontsource/instrument-sans/500.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 ---
+
+<!doctype html>
 <html lang="pt-BR">
-  <head><meta charset="utf-8" /><title>Portfólio</title></head>
-  <body><h1 class="container">Portfólio</h1></body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ivy Gabriel</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="/pt/" />
+    <noscript><meta http-equiv="refresh" content="0;url=/pt/" /></noscript>
+  </head>
+  <body class="container">
+    <p><a href="/pt/">Português</a> · <a href="/en/">English</a></p>
+    <script>
+      import { homePath, pickLocale, withHash } from '../lib/i18n';
+      const languages = navigator.languages?.length ? navigator.languages : [navigator.language];
+      location.replace(withHash(homePath(pickLocale([...languages])), location.hash));
+    </script>
+  </body>
 </html>

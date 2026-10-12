@@ -1,0 +1,51 @@
+---
+import '@fontsource/instrument-sans/400.css';
+import '@fontsource/instrument-sans/500.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import { site } from '../content/site';
+import { DEFAULT_LOCALE, HTML_LANG, LOCALES, type Locale } from '../lib/i18n';
+import { loadProjects } from '../lib/projects';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  alternates: Record<Locale, string>;
+  image?: string;
+}
+
+const { locale, title, description, alternates, image = '/og-cover.png' } = Astro.props;
+const abs = (path: string) => new URL(path, Astro.site).href;
+const hasExampleContent = site.example || loadProjects().some((p) => p.example);
+---
+
+<!doctype html>
+<html lang={HTML_LANG[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={abs(alternates[locale])} />
+    {LOCALES.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={abs(alternates[l])} />)}
+    <link rel="alternate" hreflang="x-default" href={abs(alternates[DEFAULT_LOCALE])} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={abs(image)} />
+    <meta property="og:url" content={abs(alternates[locale])} />
+    <meta property="og:locale" content={HTML_LANG[locale].replace('-', '_')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={abs(image)} />
+    {hasExampleContent && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

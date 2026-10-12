@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { copy } from '../lib/copy';
+import { homePath, type Locale } from '../lib/i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = copy[locale];
+const alternates = { pt: homePath('pt'), en: homePath('en') };
+---
+
+<Base locale={locale} title={t.meta.title} description={t.meta.description} alternates={alternates}>
+  <main id="main">
+    <h1>{t.hero.title}</h1>
+  </main>
+</Base>
