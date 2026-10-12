@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import { copy } from '../lib/copy';
+import { homePath, otherLocale, projectPath, type Locale } from '../lib/i18n';
+import type { Project } from '../lib/projects';
+import Footer from './Footer.astro';
+import Navbar from './Navbar.astro';
+import Panel from './Panel.astro';
+
+interface Props { locale: Locale; project: Project; next: Project | null }
+const { locale, project, next } = Astro.props;
+const t = copy[locale];
+const tx = project[locale];
+const alternates = {
+  pt: projectPath('pt', project.slug),
+  en: projectPath('en', project.slug),
+};
+const switchHref = alternates[otherLocale(locale)];
+---
+
+<Base locale={locale} title={`${tx.title} — ${t.meta.title}`} description={tx.caption} alternates={alternates}>
+  <Navbar locale={locale} base={homePath(locale)} switchHref={switchHref} />
+  <main id="main">
+    <section class="Tophead container">
+      <p class="label" data-reveal="fade">{project.year} · {project.tags.join(' · ')}</p>
+      <h1 data-reveal="words">{tx.title}</h1>
+    </section>
+
+    <Panel label={tx.title}>
+      <img src={project.cover} alt={tx.title} width="1600" height="1000" />
+    </Panel>
+
+    <section class="Overview container--narrow">
+      <p class="label" data-reveal="fade">{t.project.overview}</p>
+      <div>
+        <p class="lead" data-reveal="words">{tx.overview}</p>
+        <p class="role" data-reveal="fade-up"><span class="label">{t.project.role}</span> {tx.role}</p>
+      </div>
+    </section>
+
+    <section class="Splitshow container--narrow">
+      <ul class="shots">
+        {project.shots.map((src, i) => (
+          <li class="shot">
+            <div class="shot__media"><img src={src} alt="" width="1000" height="1250" loading="lazy" /></div>
+            <p class="shot__caption" data-reveal="fade-up">{tx.shotCaptions[i]}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {next && (
+      <section class="Next -inverse">
+        <a class="container link" href={projectPath(locale, next.slug)} data-cursor-icon="arrow-up-right">
+          <span class="label">{t.project.next}</span>
+          <span class="title">{next[locale].title}</span>
+        </a>
+      </section>
+    )}
+  </main>
+  <Footer locale={locale} base={homePath(locale)} switchHref={switchHref} />
+</Base>
+
+<style>
+  .Tophead {
+    padding-top: 20rem;
+    padding-bottom: 8rem;
+  }
+  .Tophead h1 {
+    margin-top: 2rem;
+    max-width: 90rem;
+    font-size: var(--fs-h1);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .Overview {
+    display: grid;
+    grid-template-columns: 28rem 1fr;
+    gap: 2rem;
+    padding-bottom: 14rem;
+  }
+  .lead {
+    font-size: var(--fs-lead);
+    line-height: 1.1;
+  }
+  .role {
+    margin-top: 4rem;
+    font-size: 2rem;
+  }
+  .role .label {
+    margin-right: 1rem;
+    color: var(--c-ink-soft);
+  }
+  .Splitshow {
+    padding-bottom: 16rem;
+  }
+  .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10rem 10rem;
+    align-items: start;
+  }
+  .shot:nth-child(even) {
+    margin-top: 12rem;
+  }
+  .shot__media {
+    overflow: hidden;
+    border-radius: var(--r-card);
+    aspect-ratio: 4 / 5;
+    background: var(--c-lavender);
+  }
+  .shot__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .shot__caption {
+    max-width: 44rem;
+    margin-top: 3rem;
+    font-size: var(--fs-sub);
+    line-height: 1.15;
+  }
+  .Next {
+    padding-block: 14rem;
+  }
+  .link {
+    display: grid;
+    gap: 2rem;
+  }
+  .link .title {
+    font-size: var(--fs-h2);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  @media (max-width: 767px) {
+    .Tophead {
+      padding-top: 16rem;
+      padding-bottom: 5rem;
+    }
+    .Overview {
+      grid-template-columns: 1fr;
+      padding-bottom: 8rem;
+    }
+    .Splitshow {
+      padding-bottom: 8rem;
+    }
+    .shots {
+      grid-template-columns: 1fr;
+      gap: 6rem;
+    }
+    .shot:nth-child(even) {
+      margin-top: 0;
+    }
+    .Next {
+      padding-block: 8rem;
+    }
+  }
+</style>
