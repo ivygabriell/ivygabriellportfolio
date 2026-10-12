@@ -108,29 +108,41 @@ Topbar → Tophead (nome do cliente em rótulo pequeno + h1 à esquerda) → Pre
 - A seção de "Testimonials" e o conteúdo exato do "Why" foram vistos só por texto e captura estática.
 - Licença da biblioteca de cursor deles (é código próprio do site): não vamos copiar; implementamos nossa versão.
 
-## Mapeamento Cuberto → portfólio
+## Versão enxuta (decisão)
 
-| Cuberto | No portfólio | Observação |
-|---|---|---|
-| Topbar fixa que some/volta + pílula "Contacts" | Igual: logo (seu nome), links, seletor PT/EN, pílula "Contato"; no mobile, barra arredondada com menu | igual |
-| Tophead | Hero: frase grande centralizada + subtítulo | igual |
-| Preview / showreel com modal | Painel de destaque com vídeo curto ou demo; modal com vídeo | igual; vídeo de exemplo até haver um seu |
-| Overview "What we do" | "Sobre": rótulo + parágrafo grande | adaptado |
-| Features (cartões pretos 01–05, scrub) | "O que eu faço": 3 a 5 áreas, cada uma com link para um projeto | igual |
-| Logoreel (clientes) | Grade de tecnologias e ferramentas, cada uma com link | adaptado: sem clientes |
-| Selected work (invertida, grade deslocada) | "Projetos": mesma grade em seção escura | igual |
-| Testimonials | fora do escopo | sem clientes |
-| Why (cartões pastel com contadores) | "Em números": 3 a 4 números reais seus | opcional, só com números reais |
-| Insights (blog) | fora do escopo | pode virar "Notas" depois |
-| FAQ | fora do escopo | |
-| Outro (gradiente + pílula branca) | "Vamos conversar": chamada final com e-mail e botão de copiar | igual |
-| Footer | E-mail em pílula, localização, links, ícones sociais em círculos | igual |
-| Página de projeto (Tophead, Preview, Overview, Splitshow, Feedback, Nextcase) | Mesma estrutura, sem Feedback; "Próximo projeto" no fim | adaptado |
-| `/about`, `/services`, `/blog`, `/contacts` | fora do escopo | tudo cabe na home |
+O Cuberto tem 12 seções e depende de mídia de produção (renders 3D, showreel, logos de clientes). Para uma pessoa com pouco conteúdo, o portfólio usa a mesma linguagem visual e o mesmo sistema de animação, mas só 6 seções, escolhidas por funcionarem sem mídia pesada. Voz em primeira pessoa, sem "voz de agência".
+
+### Home (nesta ordem)
+
+1. **Hero:** frase grande centralizada + subtítulo + pílula "Contato". Topbar fixa que some ao descer e volta ao subir.
+2. **Painel de destaque:** no lugar do showreel. Painel largo de cantos arredondados com arte feita em código (gradiente animado e formas, em CSS/SVG), com a mesma entrada por `clip-path` e a paralaxe. Se houver um vídeo ou demo seu, ele entra aqui e ganha o modal com `<dialog>` e o cursor `play`.
+3. **Sobre:** rótulo pequeno em caixa-alta à esquerda e parágrafo grande à direita, em primeira pessoa; links para redes.
+4. **O que eu faço:** 3 a 4 cartões pretos empilhados, com número, título, texto e link. Abrem com scrub ao rolar (no mobile, com clique). Arte de fundo em gradiente feita em código.
+5. **Projetos:** seção escura com a grade de duas colunas deslocadas; imagem arredondada (captura de tela do projeto) + legenda de uma linha; 3 a 4 projetos; cada um leva à página do projeto. Vídeo no hover quando existir.
+6. **Vamos conversar + footer:** chamada final sobre fundo escuro com gradiente e formas concêntricas, pílula branca com botão de copiar o e-mail; footer com e-mail em pílula, localização, links, seletor de idioma e ícones sociais em círculos.
+
+Opcionais (só entram com conteúdo real): faixa de tecnologias (4 colunas, cada uma com link) e "Em números" (cartões pastel com contadores).
+
+### Página de projeto
+
+Tophead (nome do projeto em rótulo pequeno + h1 à esquerda) → Preview (mídia larga) → Visão geral (desafio e o que foi feito) → Splitshow (grade de duas colunas deslocadas com imagens e legendas) → Próximo projeto → Footer.
+
+### Mapeamento resumido
+
+| Cuberto | Portfólio |
+|---|---|
+| Tophead | Hero |
+| Preview / showreel | Painel de destaque feito em código (vídeo opcional) |
+| Overview "What we do" | Sobre |
+| Features | O que eu faço |
+| Selected work | Projetos |
+| Outro + Footer | Vamos conversar + footer |
+| Logoreel, Why | Opcionais, só com conteúdo real |
+| Testimonials, Insights, FAQ, `/about`, `/services`, `/blog`, `/contacts` | Fora de escopo |
 
 ## Fora de escopo (YAGNI)
 
-Blog, CMS, formulário com back-end, depoimentos, FAQ, páginas `/about`, `/services` e `/contacts`, tema claro/escuro alternável pelo usuário, área de currículo para recrutadores.
+Blog, CMS, formulário com back-end, depoimentos, FAQ, logos de clientes, páginas `/about`, `/services` e `/contacts`, tema claro/escuro alternável pelo usuário, área de currículo para recrutadores.
 
 ## Stack
 
@@ -138,7 +150,7 @@ Astro (estático) com `ClientRouter` + GSAP (ScrollTrigger e SplitText) + Lenis.
 
 ## Estrutura e páginas
 
-- `/pt/` e `/en/`: home com as seções, na ordem do mapeamento.
+- `/pt/` e `/en/`: home com as 6 seções da versão enxuta.
 - `/pt/projetos/[slug]` e `/en/projects/[slug]`: página de cada projeto, aberta com a transição de página.
 - `/` redireciona para o idioma do navegador (`navigator.language`).
 
@@ -149,7 +161,7 @@ Textos separados do código:
 - `src/content/pt.json` e `src/content/en.json` para os textos das seções.
 - `src/content/projects/*` (um arquivo por projeto), com campos por idioma.
 
-O conteúdo inicial é de exemplo, claramente marcado, para ser trocado depois. Como o Cuberto depende muito de mídia (vídeo e imagens 3D), o plano inclui gerar mídias de exemplo próprias (cores e formas simples) para o site não ficar vazio.
+O conteúdo inicial é de exemplo, claramente marcado, para ser trocado depois. A mídia de exemplo é gerada por mim (gradientes, formas e capturas simuladas, com cores e formas simples), para o site não ficar vazio. O ponto decisivo para o resultado final é a seção Projetos: com 3 projetos reais e capturas de tela suas, o site funciona; com mock, parece template.
 
 ## Visual
 
