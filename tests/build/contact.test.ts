@@ -37,3 +37,11 @@ describe('contato', () => {
     expect(html).not.toContain('href="https://www.instagram.com/"');
   });
 });
+
+describe('fechamento da página', () => {
+  it.each(['pt', 'en'])('%s: do Contato ao footer não há arte em SVG (triângulos)', (lang) => {
+    const html = readDecoded(`${lang}/index.html`);
+    const closing = html.slice(html.indexOf('id="contato"'), html.indexOf('<footer'));
+    expect(closing).not.toContain('<svg');
+  });
+});

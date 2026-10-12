@@ -3,7 +3,6 @@ import { copy } from '../lib/copy';
 import { site } from '../content/site';
 import { whatsappUrl } from '../lib/whatsapp';
 import type { Locale } from '../lib/i18n';
-import GradientArt from './GradientArt.astro';
 import Pill from './Pill.astro';
 
 interface Props { locale: Locale }
@@ -12,7 +11,6 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
 ---
 
 <section class="Outro -inverse" id="contato">
-  <div class="art"><GradientArt variant="tri" /></div>
   <div class="container inner">
     <h2 data-reveal="words">{t.title}</h2>
     <p data-reveal="words">{t.text}</p>
@@ -39,12 +37,6 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
     margin-top: calc(-1 * var(--r-top));
     padding-block: 18rem 16rem;
     text-align: center;
-  }
-  .art {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: radial-gradient(120% 90% at 50% 120%, #1f3fbf 0%, var(--c-ink) 70%);
   }
   .inner {
     display: grid;
