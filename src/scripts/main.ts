@@ -6,6 +6,8 @@ import './reveal';
 import './navbar';
 import './preview';
 import './services';
+import './cursor';
+import './card-video';
 
 interface SwapEvent extends Event {
   newDocument: Document;

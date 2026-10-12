@@ -59,6 +59,9 @@ const hasExampleContent = site.example || loadProjects().some((p) => p.example);
     <ClientRouter />
   </head>
   <body>
+    <div class="Cursor" transition:persist aria-hidden="true">
+      <div class="Cursor__inner"><span class="Cursor__icon"></span></div>
+    </div>
     <slot />
     <script>
       import '../scripts/main';

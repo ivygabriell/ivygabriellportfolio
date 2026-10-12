@@ -101,3 +101,45 @@ svg {
 .motion:not(.motion-failed) [data-reveal]:not([data-revealed]) {
   opacity: 0;
 }
+
+.Cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  mix-blend-mode: exclusion;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.Cursor.-visible {
+  opacity: 1;
+}
+.Cursor__inner {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: -0.7rem 0 0 -0.7rem;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  transition:
+    width 0.6s var(--ease-out),
+    height 0.6s var(--ease-out),
+    margin 0.6s var(--ease-out);
+}
+.Cursor.-icon .Cursor__inner {
+  width: 8rem;
+  height: 8rem;
+  margin: -4rem 0 0 -4rem;
+}
+.Cursor__icon {
+  width: 3.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.Cursor.-icon .Cursor__icon {
+  opacity: 1;
+  transition-delay: 0.15s;
+}
