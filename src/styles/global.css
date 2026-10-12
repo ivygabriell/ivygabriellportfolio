@@ -143,3 +143,25 @@ svg {
   opacity: 1;
   transition-delay: 0.15s;
 }
+
+.Loader {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  pointer-events: none;
+}
+.Loader .backdrop,
+.Loader .fill {
+  position: absolute;
+  inset: 0;
+}
+.Loader .backdrop {
+  background: rgb(0 0 0 / 0.2);
+  opacity: 0;
+}
+.Loader .fill {
+  background: #000;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}

@@ -62,6 +62,10 @@ const hasExampleContent = site.example || loadProjects().some((p) => p.example);
     <div class="Cursor" transition:persist aria-hidden="true">
       <div class="Cursor__inner"><span class="Cursor__icon"></span></div>
     </div>
+    <div class="Loader" transition:persist aria-hidden="true">
+      <div class="backdrop"></div>
+      <div class="fill"></div>
+    </div>
     <slot />
     <script>
       import '../scripts/main';

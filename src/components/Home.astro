@@ -20,7 +20,7 @@ const switchHref = alternates[otherLocale(locale)];
 
 <Base locale={locale} title={t.meta.title} description={t.meta.description} alternates={alternates}>
   <Navbar locale={locale} switchHref={switchHref} />
-  <main id="main">
+  <main id="main" transition:animate="none">
     <Hero locale={locale} />
     <Highlight locale={locale} />
     <About locale={locale} />

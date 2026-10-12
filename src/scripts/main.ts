@@ -8,6 +8,9 @@ import './preview';
 import './services';
 import './cursor';
 import './card-video';
+import './clipboard-button';
+import './lang-switch';
+import './loader';
 
 interface SwapEvent extends Event {
   newDocument: Document;

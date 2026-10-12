@@ -20,7 +20,7 @@ const switchHref = alternates[otherLocale(locale)];
 
 <Base locale={locale} title={`${tx.title} — ${t.meta.title}`} description={tx.caption} alternates={alternates}>
   <Navbar locale={locale} base={homePath(locale)} switchHref={switchHref} />
-  <main id="main">
+  <main id="main" transition:animate="none">
     <section class="Tophead container">
       <p class="label" data-reveal="fade">{project.year} · {project.tags.join(' · ')}</p>
       <h1 data-reveal="words">{tx.title}</h1>
