@@ -57,9 +57,9 @@ describe('textos finais', () => {
     }
   });
 
-  it('a seção de serviços se chama "Selected work" e tem os 4 serviços aprovados', () => {
-    expect(pt.services.title).toBe('Selected work');
-    expect(en.services.title).toBe('Selected work');
+  it('a seção de serviços se chama "Serviços" (EN: "Services") e tem os 4 serviços aprovados', () => {
+    expect(pt.services.title).toBe('Serviços');
+    expect(en.services.title).toBe('Services');
     expect(pt.services.items.map((i) => i.title)).toEqual([
       'Sites e landing pages',
       'Aplicações web',

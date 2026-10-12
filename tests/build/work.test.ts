@@ -8,11 +8,12 @@ function section(html: string): string {
   return html.slice(start, html.indexOf('</main>'));
 }
 
-describe('seção Selected work (serviços)', () => {
+describe('seção de serviços', () => {
   it.each([['pt', pt], ['en', en]] as const)('%s: título, 4 cartões com título e descrição, sem links', (lang, t) => {
     const html = readDecoded(`${lang}/index.html`);
     const work = section(html);
-    expect(work).toMatch(/<h2[^>]*>Selected work<\/h2>/);
+    expect(work).toMatch(new RegExp(`<h2[^>]*>${t.services.title}</h2>`));
+    expect(work).not.toContain('Selected work');
     const titles = [...work.matchAll(/<h3[^>]*class="Card__title[^"]*"[^>]*>([^<]*)<\/h3>/g)].map((m) => m[1]);
     expect(titles).toEqual(t.services.items.map((i) => i.title));
     for (const item of t.services.items) expect(work).toContain(item.text);

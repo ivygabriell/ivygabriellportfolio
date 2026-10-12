@@ -20,7 +20,7 @@ Complementa `2026-10-12-portfolio-design.md`. Aquele spec define a estrutura e o
 1. **Hero**: *Ivy Gabriel, Desenvolvedor Full Stack.* + frase de impacto. **Sem botão no hero** (o hero original nunca teve; o acesso ao contato é a pílula "Contato" da navbar e a seção final) e sem link de currículo.
 2. **Destaque**: painel em código. O vídeo/motion fica para depois (`highlightVideo: null`); o painel funciona sem ele.
 3. **Sobre**: texto curto, **sem** habilidades (mantém o bloco de redes).
-4. **Selected work** (título igual nos dois idiomas): 4 cartões, um por serviço (Sites e landing pages, Aplicações web, Apps mobile, Automações e integrações), no layout de grade dos antigos cartões de projeto, com arte em cobalto, título (`h3`) e descrição. Sem links.
+4. **Serviços** (o título passou de "Selected work" para "Serviços" / "Services", a pedido da usuária; o antigo nome de trabalho da seção ainda aparece nos nomes de arquivo/classe `Work`): 4 cartões, um por serviço (Sites e landing pages, Aplicações web, Apps mobile, Automações e integrações), no layout de grade dos antigos cartões de projeto, com arte em cobalto, título (`h3`) e descrição. Sem links.
 5. **Contato + footer**: e-mail e WhatsApp como botões principais; LinkedIn, GitHub e Instagram como links secundários; sem formulário. Navbar e footer: Sobre, Serviços, Contato.
 
 `services.ts` (rolagem guiada) e as páginas de projeto continuam no código sem uso na home; a limpeza fica para depois.
