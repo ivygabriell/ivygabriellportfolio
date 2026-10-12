@@ -76,16 +76,26 @@ function revealPanel(el: HTMLElement) {
   ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: () => tl.play() });
 }
 
+// Uma revelação que falha não pode deixar conteúdo escondido: limpamos o que ela aplicou e seguimos.
+function safely(what: string, targets: HTMLElement[], run: () => void) {
+  try {
+    run();
+  } catch (error) {
+    console.error(`[reveal] ${what} failed`, error);
+    gsap.set(targets, { clearProps: 'all' });
+  }
+}
+
 register((root, flags) => {
   if (!flags.animations) return;
   const els = [...root.querySelectorAll<HTMLElement>('[data-reveal]')];
   const of = (kind: string) => els.filter((el) => el.dataset.reveal === kind);
 
-  of('words').forEach(revealWords);
-  of('panel').forEach(revealPanel);
-  batchFadeUp(of('fade-up'));
-  batchFade(of('fade'));
-  batchScale(of('scale'));
+  of('words').forEach((el) => safely('words', [el], () => revealWords(el)));
+  of('panel').forEach((el) => safely('panel', [el], () => revealPanel(el)));
+  safely('fade-up', of('fade-up'), () => batchFadeUp(of('fade-up')));
+  safely('fade', of('fade'), () => batchFade(of('fade')));
+  safely('scale', of('scale'), () => batchScale(of('scale')));
 
   // Só agora o CSS deixa de esconder: os estados iniciais já estão aplicados pelo GSAP.
   els.forEach((el) => (el.dataset.revealed = '1'));

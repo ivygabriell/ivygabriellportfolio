@@ -33,13 +33,28 @@ register((root, flags) => {
     video?.pause();
     getLenis()?.start();
   };
+  // O painel é um div: para o teclado e leitores de tela ele precisa se comportar como botão.
+  const onKey = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      open();
+    }
+  };
+  opener.setAttribute('role', 'button');
+  opener.setAttribute('tabindex', '0');
+  opener.setAttribute('aria-haspopup', 'dialog');
+  const label = opener.closest('section')?.getAttribute('aria-label');
+  if (label) opener.setAttribute('aria-label', label);
   opener.addEventListener('click', open);
+  opener.addEventListener('keydown', onKey);
   dialog.addEventListener('click', close);
   dialog.addEventListener('close', onClosed);
   return () => {
     opener.removeEventListener('click', open);
+    opener.removeEventListener('keydown', onKey);
     dialog.removeEventListener('click', close);
     dialog.removeEventListener('close', onClosed);
+    ['role', 'tabindex', 'aria-haspopup', 'aria-label'].forEach((a) => opener.removeAttribute(a));
     if (dialog.open) dialog.close();
   };
 });

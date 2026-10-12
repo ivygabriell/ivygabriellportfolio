@@ -37,8 +37,7 @@ const links = [
         data-lang-switch
         data-base={switchHref}
         hreflang={HTML_LANG[other]}
-        lang={HTML_LANG[other]}
-        aria-label={t.langAria}>{other.toUpperCase()}</a
+        aria-label={`${other.toUpperCase()} — ${t.langAria}`}>{other.toUpperCase()}</a
       >
       <Pill class="action" href={`${base}#contato`}>{t.contact}</Pill>
     </nav>

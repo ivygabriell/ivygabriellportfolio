@@ -36,4 +36,14 @@ describe('motionFlags', () => {
       animations: true, smoothScroll: true, cursor: false,
     });
   });
+
+  it('início tardio (a página já foi mostrada pelo timeout de segurança) não refaz estados iniciais', () => {
+    const env = { reducedMotion: false, finePointer: true, touch: false };
+    expect(motionFlags(env, { late: true })).toEqual({ animations: false, smoothScroll: true, cursor: true });
+  });
+
+  it('início normal não muda com a opção ausente ou false', () => {
+    const env = { reducedMotion: false, finePointer: true, touch: false };
+    expect(motionFlags(env, { late: false })).toEqual(motionFlags(env));
+  });
 });

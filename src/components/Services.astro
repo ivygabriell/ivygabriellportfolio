@@ -18,10 +18,10 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
         <div class="item__fill"></div>
         <div class="item__bg"><GradientArt variant={variants[i % variants.length]} /></div>
         <div class="item__head">
-          <h3 class="item__title">{item.title}</h3>
+          <h3 class="item__title"><span class="item__toggle">{item.title}</span></h3>
           <span class="item__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
         </div>
-        <div class="item__accordion">
+        <div class="item__accordion" id={`service-${i}`}>
           <div class="item__inner">
             <div class="item__content">
               <p>{item.text}</p>
@@ -49,6 +49,7 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
   }
   .items {
     display: grid;
+    align-content: start;
     gap: 1.2rem;
   }
   .item {
@@ -125,6 +126,10 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
   .Services:global(.is-scrub) .item:not(:first-child) .item__num {
     opacity: 0.3;
   }
+  /* Conteúdo recolhido não pode receber foco nem ser lido (services.ts liga a visibilidade ao abrir). */
+  .Services:global(.is-scrub) .item:not(:first-child) .item__inner {
+    visibility: hidden;
+  }
 
   /* Acordeão por clique (mobile) */
   .Services:global(.is-accordion) .item {
@@ -147,6 +152,14 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
   .Services:global(.is-accordion) .item__content {
     opacity: 0;
     transition: opacity 0.6s;
+  }
+  .Services:global(.is-accordion) .item__inner {
+    visibility: hidden;
+    transition: visibility 0s 1.2s;
+  }
+  .Services:global(.is-accordion) .item:global(.-active) .item__inner {
+    visibility: visible;
+    transition-delay: 0s;
   }
   .Services:global(.is-accordion) .item:global(.-active) {
     color: #fff;

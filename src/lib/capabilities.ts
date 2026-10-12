@@ -19,11 +19,12 @@ export function readEnv(win: { matchMedia(query: string): { matches: boolean } }
   };
 }
 
-export function motionFlags(env: Env): MotionFlags {
-  const animations = !env.reducedMotion;
+export function motionFlags(env: Env, options: { late?: boolean } = {}): MotionFlags {
+  const motion = !env.reducedMotion;
   return {
-    animations,
-    smoothScroll: animations && !env.touch,
-    cursor: animations && env.finePointer && !env.touch,
+    // `late`: a página já foi mostrada pelo timeout de segurança; refazer os estados iniciais faria o conteúdo piscar.
+    animations: motion && !options.late,
+    smoothScroll: motion && !env.touch,
+    cursor: motion && env.finePointer && !env.touch,
   };
 }

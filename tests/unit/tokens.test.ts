@@ -22,4 +22,14 @@ describe('tokens de escala fluida', () => {
     expect(tokens).toContain('cubic-bezier(0.16, 1, 0.3, 1)');
     expect(tokens).toContain('cubic-bezier(0.34, 4.56, 0.64, 1)');
   });
+
+  it('tablet (768 a 1279px) reduz margens e coluna de rótulo para o layout não espremer', () => {
+    const tablet = tokens.match(/@media \(min-width: 768px\) and \(max-width: 1279px\)\s*\{[\s\S]*?\n\}/);
+    expect(tablet, 'bloco de media query do tablet').not.toBeNull();
+    for (const name of ['--gutter', '--narrow', '--label-col']) expect(tablet![0]).toContain(name);
+  });
+
+  it('define a coluna de rótulo que About e a visão geral do projeto usam', () => {
+    expect(tokens).toMatch(/:root\s*\{[^}]*--label-col:\s*28rem/);
+  });
 });

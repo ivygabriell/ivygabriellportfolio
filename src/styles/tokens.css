@@ -31,10 +31,21 @@
 
   --pill-h: 5.8rem;
   --pill-px: 2.8rem;
+
+  --label-col: 28rem;
 }
 
 html {
   font-size: clamp(8px, 0.625vw, 12px);
+}
+
+/* Tablet: o rem fica preso em 8px, então as margens e a coluna de rótulo precisam ser menores. */
+@media (min-width: 768px) and (max-width: 1279px) {
+  :root {
+    --gutter: 6rem;
+    --narrow: 8rem;
+    --label-col: 18rem;
+  }
 }
 
 @media (max-width: 767px) {

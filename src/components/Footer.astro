@@ -18,7 +18,7 @@ const links = [
 <footer class="Footer -inverse">
   <div class="container grid">
     <div class="contact">
-      <a class="pill" href={`mailto:${site.email}`} aria-label={t.footer.emailLabel}>{site.email}</a>
+      <a class="pill" href={`mailto:${site.email}`}>{site.email}</a>
       <p class="loc"><span class="label">{t.footer.locationLabel}</span> {t.footer.location}</p>
     </div>
     <nav class="links" aria-label={t.footer.navLabel}>
@@ -28,8 +28,7 @@ const links = [
         data-lang-switch
         data-base={switchHref}
         hreflang={HTML_LANG[other]}
-        lang={HTML_LANG[other]}
-        aria-label={t.nav.langAria}>{other.toUpperCase()}</a
+        aria-label={`${other.toUpperCase()} — ${t.nav.langAria}`}>{other.toUpperCase()}</a
       >
     </nav>
   </div>

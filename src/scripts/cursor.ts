@@ -3,6 +3,17 @@ import { MOTION } from './motion-config';
 import { gsap } from './gsap';
 import { register } from './registry';
 
+// O cursor persiste entre páginas, mas o revert do GSAP zera x/y: lembramos o último ponteiro para retomar dali.
+const pointer = { x: -1, y: -1 };
+document.addEventListener(
+  'pointermove',
+  (event) => {
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+  },
+  { passive: true },
+);
+
 register((_root, flags) => {
   if (!flags.cursor) return;
   const el = document.querySelector<HTMLElement>('.Cursor');
@@ -10,6 +21,7 @@ register((_root, flags) => {
   if (!el || !iconBox) return;
 
   const { speed, skewing } = MOTION.cursor;
+  if (pointer.x >= 0) gsap.set(el, { x: pointer.x, y: pointer.y });
   const setX = gsap.quickTo(el, 'x', { duration: speed, ease: 'power3.out' });
   const setY = gsap.quickTo(el, 'y', { duration: speed, ease: 'power3.out' });
   let last = { x: 0, y: 0, t: 0 };
