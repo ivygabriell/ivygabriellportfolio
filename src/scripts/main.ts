@@ -3,6 +3,8 @@ import { gsap, ScrollTrigger } from './gsap';
 import { mount, unmount } from './registry';
 import './smooth-scroll';
 import './reveal';
+import './navbar';
+import './preview';
 
 interface SwapEvent extends Event {
   newDocument: Document;
