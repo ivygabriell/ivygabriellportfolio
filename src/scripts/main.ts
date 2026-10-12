@@ -5,6 +5,7 @@ import './smooth-scroll';
 import './reveal';
 import './navbar';
 import './preview';
+import './services';
 
 interface SwapEvent extends Event {
   newDocument: Document;
