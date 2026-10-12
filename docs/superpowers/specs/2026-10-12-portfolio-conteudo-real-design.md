@@ -45,7 +45,7 @@ Sem Depoimentos, Processo, FAQ, Currículo nem Blog.
 
 **Contato.** Título: *Tem uma ideia para tirar do papel?* / *Have an idea to get off the ground?* Botões: *Copiar e-mail* e *Chamar no WhatsApp* / *Copy email* e *Message on WhatsApp*. Mensagem inicial do WhatsApp: *Olá, Ivy! Vi seu portfólio e quero conversar sobre um projeto.* / *Hi Ivy! I saw your portfolio and I'd like to talk about a project.*
 
-**Contatos (públicos no site):** e-mail `ivy.gabriel@icloud.com`; WhatsApp `+55 62 99502-4778` (`https://wa.me/5562995024778?text=<mensagem codificada no idioma da página>`); LinkedIn `https://www.linkedin.com/in/ivygabriel`; GitHub `https://github.com/ivygabriell`. O Instagram sai.
+**Contatos (públicos no site):** e-mail `ivy.gabriel@icloud.com`; WhatsApp **somente como botão com link de redirecionamento** (`https://wa.me/5562995024778?text=<mensagem codificada no idioma da página>`); o número **não aparece como texto** em nenhuma página; LinkedIn `https://www.linkedin.com/in/ivygabriel`; GitHub `https://github.com/ivygabriell`. O Instagram sai.
 
 ## 4. Dados e código
 
@@ -79,7 +79,8 @@ O botão em pílula (`Pill`) passa de preto a `--c-accent` com texto `--c-bg`; h
 5. Lighthouse nas páginas `/pt/` e `/en/`: acessibilidade ≥ 98, performance ≥ 95.
 6. Páginas sem projetos: nenhuma rota `/pt/projetos/*` nem `/en/projects/*` é gerada; a seção Projetos mostra "Em breve".
 7. O link do WhatsApp abre a conversa com a mensagem inicial no idioma da página.
-8. Nenhuma ocorrência de `example.com`, `Instagram` ou `gcivy` no HTML gerado (exceto `SITE_URL` de fallback documentado).
+8. O número de WhatsApp aparece apenas dentro do `href` do botão, nunca como texto visível nem em metadados.
+9. Nenhuma ocorrência de `example.com`, `Instagram` ou `gcivy` no HTML gerado (exceto `SITE_URL` de fallback documentado).
 
 ## 7. Fora do escopo
 
