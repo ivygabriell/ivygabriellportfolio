@@ -174,15 +174,29 @@ const links = [
     display: none;
   }
   @media (max-width: 767px) {
+    :global(html:not(.js)) .Navbar {
+      position: relative;
+    }
+    :global(html:not(.js)) .bar {
+      height: auto;
+      flex-wrap: wrap;
+      padding-block: 1.6rem;
+      border-radius: 3.2rem;
+    }
     :global(html:not(.js)) .menu {
       position: static;
+      z-index: auto;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      width: 100%;
+      gap: 1.6rem 2.4rem;
       padding: 1rem 0 0;
     }
     :global(html:not(.js)) .navs {
       flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1.6rem 2.4rem;
       font-size: 2rem;
     }
   }
