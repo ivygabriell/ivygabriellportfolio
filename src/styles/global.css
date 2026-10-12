@@ -95,3 +95,9 @@ svg {
   white-space: nowrap;
   border: 0;
 }
+
+/* Estados iniciais de revelação: só existem quando o JS ligou o movimento (.motion)
+   e somem se o script falhar (.motion-failed). */
+.motion:not(.motion-failed) [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+}
