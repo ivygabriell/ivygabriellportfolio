@@ -10,8 +10,8 @@ const t = copy[Astro.props.locale].outro;
 const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
 ---
 
-<section class="Outro -inverse" id="contato">
-  <div class="container inner">
+<section class="Outro" id="contato">
+  <div class="inner">
     <h2 data-reveal="words">{t.title}</h2>
     <p data-reveal="words">{t.text}</p>
     <div class="actions">
@@ -31,11 +31,6 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
 
 <style>
   .Outro {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    margin-top: calc(-1 * var(--r-top));
-    padding-block: 18rem 16rem;
     text-align: center;
   }
   .inner {
@@ -44,7 +39,6 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
     gap: 4rem;
   }
   h2 {
-    max-width: 90rem;
     font-size: var(--fs-h1);
     font-weight: 500;
     line-height: 1;
@@ -67,7 +61,6 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
   }
   @media (max-width: 767px) {
     .Outro {
-      padding-block: 10rem 8rem;
       text-align: left;
     }
     .inner {

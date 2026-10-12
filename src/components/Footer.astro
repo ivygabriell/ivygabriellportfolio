@@ -8,6 +8,7 @@ import SocialIcon from './SocialIcon.astro';
 interface Props { locale: Locale; base?: string }
 const { locale, base = '' } = Astro.props;
 const t = copy[locale];
+const withContact = Astro.slots.has('contact');
 const links = [
   { href: `${base}#sobre`, label: t.nav.about },
   { href: `${base}#servicos`, label: t.nav.services },
@@ -15,11 +16,12 @@ const links = [
 ];
 ---
 
-<footer class="Footer -inverse">
-  <div class="container--narrow grid">
+<footer class:list={['Footer', '-inverse', { '-with-contact': withContact }]}>
+  <div class="container--narrow top">
     <nav class="links" aria-label={t.footer.navLabel}>
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
+    {withContact && <div class="contact"><slot name="contact" /></div>}
   </div>
   <div class="container--narrow rule"><Divider /></div>
   <div class="container--narrow bottom">
@@ -37,7 +39,21 @@ const links = [
     padding-block: 8rem;
     border-radius: 0;
   }
+  .Footer.-with-contact {
+    padding-top: 18rem;
+  }
+  .top {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 81rem) 1fr;
+    align-items: start;
+    gap: 4rem;
+  }
+  .contact {
+    grid-column: 2;
+  }
   .links {
+    grid-column: 1;
+    grid-row: 1;
     display: grid;
     gap: 1.6rem;
     justify-items: start;
@@ -76,6 +92,20 @@ const links = [
   @media (max-width: 767px) {
     .Footer {
       padding-block: 6rem;
+    }
+    .Footer.-with-contact {
+      padding-top: 10rem;
+    }
+    .top {
+      grid-template-columns: 1fr;
+    }
+    .contact {
+      grid-column: 1;
+      order: -1;
+    }
+    .links {
+      grid-column: 1;
+      grid-row: auto;
     }
     .rule {
       margin-top: 4rem;

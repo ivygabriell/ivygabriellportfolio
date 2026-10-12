@@ -24,7 +24,8 @@ const switchHref = alternates[otherLocale(locale)];
     <Highlight locale={locale} />
     <About locale={locale} />
     <Work locale={locale} />
-    <Outro locale={locale} />
   </main>
-  <Footer locale={locale} />
+  <Footer locale={locale}>
+    <Outro locale={locale} slot="contact" />
+  </Footer>
 </Base>

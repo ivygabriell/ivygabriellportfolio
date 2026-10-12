@@ -5,7 +5,7 @@ import { readDecoded } from './dist';
 
 function section(html: string): string {
   const start = html.indexOf('id="servicos"');
-  return html.slice(start, html.indexOf('id="contato"'));
+  return html.slice(start, html.indexOf('</main>'));
 }
 
 describe('seção Selected work (serviços)', () => {

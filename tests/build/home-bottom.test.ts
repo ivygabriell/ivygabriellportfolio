@@ -17,7 +17,8 @@ describe('base da home', () => {
     expect(html).toContain('<footer');
     expect(html).toContain(pt.footer.rights);
     expect(html).not.toContain('Localização');
-    const footer = html.slice(html.indexOf('<footer'));
+    // O e-mail só existe dentro do bloco do Contato; a navegação e a barra de baixo não têm e-mail.
+    const footer = html.slice(html.indexOf('<footer')).replace(/<section[^>]*id="contato"[\s\S]*?<\/section>/, '');
     expect(footer).not.toContain('mailto:');
     expect(footer).not.toContain('data-clipboard-copy');
     for (const s of site.socials) expect(html).toContain(s.url);

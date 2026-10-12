@@ -39,10 +39,30 @@ describe('contato', () => {
 });
 
 describe('fechamento da página', () => {
-  it.each(['pt', 'en'])('%s: do Contato ao footer não há arte em SVG (triângulos)', (lang) => {
+  it.each(['pt', 'en'])('%s: o Contato fica dentro do footer, na mesma linha dos links, antes da linha divisória', (lang) => {
     const html = readDecoded(`${lang}/index.html`);
-    const closing = html.slice(html.indexOf('id="contato"'), html.indexOf('<footer'));
-    expect(closing).not.toContain('<svg');
+    const footerAt = html.indexOf('<footer');
+    const links = html.indexOf('class="links', footerAt);
+    const contato = html.indexOf('id="contato"', footerAt);
+    const divider = html.indexOf('class="Divider', footerAt);
+    expect(footerAt).toBeGreaterThan(-1);
+    expect(links).toBeGreaterThan(footerAt);
+    expect(contato).toBeGreaterThan(links);
+    expect(divider).toBeGreaterThan(contato);
+    expect(html.slice(html.indexOf('</main>') + '</main>'.length, footerAt).trim()).toBe('');
+  });
+
+  it.each(['pt', 'en'])('%s: o bloco do Contato não tem arte em SVG (triângulos)', (lang) => {
+    const html = readDecoded(`${lang}/index.html`);
+    const block = html.slice(html.indexOf('id="contato"'), html.indexOf('class="Divider'));
+    expect(block).not.toContain('<svg');
+  });
+
+  it.each(['pt', 'en'])('%s: a linha do footer usa o mesmo recuo do Sobre (container--narrow)', (lang) => {
+    const html = readDecoded(`${lang}/index.html`);
+    const footer = html.slice(html.indexOf('<footer'));
+    expect(footer).toMatch(/class="container--narrow[^"]*\btop\b/);
+    expect(footer).not.toMatch(/class="container[ "]/);
   });
 });
 
