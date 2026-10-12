@@ -8,9 +8,9 @@ export const site = {
   whatsapp: '5562995024778',
   example: true,
   socials: [
-    { id: 'github', label: 'GitHub', short: 'GH', url: 'https://github.com/ivygabriell' },
-    { id: 'linkedin', label: 'LinkedIn', short: 'IN', url: 'https://www.linkedin.com/in/ivygabriel' },
-    { id: 'instagram', label: 'Instagram', short: 'IG', url: 'https://www.instagram.com/ivygabriell_/' },
+    { id: 'github', label: 'GitHub', url: 'https://github.com/ivygabriell' },
+    { id: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/ivygabriel' },
+    { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/ivygabriell_/' },
   ],
   // Caminho de um vídeo curto (ex.: '/media/destaque.mp4') ou null para só o painel em código.
   highlightVideo: null as string | null,

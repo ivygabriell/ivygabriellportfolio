@@ -21,6 +21,8 @@ describe('topo da home', () => {
     expect(logo, 'link do logo').not.toBeNull();
     const letters = [...logo![1].matchAll(/class="logo__ch[^"]*"[^>]*>([^<]*)</g)].map((m) => m[1]);
     expect(letters).toEqual(['I', 'G']);
+    // WCAG 2.5.3: o nome acessível contém o texto visível (comando de voz "clicar IG").
+    expect(logo![0]).toMatch(/aria-label="IG — Ivy Gabriel"/);
   });
 
   it('a navbar tem links por âncora, pílula de contato e troca de idioma', () => {

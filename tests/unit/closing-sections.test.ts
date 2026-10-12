@@ -21,4 +21,11 @@ describe('Contato e footer em uma cor só', () => {
     expect(src('components/Outro.astro')).not.toMatch(/\.Outro\s*\{[^}]*background/);
     expect(src('components/Footer.astro')).not.toMatch(/\.Footer\s*\{[^}]*background/);
   });
+
+  it('o footer não tem e-mail (nem pílula, nem link): o e-mail fica no Contato', () => {
+    const footer = src('components/Footer.astro');
+    expect(footer).not.toContain('site.email');
+    expect(footer).not.toContain('mailto:');
+    expect(footer).not.toMatch(/\.pill\s*\{/);
+  });
 });

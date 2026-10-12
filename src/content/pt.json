@@ -60,11 +60,8 @@
     "whatsappMessage": "Olá, Ivy! Vi seu portfólio e quero conversar sobre um projeto."
   },
   "footer": {
-    "emailLabel": "E-mail",
-    "locationLabel": "Localização",
-    "location": "Brasil",
     "navLabel": "Navegação",
     "socialLabel": "Redes",
-    "rights": "© 2026 Ivy Gabriel"
+    "rights": "© 2026 Ivy Gabriel, Brasil"
   }
 }

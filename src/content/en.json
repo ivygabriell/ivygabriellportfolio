@@ -60,11 +60,8 @@
     "whatsappMessage": "Hi Ivy! I saw your portfolio and I'd like to talk about a project."
   },
   "footer": {
-    "emailLabel": "Email",
-    "locationLabel": "Location",
-    "location": "Brazil",
     "navLabel": "Navigation",
     "socialLabel": "Social",
-    "rights": "© 2026 Ivy Gabriel"
+    "rights": "© 2026 Ivy Gabriel, Brazil"
   }
 }

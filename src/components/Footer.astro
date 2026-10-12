@@ -1,13 +1,13 @@
 ---
 import { copy } from '../lib/copy';
 import { site } from '../content/site';
-import { HTML_LANG, otherLocale, type Locale } from '../lib/i18n';
+import type { Locale } from '../lib/i18n';
 import Divider from './Divider.astro';
+import SocialIcon from './SocialIcon.astro';
 
-interface Props { locale: Locale; switchHref: string; base?: string }
-const { locale, switchHref, base = '' } = Astro.props;
+interface Props { locale: Locale; base?: string }
+const { locale, base = '' } = Astro.props;
 const t = copy[locale];
-const other = otherLocale(locale);
 const links = [
   { href: `${base}#sobre`, label: t.nav.about },
   { href: `${base}#servicos`, label: t.nav.services },
@@ -16,28 +16,17 @@ const links = [
 ---
 
 <footer class="Footer -inverse">
-  <div class="container grid">
-    <div class="contact">
-      <a class="pill" href={`mailto:${site.email}`}>{site.email}</a>
-      <p class="loc"><span class="label">{t.footer.locationLabel}</span> {t.footer.location}</p>
-    </div>
+  <div class="container--narrow grid">
     <nav class="links" aria-label={t.footer.navLabel}>
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
-      <a
-        href={switchHref}
-        data-lang-switch
-        data-base={switchHref}
-        hreflang={HTML_LANG[other]}
-        aria-label={`${other.toUpperCase()} — ${t.nav.langAria}`}>{other.toUpperCase()}</a
-      >
     </nav>
   </div>
-  <div class="container rule"><Divider /></div>
-  <div class="container bottom">
+  <div class="container--narrow rule"><Divider /></div>
+  <div class="container--narrow bottom">
     <p class="rights">{t.footer.rights}</p>
     <ul class="socials" aria-label={t.footer.socialLabel}>
       {site.socials.map((s) => (
-        <li><a class="circle" href={s.url} rel="noopener" aria-label={s.label} data-cursor-icon="arrow-up-right">{s.short}</a></li>
+        <li><a class="circle" href={s.url} rel="noopener" aria-label={s.label} data-cursor-icon="arrow-up-right"><SocialIcon id={s.id} /></a></li>
       ))}
     </ul>
   </div>
@@ -48,40 +37,14 @@ const links = [
     padding-block: 8rem;
     border-radius: 0;
   }
-  .grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 6rem;
-  }
-  .contact {
-    display: grid;
-    gap: 2rem;
-    align-content: start;
-  }
-  .pill {
-    justify-self: start;
-    padding: 1.2rem 2.4rem;
-    border: 1px solid #fff;
-    border-radius: var(--r-pill);
-    font-size: 2.4rem;
-  }
-  .loc {
-    font-size: 1.6rem;
-  }
-  .loc .label {
-    margin-right: 0.8rem;
-    color: var(--c-paper-soft);
-  }
   .links {
     display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(3, auto);
-    gap: 1.6rem 6rem;
+    gap: 1.6rem;
+    justify-items: start;
     font-size: 2.4rem;
-    text-align: right;
   }
   .rule {
-    margin-top: 8rem;
+    margin-top: 6rem;
   }
   .bottom {
     display: flex;
@@ -104,8 +67,6 @@ const links = [
     height: 5.4rem;
     border-radius: 50%;
     background: rgb(255 255 255 / 0.12);
-    font-size: 1.6rem;
-    font-weight: 500;
     transition: background-color 0.4s;
   }
   .circle:hover {
@@ -116,16 +77,8 @@ const links = [
     .Footer {
       padding-block: 6rem;
     }
-    .grid {
-      flex-direction: column;
-      gap: 4rem;
-    }
-    .links {
-      text-align: left;
-      grid-template-rows: repeat(3, auto);
-    }
     .rule {
-      margin-top: 5rem;
+      margin-top: 4rem;
     }
     .bottom {
       flex-direction: column;

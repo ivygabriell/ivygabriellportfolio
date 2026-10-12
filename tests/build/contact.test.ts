@@ -45,3 +45,18 @@ describe('fechamento da página', () => {
     expect(closing).not.toContain('<svg');
   });
 });
+
+describe('ícones das redes no footer', () => {
+  it.each(['pt', 'en'])('%s: cada rede é um círculo com ícone SVG decorativo e nome acessível, sem siglas', (lang) => {
+    const html = readDecoded(`${lang}/index.html`);
+    const footer = html.slice(html.indexOf('<footer'));
+    const circles = [...footer.matchAll(/<a[^>]*class="circle[^"]*"[^>]*>([\s\S]*?)<\/a>/g)];
+    expect(circles).toHaveLength(site.socials.length);
+    circles.forEach((circle, i) => {
+      expect(circle[0]).toContain(`aria-label="${site.socials[i].label}"`);
+      expect(circle[1]).toContain('<svg');
+      expect(circle[1]).toContain('aria-hidden="true"');
+      expect(circle[1].replace(/<svg[\s\S]*?<\/svg>/g, '').trim()).toBe('');
+    });
+  });
+});

@@ -20,7 +20,7 @@ const links = [
 
 <header class="Navbar">
   <div class="bar">
-    <a class="logo" href={homePath(locale)} aria-label={site.name}>
+    <a class="logo" href={homePath(locale)} aria-label={`${site.wordmark} — ${site.name}`}>
       {[...site.wordmark].map((ch) => <span class="logo__ch">{ch}</span>)}
     </a>
     <button class="toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label={t.menu}>

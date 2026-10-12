@@ -95,4 +95,14 @@ describe('textos finais', () => {
     expect(en.outro.whatsappMessage).toContain('Ivy');
     expect(en.outro.title).toBe('Have an idea to get off the ground?');
   });
+
+  it('o footer não tem mais localização separada: o país vai ao lado do © 2026', () => {
+    for (const t of [pt, en]) {
+      expect(t.footer).not.toHaveProperty('location');
+      expect(t.footer).not.toHaveProperty('locationLabel');
+      expect(t.footer).not.toHaveProperty('emailLabel');
+    }
+    expect(pt.footer.rights).toBe('© 2026 Ivy Gabriel, Brasil');
+    expect(en.footer.rights).toBe('© 2026 Ivy Gabriel, Brazil');
+  });
 });
