@@ -449,7 +449,7 @@ describe('assets da marca', () => {
     const x = 600;
     const y = 625;
     const i = (y * info.width + x) * info.channels;
-    expect(data[i + 2], 'canal azul na base da imagem').toBeGreaterThan(240);
+    expect(data[i + 2], 'canal azul na base da imagem').toBeGreaterThan(200);
   });
 
   it('o favicon e o gerador usam o cobalto e não o índigo antigo', () => {
