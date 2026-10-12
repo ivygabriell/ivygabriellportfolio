@@ -1,6 +1,22 @@
+# dependências e builds
 node_modules
 dist
 .astro
-.DS_Store
+
+# ambiente (o modelo .env.example continua versionado)
 .env
+.env.*
+!.env.example
+
+# hospedagem (a CLI guarda o ID do projeto aqui)
+.vercel
+.netlify
+
+# ferramentas e sistema
 .superpowers
+.claude/settings.local.json
+.DS_Store
+.idea
+*.log
+coverage
+*.tsbuildinfo
