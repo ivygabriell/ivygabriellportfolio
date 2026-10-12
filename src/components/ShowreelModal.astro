@@ -1,0 +1,27 @@
+---
+interface Props { src: string }
+const { src } = Astro.props;
+---
+
+<dialog class="ShowreelModal" id="showreel-modal" data-lenis-prevent data-cursor-icon="times">
+  <video src={src} playsinline loop preload="none"></video>
+</dialog>
+
+<style>
+  .ShowreelModal {
+    width: min(100% - 4rem, 150rem);
+    max-height: 90vh;
+    padding: 0;
+    border: 0;
+    border-radius: var(--r-card);
+    background: #000;
+    overflow: hidden;
+  }
+  .ShowreelModal::backdrop {
+    background: rgb(0 0 0 / 0.8);
+  }
+  video {
+    width: 100%;
+    height: auto;
+  }
+</style>

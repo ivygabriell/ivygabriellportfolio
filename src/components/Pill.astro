@@ -1,0 +1,77 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'solid' | 'outline' | 'light';
+  class?: string;
+  [attr: string]: unknown;
+}
+const { href, variant = 'solid', class: cls, ...rest } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag href={href} class:list={['Pill', `-${variant}`, cls]} {...rest}>
+  <span class="Pill__label"><slot /></span>
+</Tag>
+
+<style>
+  .Pill {
+    --pill-bg: #000;
+    --pill-fg: #fff;
+    --pill-hover-bg: #fff;
+    --pill-hover-fg: #000;
+    --pill-border: #000;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--pill-h);
+    padding: 0 var(--pill-px);
+    border: 1px solid var(--pill-border);
+    border-radius: var(--r-pill);
+    background: var(--pill-bg);
+    color: var(--pill-fg);
+    font-size: 2rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.4s;
+  }
+  .Pill::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    background: var(--pill-hover-bg);
+    transform: translateY(101%);
+    transition: transform 0.7s var(--ease-spring);
+  }
+  .Pill:hover,
+  .Pill:focus-visible {
+    color: var(--pill-hover-fg);
+  }
+  .Pill:hover::before,
+  .Pill:focus-visible::before {
+    transform: translateY(0);
+  }
+  .-outline {
+    --pill-bg: transparent;
+    --pill-fg: currentColor;
+    --pill-hover-bg: #fff;
+    --pill-hover-fg: #000;
+    --pill-border: currentColor;
+  }
+  .-light {
+    --pill-bg: #fff;
+    --pill-fg: #000;
+    --pill-hover-bg: #000;
+    --pill-hover-fg: #fff;
+    --pill-border: #fff;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .Pill::before {
+      transition: none;
+    }
+  }
+</style>

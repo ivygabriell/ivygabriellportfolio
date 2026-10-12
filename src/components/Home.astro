@@ -1,7 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import { copy } from '../lib/copy';
-import { homePath, type Locale } from '../lib/i18n';
+import { homePath, otherLocale, type Locale } from '../lib/i18n';
+import About from './About.astro';
+import Hero from './Hero.astro';
+import Highlight from './Highlight.astro';
+import Navbar from './Navbar.astro';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -10,7 +14,10 @@ const alternates = { pt: homePath('pt'), en: homePath('en') };
 ---
 
 <Base locale={locale} title={t.meta.title} description={t.meta.description} alternates={alternates}>
+  <Navbar locale={locale} switchHref={alternates[otherLocale(locale)]} />
   <main id="main">
-    <h1>{t.hero.title}</h1>
+    <Hero locale={locale} />
+    <Highlight locale={locale} />
+    <About locale={locale} />
   </main>
 </Base>

@@ -1,0 +1,48 @@
+---
+import { copy } from '../lib/copy';
+import type { Locale } from '../lib/i18n';
+
+interface Props { locale: Locale }
+const t = copy[Astro.props.locale].hero;
+---
+
+<section class="Hero container">
+  <h1 data-reveal="words">{t.title}</h1>
+  <p data-reveal="words">{t.subtitle}</p>
+</section>
+
+<style>
+  .Hero {
+    padding-top: 20rem;
+    padding-bottom: 8rem;
+    text-align: center;
+  }
+  h1 {
+    max-width: 90rem;
+    margin: 0 auto;
+    font-size: var(--fs-h1);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  p {
+    max-width: 76rem;
+    margin: 4rem auto 0;
+    font-size: var(--fs-sub);
+    line-height: 1.1;
+  }
+  @media (max-width: 767px) {
+    .Hero {
+      padding-top: 16rem;
+      padding-bottom: 6rem;
+      text-align: left;
+    }
+    h1,
+    p {
+      margin-inline: 0;
+    }
+    p {
+      margin-top: 3rem;
+    }
+  }
+</style>

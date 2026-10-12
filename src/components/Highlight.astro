@@ -1,0 +1,52 @@
+---
+import { copy } from '../lib/copy';
+import { site } from '../content/site';
+import type { Locale } from '../lib/i18n';
+import Panel from './Panel.astro';
+import ShowreelModal from './ShowreelModal.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = copy[locale].highlight;
+const video = site.highlightVideo;
+---
+
+<Panel id="destaque" label={t.label} cursorIcon={video ? 'play' : undefined}>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <p class="statement">{t.title}</p>
+</Panel>
+{video && <ShowreelModal src={video} />}
+
+<style>
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(6rem);
+    opacity: 0.9;
+  }
+  .b1 { width: 60%; aspect-ratio: 1; left: -10%; top: 0; background: #c7d2fe; }
+  .b2 { width: 50%; aspect-ratio: 1; right: -5%; top: 20%; background: #fde68a; }
+  .b3 { width: 45%; aspect-ratio: 1; left: 30%; bottom: -20%; background: #fbcfe8; }
+  :global(.motion) .blob {
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  :global(.motion) .b2 { animation-duration: 22s; }
+  :global(.motion) .b3 { animation-duration: 26s; }
+  @keyframes drift {
+    to { transform: translate3d(8%, -6%, 0) scale(1.15); }
+  }
+  .statement {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 0 6rem;
+    text-align: center;
+    font-size: var(--fs-h2);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+</style>

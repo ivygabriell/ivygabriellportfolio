@@ -1,0 +1,189 @@
+---
+import { copy } from '../lib/copy';
+import { site } from '../content/site';
+import { HTML_LANG, homePath, otherLocale, type Locale } from '../lib/i18n';
+import Pill from './Pill.astro';
+
+interface Props {
+  locale: Locale;
+  base?: string;
+  switchHref: string;
+}
+const { locale, base = '', switchHref } = Astro.props;
+const t = copy[locale].nav;
+const other = otherLocale(locale);
+const links = [
+  { href: `${base}#sobre`, label: t.about },
+  { href: `${base}#servicos`, label: t.services },
+  { href: `${base}#projetos`, label: t.projects },
+];
+---
+
+<header class="Navbar">
+  <div class="bar">
+    <a class="logo" href={homePath(locale)} aria-label={site.name}>
+      {[...site.wordmark].map((ch) => <span class="logo__ch">{ch}</span>)}
+    </a>
+    <button class="toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label={t.menu}>
+      <span></span><span></span>
+    </button>
+    <nav id="menu" class="menu" aria-label={site.name}>
+      <ul class="navs">
+        {links.map((l) => <li><a class="nav" href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <a
+        class="lang action"
+        href={switchHref}
+        data-lang-switch
+        data-base={switchHref}
+        hreflang={HTML_LANG[other]}
+        lang={HTML_LANG[other]}
+        aria-label={t.langAria}>{other.toUpperCase()}</a
+      >
+      <Pill class="action" href={`${base}#contato`}>{t.contact}</Pill>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .Navbar {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 50;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem var(--gutter);
+  }
+  .logo {
+    display: inline-flex;
+    font-size: 4rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .logo__ch {
+    display: inline-block;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 3.6rem;
+  }
+  .navs {
+    display: flex;
+    gap: 3.6rem;
+    font-size: 2rem;
+  }
+  .nav {
+    position: relative;
+    padding-block: 0.4rem;
+  }
+  .nav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--ease-out);
+  }
+  .nav:hover::after {
+    transform: scaleX(1);
+  }
+  .lang {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .toggle {
+    display: none;
+  }
+
+  /* Estado fixo: some ao descer, volta ao subir (classes ligadas por navbar.ts) */
+  .Navbar:global(.-fixed) {
+    position: fixed;
+    transform: translateY(-120%);
+    transition: transform 0.6s var(--ease-out);
+    background: rgb(255 255 255 / 0.88);
+    backdrop-filter: blur(1.2rem);
+  }
+  .Navbar:global(.-fixed.-visible) {
+    transform: none;
+  }
+
+  @media (max-width: 767px) {
+    .bar {
+      margin: 2rem;
+      padding: 0 2.4rem;
+      height: 6.4rem;
+      border: 1px solid var(--c-line);
+      border-radius: var(--r-pill);
+      background: #fff;
+    }
+    .logo {
+      font-size: 3.2rem;
+    }
+    .toggle {
+      display: grid;
+      gap: 0.8rem;
+      width: 4rem;
+      padding: 1rem 0.4rem;
+    }
+    .toggle span {
+      height: 2px;
+      background: currentColor;
+      transition: transform 0.5s var(--ease-out);
+    }
+    .Navbar:global(.-open) .toggle span:first-child {
+      transform: translateY(0.5rem) rotate(45deg);
+    }
+    .Navbar:global(.-open) .toggle span:last-child {
+      transform: translateY(-0.5rem) rotate(-45deg);
+    }
+    .menu {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 3rem;
+      padding: 10rem 3rem 3rem;
+      background: #fff;
+    }
+    .Navbar:global(.-open) .menu {
+      display: flex;
+    }
+    .navs {
+      flex-direction: column;
+      gap: 2rem;
+      font-size: 4.2rem;
+    }
+    .Navbar:global(.-fixed) {
+      background: none;
+      backdrop-filter: none;
+    }
+  }
+
+  /* Sem JavaScript o menu do mobile fica sempre aberto em linha, para continuar navegável */
+  :global(html:not(.js)) .toggle {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    :global(html:not(.js)) .menu {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 1rem 0 0;
+    }
+    :global(html:not(.js)) .navs {
+      flex-direction: row;
+      font-size: 2rem;
+    }
+  }
+</style>
