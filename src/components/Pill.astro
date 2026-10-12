@@ -35,7 +35,7 @@ const Tag = href ? 'a' : 'button';
     font-size: 2rem;
     font-weight: 500;
     white-space: nowrap;
-    transition: color 0.4s;
+    transition: color 0.4s var(--ease-out);
   }
   .Pill::before {
     content: '';
@@ -45,7 +45,9 @@ const Tag = href ? 'a' : 'button';
     border-radius: 50% 50% 0 0 / 100% 100% 0 0;
     background: var(--pill-hover-bg);
     transform: translateY(101%);
-    transition: transform 0.7s var(--ease-spring);
+    transition:
+      transform 0.7s var(--ease-out),
+      border-radius 0.7s var(--ease-out);
   }
   .Pill:hover,
   .Pill:focus-visible {
@@ -54,6 +56,7 @@ const Tag = href ? 'a' : 'button';
   .Pill:hover::before,
   .Pill:focus-visible::before {
     transform: translateY(0);
+    border-radius: 0;
   }
   .-outline {
     --pill-bg: transparent;
