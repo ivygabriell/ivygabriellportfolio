@@ -1,11 +1,12 @@
 :root {
-  --c-bg: #fff;
-  --c-ink: #000;
-  --c-mint: #e3f5f3;
-  --c-lavender: #f1f3fa;
-  --c-ink-soft: rgb(0 0 0 / 0.6);
+  --c-bg: #f7f8fc;
+  --c-ink: #0b1330;
+  --c-mint: #e4eaff;
+  --c-lavender: #d3dcff;
+  --c-accent: #1f4fff;
+  --c-ink-soft: rgb(11 19 48 / 0.6);
   --c-paper-soft: rgb(255 255 255 / 0.6);
-  --c-line: rgb(0 0 0 / 0.12);
+  --c-line: rgb(11 19 48 / 0.12);
   --c-line-inverse: rgb(255 255 255 / 0.2);
 
   --font: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
