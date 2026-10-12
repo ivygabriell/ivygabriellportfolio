@@ -15,12 +15,16 @@ Complementa `2026-10-12-portfolio-design.md`. Aquele spec define a estrutura e o
 
 ## 2. Estrutura final
 
+A **ordem das seções é a do site atual** (a usuária pediu para não alterar a estrutura): Hero → Destaque → Sobre → Serviços → Projetos → Contato.
+
 1. **Hero**: *Ivy Gabriel, Desenvolvedor Full Stack.* + frase de impacto + CTA "Vamos conversar". Sem link de currículo.
 2. **Destaque**: painel em código. O vídeo/motion fica para depois (`highlightVideo: null`); o painel funciona sem ele.
-3. **Serviços**: 4 cartões.
-4. **Projetos**: estado "Em breve" (2 cartões sem link).
-5. **Sobre**: texto curto, **sem** habilidades.
+3. **Sobre**: texto curto, **sem** habilidades (mantém o bloco de redes).
+4. **Serviços**: 4 cartões.
+5. **Projetos**: estado "Em breve" (2 cartões sem link).
 6. **Contato + footer**: e-mail e WhatsApp como botões principais; LinkedIn e GitHub como links secundários; sem formulário.
+
+Reordenar (por exemplo, Serviços logo depois do Hero) é uma mudança de uma linha em `Home.astro` mais os links da navbar e do footer, mas mexe no ritmo de seções claras e escuras; fica fora desta rodada.
 
 Sem Depoimentos, Processo, FAQ, Currículo nem Blog.
 
@@ -73,7 +77,7 @@ O botão em pílula (`Pill`) passa de preto a `--c-accent` com texto `--c-bg`; h
 ## 6. Critérios de aceite
 
 1. `npm test` e `npm run test:build` verdes; `astro check` sem erros.
-2. **Teste de congelamento:** os arquivos em `src/scripts/` e `motion-config.ts` ficam idênticos ao commit `9ba438a`; os testes de estrutura do HTML (ordem e ids das seções) continuam passando.
+2. **Teste de congelamento:** os arquivos em `src/scripts/` (incluindo `motion-config.ts`) ficam idênticos ao commit `9ba438a`, com **uma única exceção**: o literal de cor `'#000'` em `services.ts` (destino da animação do cartão) passa a `'#0b1330'`, igual ao `--c-ink`; os testes de estrutura do HTML (ordem e ids das seções) continuam passando.
 3. Sem JavaScript e com movimento reduzido, tudo continua visível.
 4. Contraste verificado por teste: `--c-ink` sobre `--c-bg` e `--c-bg` sobre `--c-accent` ≥ 4,5:1.
 5. Lighthouse nas páginas `/pt/` e `/en/`: acessibilidade ≥ 98, performance ≥ 95.
