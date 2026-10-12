@@ -6,7 +6,6 @@
   "nav": {
     "about": "About",
     "services": "Services",
-    "projects": "Projects",
     "contact": "Contact",
     "menu": "Open menu",
     "close": "Close menu",
@@ -26,37 +25,24 @@
     "socialLabel": "Social"
   },
   "services": {
-    "title": "Services",
-    "explore": "Explore",
+    "title": "Selected work",
     "items": [
       {
         "title": "Websites and landing pages",
-        "text": "Your brand with a site that performs, inspires trust and leads visitors to get in touch.",
-        "href": "#contato"
+        "text": "Your brand with a site that performs, inspires trust and leads visitors to get in touch."
       },
       {
         "title": "Web applications",
-        "text": "Replace spreadsheets and manual tasks with a system built around how your business works.",
-        "href": "#contato"
+        "text": "Replace spreadsheets and manual tasks with a system built around how your business works."
       },
       {
         "title": "Mobile apps",
-        "text": "Your service in your customer's pocket, with a fast, easy-to-use app ready to grow.",
-        "href": "#contato"
+        "text": "Your service in your customer's pocket, with a fast, easy-to-use app ready to grow."
       },
       {
         "title": "Automations and integrations",
-        "text": "Connected tools and repetitive tasks on autopilot.",
-        "href": "#contato"
+        "text": "Connected tools and repetitive tasks on autopilot."
       }
-    ]
-  },
-  "projects": {
-    "title": "Projects",
-    "view": "View project",
-    "soon": [
-      "Coming soon: a project I'm finishing right now.",
-      "Coming soon: the next project could be yours."
     ]
   },
   "project": {

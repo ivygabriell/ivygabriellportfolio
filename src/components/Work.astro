@@ -1,0 +1,87 @@
+---
+import { copy } from '../lib/copy';
+import type { Locale } from '../lib/i18n';
+import GradientArt from './GradientArt.astro';
+
+interface Props { locale: Locale }
+const t = copy[Astro.props.locale].services;
+const variants = ['arch', 'hex', 'tri', 'arch'] as const;
+---
+
+<section class="Work -inverse" id="servicos">
+  <div class="container--narrow head">
+    <h2 data-reveal="words">{t.title}</h2>
+  </div>
+  <ul class="cards container--narrow">
+    {t.items.map((item, i) => (
+      <li class="cell">
+        <article class="Card" data-reveal="fade-up">
+          <div class="Card__media"><GradientArt variant={variants[i % variants.length]} /></div>
+          <h3 class="Card__title">{item.title}</h3>
+          <p class="Card__text">{item.text}</p>
+        </article>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .Work {
+    padding-block: 14rem 16rem;
+  }
+  .head {
+    padding-bottom: 10rem;
+  }
+  h2 {
+    font-size: var(--fs-h2);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12rem 10rem;
+    align-items: start;
+  }
+  .cell:nth-child(even) {
+    margin-top: 12rem;
+  }
+  .Card {
+    display: block;
+  }
+  .Card__media {
+    overflow: hidden;
+    border-radius: var(--r-card);
+    aspect-ratio: 4 / 5;
+    background: var(--c-accent);
+  }
+  .Card__title {
+    margin-top: 3rem;
+    font-size: var(--fs-lead);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+  .Card__text {
+    max-width: 44rem;
+    margin-top: 1.6rem;
+    font-size: var(--fs-sub);
+    line-height: 1.15;
+    color: var(--c-paper-soft);
+  }
+  @media (max-width: 767px) {
+    .Work {
+      padding-block: 8rem 10rem;
+    }
+    .head {
+      padding-bottom: 5rem;
+    }
+    .cards {
+      grid-template-columns: 1fr;
+      gap: 6rem;
+    }
+    .cell:nth-child(even) {
+      margin-top: 0;
+    }
+  }
+</style>

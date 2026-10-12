@@ -34,6 +34,6 @@ describe('páginas de projeto', () => {
 
   it.skipIf(projects.length === 0)('os links da navbar voltam para as âncoras da home do idioma', () => {
     const html = read(`pt/projetos/${projects[0].slug}/index.html`);
-    expect(html).toContain('href="/pt/#projetos"');
+    expect(html).toContain('href="/pt/#servicos"');
   });
 });

@@ -6,13 +6,12 @@ const src = (path: string) => readFileSync(`src/${path}`, 'utf8');
 const LEGACY = ['#4338ca', '#818cf8', '#312e81', '#c7d2fe', '#fde68a', '#fbcfe8', '#e3f5f3', '#f1f3fa', '#111'];
 const SCANNED = [
   'components/Pill.astro',
-  'components/Services.astro',
+  'components/Work.astro',
   'components/Footer.astro',
   'components/Navbar.astro',
   'components/GradientArt.astro',
   'components/Highlight.astro',
   'components/Outro.astro',
-  'components/Projects.astro',
   'components/ProjectPage.astro',
   'components/Panel.astro',
   'styles/global.css',
@@ -21,11 +20,10 @@ const SCANNED = [
 ];
 const NO_PURE_BLACK = [
   'components/Pill.astro',
-  'components/Services.astro',
+  'components/Work.astro',
   'components/Footer.astro',
   'components/Navbar.astro',
   'components/Outro.astro',
-  'components/Projects.astro',
   'scripts/services.ts',
 ];
 

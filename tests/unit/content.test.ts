@@ -57,7 +57,9 @@ describe('textos finais', () => {
     }
   });
 
-  it('há 4 serviços com os títulos aprovados, todos levando ao contato', () => {
+  it('a seção de serviços se chama "Selected work" e tem os 4 serviços aprovados', () => {
+    expect(pt.services.title).toBe('Selected work');
+    expect(en.services.title).toBe('Selected work');
     expect(pt.services.items.map((i) => i.title)).toEqual([
       'Sites e landing pages',
       'Aplicações web',
@@ -70,12 +72,15 @@ describe('textos finais', () => {
       'Mobile apps',
       'Automations and integrations',
     ]);
-    for (const item of [...pt.services.items, ...en.services.items]) expect(item.href).toBe('#contato');
   });
 
-  it('Projetos tem dois cartões "Em breve" em cada idioma', () => {
-    expect(pt.projects.soon).toHaveLength(2);
-    expect(en.projects.soon).toHaveLength(2);
+  it('não sobram textos das seções removidas (Projetos e "Explorar")', () => {
+    for (const t of [pt, en]) {
+      expect(t).not.toHaveProperty('projects');
+      expect(t.nav).not.toHaveProperty('projects');
+      expect(t.services).not.toHaveProperty('explore');
+      for (const item of t.services.items) expect(item).not.toHaveProperty('href');
+    }
   });
 
   it('o texto do Contato usa a frase aprovada', () => {

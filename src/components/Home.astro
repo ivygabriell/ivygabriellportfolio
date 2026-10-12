@@ -8,8 +8,7 @@ import Hero from './Hero.astro';
 import Highlight from './Highlight.astro';
 import Navbar from './Navbar.astro';
 import Outro from './Outro.astro';
-import Projects from './Projects.astro';
-import Services from './Services.astro';
+import Work from './Work.astro';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -24,8 +23,7 @@ const switchHref = alternates[otherLocale(locale)];
     <Hero locale={locale} />
     <Highlight locale={locale} />
     <About locale={locale} />
-    <Services locale={locale} />
-    <Projects locale={locale} />
+    <Work locale={locale} />
     <Outro locale={locale} />
   </main>
   <Footer locale={locale} switchHref={switchHref} />

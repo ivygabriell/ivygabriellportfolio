@@ -6,7 +6,6 @@
   "nav": {
     "about": "Sobre",
     "services": "Serviços",
-    "projects": "Projetos",
     "contact": "Contato",
     "menu": "Abrir menu",
     "close": "Fechar menu",
@@ -26,37 +25,24 @@
     "socialLabel": "Redes"
   },
   "services": {
-    "title": "Serviços",
-    "explore": "Explorar",
+    "title": "Selected work",
     "items": [
       {
         "title": "Sites e landing pages",
-        "text": "Sua marca com um site que tem desempenho, passa confiança e leva o visitante a falar com você.",
-        "href": "#contato"
+        "text": "Sua marca com um site que tem desempenho, passa confiança e leva o visitante a falar com você."
       },
       {
         "title": "Aplicações web",
-        "text": "Troque planilhas e tarefas manuais por um sistema feito para o jeito como o seu negócio funciona.",
-        "href": "#contato"
+        "text": "Troque planilhas e tarefas manuais por um sistema feito para o jeito como o seu negócio funciona."
       },
       {
         "title": "Apps mobile",
-        "text": "Seu serviço no bolso do cliente, com um app rápido, fácil de usar e pronto para crescer.",
-        "href": "#contato"
+        "text": "Seu serviço no bolso do cliente, com um app rápido, fácil de usar e pronto para crescer."
       },
       {
         "title": "Automações e integrações",
-        "text": "Ferramentas conectadas e tarefas repetitivas no automático.",
-        "href": "#contato"
+        "text": "Ferramentas conectadas e tarefas repetitivas no automático."
       }
-    ]
-  },
-  "projects": {
-    "title": "Projetos",
-    "view": "Ver projeto",
-    "soon": [
-      "Em breve: um projeto que estou finalizando agora.",
-      "Em breve: o próximo projeto pode ser o seu."
     ]
   },
   "project": {

@@ -27,7 +27,7 @@ describe('topo da home', () => {
     const html = read('pt/index.html');
     expect(html).toContain('href="#sobre"');
     expect(html).toContain('href="#servicos"');
-    expect(html).toContain('href="#projetos"');
+    expect(html).not.toContain('href="#projetos"');
     expect(html).toContain('href="#contato"');
     expect(html).toMatch(/data-lang-switch[^>]*href="\/en\/"|href="\/en\/"[^>]*data-lang-switch/);
   });

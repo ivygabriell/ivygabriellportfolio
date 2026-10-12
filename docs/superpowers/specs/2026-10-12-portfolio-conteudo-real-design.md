@@ -15,16 +15,15 @@ Complementa `2026-10-12-portfolio-design.md`. Aquele spec define a estrutura e o
 
 ## 2. Estrutura final
 
-A **ordem das seções é a do site atual** (a usuária pediu para não alterar a estrutura): Hero → Destaque → Sobre → Serviços → Projetos → Contato.
+**Revisão posterior (pedido da usuária):** a seção de Projetos virou a de serviços e a seção antiga de Serviços (acordeão com rolagem guiada) foi removida. A ordem final é Hero → Destaque → Sobre → **Selected work** (`#servicos`) → Contato → footer.
 
 1. **Hero**: *Ivy Gabriel, Desenvolvedor Full Stack.* + frase de impacto. **Sem botão no hero** (o hero original nunca teve; o acesso ao contato é a pílula "Contato" da navbar e a seção final) e sem link de currículo.
 2. **Destaque**: painel em código. O vídeo/motion fica para depois (`highlightVideo: null`); o painel funciona sem ele.
 3. **Sobre**: texto curto, **sem** habilidades (mantém o bloco de redes).
-4. **Serviços**: 4 cartões.
-5. **Projetos**: estado "Em breve" (2 cartões sem link).
-6. **Contato + footer**: e-mail e WhatsApp como botões principais; LinkedIn e GitHub como links secundários; sem formulário.
+4. **Selected work** (título igual nos dois idiomas): 4 cartões, um por serviço (Sites e landing pages, Aplicações web, Apps mobile, Automações e integrações), no layout de grade dos antigos cartões de projeto, com arte em cobalto, título (`h3`) e descrição. Sem links.
+5. **Contato + footer**: e-mail e WhatsApp como botões principais; LinkedIn e GitHub como links secundários; sem formulário. Navbar e footer: Sobre, Serviços, Contato.
 
-Reordenar (por exemplo, Serviços logo depois do Hero) é uma mudança de uma linha em `Home.astro` mais os links da navbar e do footer, mas mexe no ritmo de seções claras e escuras; fica fora desta rodada.
+`services.ts` (rolagem guiada) e as páginas de projeto continuam no código sem uso na home; a limpeza fica para depois.
 
 Sem Depoimentos, Processo, FAQ, Currículo nem Blog.
 
@@ -43,7 +42,7 @@ Sem Depoimentos, Processo, FAQ, Currículo nem Blog.
 | 3 | **Apps mobile**: Seu serviço no bolso do cliente, com um app rápido, fácil de usar e pronto para crescer. | **Mobile apps**: Your service in your customer's pocket, with a fast, easy-to-use app ready to grow. |
 | 4 | **Automações e integrações**: Ferramentas conectadas e tarefas repetitivas no automático. | **Automations and integrations**: Connected tools and repetitive tasks on autopilot. |
 
-**Projetos, "Em breve".** PT: *Em breve: um projeto que estou finalizando agora.* / *Em breve: o próximo projeto pode ser o seu.* EN: *Coming soon: a project I'm finishing right now.* / *Coming soon: the next project could be yours.*
+**Projetos, "Em breve".** PT: *Em breve: um projeto que estou finalizando agora.* / *Em breve: o próximo projeto pode ser o seu.* EN: *Coming soon: a project I'm finishing right now.* / *Coming soon: the next project could be yours.* *(Superado pela revisão posterior da seção 2: a seção virou Selected work.)*
 
 **Sobre.** PT: *Eu sou desenvolvedor full stack e trabalho do banco de dados à tela. Gosto de começar pelo problema, conversar com calma e só então escrever o código que o resolve. Explico cada etapa em linguagem simples, sem jargão. Se você tem um processo manual, um sistema lento ou uma ideia sem time técnico, é aqui que eu ajudo.* EN: *I'm a full stack developer and I work from the database to the screen. I like to start from the problem, talk things through and only then write the code that solves it. I explain every step in plain language, no jargon. If you have a manual process, a slow system or an idea without a technical team, that's where I help.*
 
@@ -56,7 +55,7 @@ Sem Depoimentos, Processo, FAQ, Currículo nem Blog.
 - `src/content/site.ts`: nome, e-mail, **`whatsapp` (novo)**, `socials` só com GitHub e LinkedIn, `highlightVideo`. O texto do WhatsApp vive em `pt.json`/`en.json` (`outro.whatsappCta`, `outro.whatsappMessage`).
 - `src/content/pt.json` e `en.json`: reescrever `meta`, `hero`, `about` (remover `skillsLabel` e `skills`), `services.items` (hrefs → `#contato`), `projects` (adicionar `soon` com 2 itens), `outro`. **Paridade PT/EN preservada** (o teste existente continua valendo).
 - `src/content/projects/`: remover `aurora`, `atlas`, `pulso`, `nimbus` e as capas/capturas SVG de exemplo em `public/media/projects/`. A pasta fica vazia até haver projeto real.
-- `Projects.astro`: se `loadProjects()` devolver lista vazia, renderiza os cartões "Em breve" (mesma classe `Card` e mesma revelação, sem `<a>`, sem ícone de cursor de link); com 1 ou mais projetos, renderiza os reais e **não** mostra "Em breve". As rotas `[slug]` não geram páginas quando não há projetos.
+- `Projects.astro`: se `loadProjects()` devolver lista vazia, renderiza os cartões "Em breve" (mesma classe `Card` e mesma revelação, sem `<a>`, sem ícone de cursor de link); com 1 ou mais projetos, renderiza os reais e **não** mostra "Em breve". As rotas `[slug]` não geram páginas quando não há projetos. *(Superado pela revisão posterior da seção 2: a seção virou Selected work.)*
 - `About.astro`: remover o bloco de habilidades; manter o bloco de redes.
 - `Outro.astro`: acrescentar o botão de WhatsApp (mesmo componente `Pill`). `Footer.astro` não ganha botão: mantém a pílula de e-mail e lista só GitHub e LinkedIn (os dados vêm de `site.socials`).
 - `site.example` permanece `true` (e, com ele, `noindex`) **até a usuária aprovar os textos publicados**; só então vira `false`. `SITE_URL` é definido no deploy.
@@ -81,7 +80,7 @@ O botão em pílula (`Pill`) passa de preto a `--c-accent` com texto `--c-bg`; h
 3. Sem JavaScript e com movimento reduzido, tudo continua visível.
 4. Contraste verificado por teste: `--c-ink` sobre `--c-bg` e `--c-bg` sobre `--c-accent` ≥ 4,5:1.
 5. Lighthouse nas páginas `/pt/` e `/en/`: acessibilidade ≥ 98, performance ≥ 95.
-6. Páginas sem projetos: nenhuma rota `/pt/projetos/*` nem `/en/projects/*` é gerada; a seção Projetos mostra "Em breve".
+6. Páginas sem projetos: nenhuma rota `/pt/projetos/*` nem `/en/projects/*` é gerada; a seção Projetos mostra "Em breve". *(Superado pela revisão posterior da seção 2: a seção virou Selected work.)*
 7. O link do WhatsApp abre a conversa com a mensagem inicial no idioma da página.
 8. O número de WhatsApp aparece apenas dentro do `href` do botão, nunca como texto visível nem em metadados.
 9. Nenhuma ocorrência de `example.com`, `Instagram` ou `gcivy` no HTML gerado (exceto `SITE_URL` de fallback documentado).
