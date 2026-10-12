@@ -116,12 +116,12 @@ O Cuberto tem 12 seções e depende de mídia de produção (renders 3D, showree
 
 1. **Hero:** frase grande centralizada + subtítulo + pílula "Contato". Topbar fixa que some ao descer e volta ao subir.
 2. **Painel de destaque:** no lugar do showreel. Painel largo de cantos arredondados com arte feita em código (gradiente animado e formas, em CSS/SVG), com a mesma entrada por `clip-path` e a paralaxe. Se houver um vídeo ou demo seu, ele entra aqui e ganha o modal com `<dialog>` e o cursor `play`.
-3. **Sobre:** rótulo pequeno em caixa-alta à esquerda e parágrafo grande à direita, em primeira pessoa; links para redes.
-4. **O que eu faço:** 3 a 4 cartões pretos empilhados, com número, título, texto e link. Abrem com scrub ao rolar (no mobile, com clique). Arte de fundo em gradiente feita em código.
+3. **Sobre:** rótulo pequeno em caixa-alta à esquerda e parágrafo grande à direita, em primeira pessoa, mais as **habilidades** (lista de tecnologias e competências, em pílulas com contorno, que aparecem em lote com a revelação de escala); links para redes.
+4. **Serviços:** 3 a 4 cartões pretos empilhados, com número, título, texto e link "Explore". Abrem com scrub ao rolar (no mobile, com clique). Arte de fundo em gradiente feita em código. Vem imediatamente antes de Projetos. Os serviços iniciais são de exemplo (ex.: desenvolvimento web, front-end interativo, design de interfaces), para você trocar pelos seus.
 5. **Projetos:** seção escura com a grade de duas colunas deslocadas; imagem arredondada (captura de tela do projeto) + legenda de uma linha; 3 a 4 projetos; cada um leva à página do projeto. Vídeo no hover quando existir.
 6. **Vamos conversar + footer:** chamada final sobre fundo escuro com gradiente e formas concêntricas, pílula branca com botão de copiar o e-mail; footer com e-mail em pílula, localização, links, seletor de idioma e ícones sociais em círculos.
 
-Opcionais (só entram com conteúdo real): faixa de tecnologias (4 colunas, cada uma com link) e "Em números" (cartões pastel com contadores).
+Opcional (só entra com conteúdo real): "Em números" (cartões pastel com contadores). A faixa de tecnologias deixa de existir como seção: as habilidades vivem em Sobre.
 
 ### Página de projeto
 
@@ -133,11 +133,12 @@ Tophead (nome do projeto em rótulo pequeno + h1 à esquerda) → Preview (mídi
 |---|---|
 | Tophead | Hero |
 | Preview / showreel | Painel de destaque feito em código (vídeo opcional) |
-| Overview "What we do" | Sobre |
-| Features | O que eu faço |
+| Overview "What we do" | Sobre (com habilidades) |
+| Features | Serviços |
 | Selected work | Projetos |
 | Outro + Footer | Vamos conversar + footer |
-| Logoreel, Why | Opcionais, só com conteúdo real |
+| Logoreel | Substituído pelas habilidades em Sobre |
+| Why | Opcional, só com conteúdo real |
 | Testimonials, Insights, FAQ, `/about`, `/services`, `/blog`, `/contacts` | Fora de escopo |
 
 ## Fora de escopo (YAGNI)
