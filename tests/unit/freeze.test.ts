@@ -2,8 +2,10 @@ import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
-// SHA-256 dos arquivos de movimento no commit 9ba438a. A única mudança de cor permitida
-// é o destino da animação em services.ts ('#0b1330' no lugar de '#000'), normalizada abaixo.
+// SHA-256 dos arquivos de movimento no commit 9ba438a. Mudanças aprovadas pela usuária, normalizadas abaixo:
+// - services.ts: destino da animação '#0b1330' no lugar de '#000' (cor da paleta nova);
+// - main.ts: três imports dos scripts novos (border-reveal, work-scrub, divider).
+// Os scripts novos (ADDED) entram na lista de arquivos esperados, mas não têm hash congelado.
 const FROZEN: Record<string, string> = {
   'card-video.ts': '5d627e670cfdee04bcbde9d4f7f6734512d568ca41a952f7003f3a56013a54c3',
   'clipboard-button.ts': 'e0baef521256557f5c06b51594aa5b2e3fb55b70d69797cf9fea8e2d15155a49',
@@ -21,15 +23,18 @@ const FROZEN: Record<string, string> = {
   'smooth-scroll.ts': 'b34ada113a2497747bd33600a9c70f8535624a459214384b2c3e7a530a2d68aa',
 };
 
+const ADDED = ['border-reveal.ts', 'divider.ts', 'work-scrub.ts'];
+
 function digest(name: string): string {
   let text = readFileSync(`src/scripts/${name}`, 'utf8');
+  if (name === 'main.ts') text = text.replace(/import '\.\/(border-reveal|work-scrub|divider)';\n/g, '');
   if (name === 'services.ts') text = text.replaceAll("backgroundColor: '#0b1330'", "backgroundColor: '#000'");
   return createHash('sha256').update(text).digest('hex');
 }
 
 describe('movimento congelado', () => {
   it('não há arquivo novo nem removido em src/scripts', () => {
-    expect(readdirSync('src/scripts').sort()).toEqual(Object.keys(FROZEN).sort());
+    expect(readdirSync('src/scripts').sort()).toEqual([...Object.keys(FROZEN), ...ADDED].sort());
   });
 
   it.each(Object.entries(FROZEN))('%s não mudou', (name, hash) => {

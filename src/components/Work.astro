@@ -11,6 +11,7 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
 <section class="Work -inverse" id="servicos">
   <div class="container--narrow head">
     <h2 data-reveal="words">{t.title}</h2>
+    <span class="Rule" data-reveal="border"></span>
   </div>
   <ul class="cards container--narrow">
     {t.items.map((item, i) => (
@@ -31,6 +32,12 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
   }
   .head {
     padding-bottom: 10rem;
+  }
+  .Rule {
+    display: block;
+    height: 1px;
+    margin-top: 5rem;
+    background: var(--c-line-inverse);
   }
   h2 {
     font-size: var(--fs-h2);

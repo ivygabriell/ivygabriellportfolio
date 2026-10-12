@@ -2,16 +2,19 @@
 import { copy } from '../lib/copy';
 import { site } from '../content/site';
 import type { Locale } from '../lib/i18n';
+import Divider from './Divider.astro';
 
 interface Props { locale: Locale }
 const t = copy[Astro.props.locale].about;
 ---
 
 <section class="About container--narrow" id="sobre">
+  <Divider />
   <div class="grid">
     <p class="label" data-reveal="fade">{t.label}</p>
     <p class="lead" data-reveal="words">{t.text}</p>
   </div>
+  <Divider />
   <div class="grid">
     <h2 class="label" data-reveal="fade">{t.socialLabel}</h2>
     <ul class="socials">
