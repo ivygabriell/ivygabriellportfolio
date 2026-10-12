@@ -18,10 +18,10 @@ const links = [
 
 <footer class:list={['Footer', '-inverse', { '-with-contact': withContact }]}>
   <div class="container--narrow top">
+    {withContact && <div class="contact"><slot name="contact" /></div>}
     <nav class="links" aria-label={t.footer.navLabel}>
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
-    {withContact && <div class="contact"><slot name="contact" /></div>}
   </div>
   <div class="container--narrow rule"><Divider /></div>
   <div class="container--narrow bottom">
@@ -44,16 +44,10 @@ const links = [
   }
   .top {
     display: grid;
-    grid-template-columns: 1fr minmax(0, 81rem) 1fr;
-    align-items: start;
-    gap: 4rem;
-  }
-  .contact {
-    grid-column: 2;
+    grid-template-columns: 1fr;
+    gap: 14rem;
   }
   .links {
-    grid-column: 1;
-    grid-row: 1;
     display: grid;
     gap: 1.6rem;
     justify-items: start;
@@ -97,15 +91,7 @@ const links = [
       padding-top: 10rem;
     }
     .top {
-      grid-template-columns: 1fr;
-    }
-    .contact {
-      grid-column: 1;
-      order: -1;
-    }
-    .links {
-      grid-column: 1;
-      grid-row: auto;
+      gap: 8rem;
     }
     .rule {
       margin-top: 4rem;

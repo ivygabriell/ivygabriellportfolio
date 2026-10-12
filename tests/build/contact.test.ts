@@ -39,22 +39,22 @@ describe('contato', () => {
 });
 
 describe('fechamento da página', () => {
-  it.each(['pt', 'en'])('%s: o Contato fica dentro do footer, na mesma linha dos links, antes da linha divisória', (lang) => {
+  it.each(['pt', 'en'])('%s: o Contato fica dentro do footer, em cima; os links vêm depois e a linha divisória por último', (lang) => {
     const html = readDecoded(`${lang}/index.html`);
     const footerAt = html.indexOf('<footer');
-    const links = html.indexOf('class="links', footerAt);
     const contato = html.indexOf('id="contato"', footerAt);
+    const links = html.indexOf('class="links', footerAt);
     const divider = html.indexOf('class="Divider', footerAt);
     expect(footerAt).toBeGreaterThan(-1);
-    expect(links).toBeGreaterThan(footerAt);
-    expect(contato).toBeGreaterThan(links);
-    expect(divider).toBeGreaterThan(contato);
+    expect(contato).toBeGreaterThan(footerAt);
+    expect(links).toBeGreaterThan(contato);
+    expect(divider).toBeGreaterThan(links);
     expect(html.slice(html.indexOf('</main>') + '</main>'.length, footerAt).trim()).toBe('');
   });
 
   it.each(['pt', 'en'])('%s: o bloco do Contato não tem arte em SVG (triângulos)', (lang) => {
     const html = readDecoded(`${lang}/index.html`);
-    const block = html.slice(html.indexOf('id="contato"'), html.indexOf('class="Divider'));
+    const block = html.slice(html.indexOf('id="contato"'), html.indexOf('class="links'));
     expect(block).not.toContain('<svg');
   });
 

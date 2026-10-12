@@ -26,18 +26,23 @@ describe('Contato dentro do footer, em uma cor só', () => {
     expect(main).not.toContain('<Outro');
   });
 
-  it('o footer tem uma linha com os links à esquerda e o Contato no meio (3 colunas)', () => {
+  it('o footer empilha: Contato centralizado em cima e os links embaixo, à esquerda, antes da linha', () => {
     const footer = src('components/Footer.astro');
     expect(footer).toContain('<slot name="contact" />');
-    expect(footer).toMatch(/\.top\s*\{[^}]*grid-template-columns:\s*1fr\s+minmax\(0,\s*81rem\)\s+1fr/);
-    expect(footer.indexOf('class="links"')).toBeLessThan(footer.indexOf('<slot name="contact"'));
+    expect(footer.indexOf('<slot name="contact"')).toBeLessThan(footer.indexOf('class="links"'));
+    expect(footer.indexOf('class="links"')).toBeLessThan(footer.indexOf('<Divider'));
+    expect(footer).toMatch(/\.top\s*\{[^}]*grid-template-columns:\s*1fr;/);
+    expect(footer).not.toContain('minmax(0, 81rem)');
+    expect(footer).not.toContain('order: -1');
+    expect(footer).toMatch(/\.links\s*\{[^}]*justify-items:\s*start/);
   });
 
-  it('o bloco do Contato é centralizado no meio da linha e, no mobile, vem antes dos links', () => {
+  it('o bloco do Contato é centralizado', () => {
     const outro = src('components/Outro.astro');
     expect(outro).toMatch(/\.inner\s*\{[^}]*justify-items:\s*center/);
     expect(outro).toContain('text-align: center');
-    expect(src('components/Footer.astro')).toMatch(/\.contact\s*\{[^}]*order:\s*-1/);
+    // Sem limite de largura o título quebra deixando "papel?" sozinho na segunda linha.
+    expect(outro).toMatch(/h2\s*\{[^}]*max-width:\s*90rem/);
   });
 
   it('o footer é reto, sem e-mail próprio e sem linha de topo', () => {
