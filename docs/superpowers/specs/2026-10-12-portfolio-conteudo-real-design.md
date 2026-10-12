@@ -90,7 +90,7 @@ O botão em pílula (`Pill`) passa de preto a `--c-accent` com texto `--c-bg`; h
 6. Páginas sem projetos: nenhuma rota `/pt/projetos/*` nem `/en/projects/*` é gerada; a seção Projetos mostra "Em breve". *(Superado pela revisão posterior da seção 2: a seção virou Selected work.)*
 7. O link do WhatsApp abre a conversa com a mensagem inicial no idioma da página.
 8. O número de WhatsApp aparece apenas dentro do `href` do botão, nunca como texto visível nem em metadados.
-9. Nenhuma ocorrência de `example.com`, `Instagram` ou `gcivy` no HTML gerado (exceto `SITE_URL` de fallback documentado).
+9. Nenhuma ocorrência de `example.com` (exceto o fallback do `SITE_URL`) nem de `gcivy` no HTML gerado (exceto `SITE_URL` de fallback documentado).
 
 ## 7. Fora do escopo
 
