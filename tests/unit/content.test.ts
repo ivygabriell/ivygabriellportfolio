@@ -45,6 +45,11 @@ describe('textos finais', () => {
     expect(en.hero.subtitle).toBe('I turn your idea into a digital product beyond the conventional.');
   });
 
+  it('o Sobre usa o texto aprovado', () => {
+    expect(pt.about.text).toBe("Gosto de software que resolve problemas de verdade. Por isso, antes de programar, eu escuto: o que trava o seu dia, o que poderia ser automático, o que você imagina e ainda não existe. Trabalho em todas as camadas, e explico tudo em linguagem simples. Você acompanha cada passo e sabe exatamente o que está sendo construído.");
+    expect(en.about.text).toBe("I like software that solves real problems. That's why, before I code, I listen: what holds up your day, what could be automatic, what you imagine that doesn't exist yet. I work across every layer, and I explain everything in plain language. You follow each step and know exactly what is being built.");
+  });
+
   it('o Sobre não tem habilidades', () => {
     for (const about of [pt.about, en.about]) {
       expect(about).not.toHaveProperty('skills');
