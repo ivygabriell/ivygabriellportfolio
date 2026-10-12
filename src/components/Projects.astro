@@ -1,0 +1,96 @@
+---
+import { copy } from '../lib/copy';
+import { projectPath, type Locale } from '../lib/i18n';
+import { loadProjects } from '../lib/projects';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = copy[locale].projects;
+const projects = loadProjects();
+---
+
+<section class="Projects -inverse" id="projetos">
+  <div class="container--narrow head">
+    <h2 data-reveal="words">{t.title}</h2>
+  </div>
+  <ul class="cards container--narrow">
+    {projects.map((p) => (
+      <li class="cell">
+        <a class="Card" href={projectPath(locale, p.slug)} data-cursor-icon="arrow-up-right" data-reveal="fade-up">
+          <div class="Card__media">
+            {p.video
+              ? <video src={p.video} poster={p.cover} muted loop playsinline preload="none"></video>
+              : <img src={p.cover} alt={p[locale].title} width="1600" height="1000" loading="lazy" />}
+          </div>
+          <p class="Card__caption">{p[locale].caption}</p>
+          <span class="sr-only">{t.view}: {p[locale].title}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .Projects {
+    padding-block: 14rem 16rem;
+  }
+  .head {
+    padding-bottom: 10rem;
+  }
+  h2 {
+    font-size: var(--fs-h2);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12rem 10rem;
+    align-items: start;
+  }
+  .cell:nth-child(even) {
+    margin-top: 12rem;
+  }
+  .Card {
+    display: block;
+  }
+  .Card__media {
+    overflow: hidden;
+    border-radius: var(--r-card);
+    aspect-ratio: 4 / 5;
+    background: #111;
+  }
+  .Card__media :global(img),
+  .Card__media :global(video) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-out);
+  }
+  .Card:hover .Card__media :global(img),
+  .Card:hover .Card__media :global(video) {
+    transform: scale(0.96);
+  }
+  .Card__caption {
+    max-width: 44rem;
+    margin-top: 3rem;
+    font-size: var(--fs-sub);
+    line-height: 1.15;
+  }
+  @media (max-width: 767px) {
+    .Projects {
+      padding-block: 8rem 10rem;
+    }
+    .head {
+      padding-bottom: 5rem;
+    }
+    .cards {
+      grid-template-columns: 1fr;
+      gap: 6rem;
+    }
+    .cell:nth-child(even) {
+      margin-top: 0;
+    }
+  }
+</style>

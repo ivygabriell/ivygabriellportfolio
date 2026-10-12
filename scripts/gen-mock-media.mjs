@@ -11,7 +11,7 @@ function scene(w, h, [a, b, c], seed) {
   const blobs = Array.from({ length: 5 }, (_, i) =>
     `<circle cx="${(rand(i) * w).toFixed(0)}" cy="${(rand(i + 9) * h).toFixed(0)}" r="${((0.12 + rand(i + 3) * 0.22) * min).toFixed(0)}" fill="${i % 2 ? b : c}" opacity=".55"/>`,
   ).join('');
-  const bw = w * 0.62, bh = h * 0.5, bx = (w - bw) / 2, by = (h - bh) / 2;
+  const bw = min * 0.62, bh = h * 0.5, bx = (w - bw) / 2, by = (h - bh) / 2;
   const line = (y, width, opacity, fill = '#000') =>
     `<rect x="${bx + bw * 0.06}" y="${by + bh * y}" width="${bw * width}" height="${bh * 0.05}" rx="${bh * 0.025}" fill="${fill}" opacity="${opacity}"/>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">

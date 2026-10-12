@@ -1,0 +1,38 @@
+---
+interface Props { variant: 'arch' | 'hex' | 'tri' }
+const { variant } = Astro.props;
+
+const layers = [0, 1, 2, 3].map((i) => ({ w: 480 - i * 100, y: 40 + i * 70, r: 120 - i * 20 }));
+const cx = 300;
+const shape = (l: { w: number; y: number; r: number }) => {
+  const x0 = cx - l.w / 2;
+  const x1 = cx + l.w / 2;
+  if (variant === 'arch')
+    return { tag: 'path', d: `M${x0} 400V${l.y + l.r}a${l.r} ${l.r} 0 0 1 ${l.r} -${l.r}H${x1 - l.r}a${l.r} ${l.r} 0 0 1 ${l.r} ${l.r}V400z` };
+  if (variant === 'hex')
+    return { tag: 'polygon', points: `${x0},400 ${x0},${l.y + 60} ${cx},${l.y} ${x1},${l.y + 60} ${x1},400` };
+  return { tag: 'polygon', points: `${x0},400 ${cx},${l.y} ${x1},400` };
+};
+---
+
+<svg class="GradientArt" viewBox="0 0 600 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id={`art-${variant}`} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#818cf8" stop-opacity="0.45" />
+      <stop offset="1" stop-color="#4338ca" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+  {layers.map((l) => {
+    const s = shape(l);
+    return s.tag === 'path'
+      ? <path d={s.d} fill={`url(#art-${variant})`} stroke="rgb(255 255 255 / 0.16)" />
+      : <polygon points={s.points} fill={`url(#art-${variant})`} stroke="rgb(255 255 255 / 0.16)" />;
+  })}
+</svg>
+
+<style>
+  .GradientArt {
+    width: 100%;
+    height: 100%;
+  }
+</style>

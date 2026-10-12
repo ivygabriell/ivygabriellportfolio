@@ -1,0 +1,73 @@
+---
+import { copy } from '../lib/copy';
+import { site } from '../content/site';
+import type { Locale } from '../lib/i18n';
+import GradientArt from './GradientArt.astro';
+import Pill from './Pill.astro';
+
+interface Props { locale: Locale }
+const t = copy[Astro.props.locale].outro;
+---
+
+<section class="Outro -inverse" id="contato">
+  <div class="art"><GradientArt variant="tri" /></div>
+  <div class="container inner">
+    <h2 data-reveal="words">{t.title}</h2>
+    <p data-reveal="words">{t.text}</p>
+    <Pill
+      variant="light"
+      type="button"
+      data-clipboard-copy={site.email}
+      data-copied={t.copied}
+      data-failed={t.copyFailed}
+      data-cursor-icon="arrow-up-right">{t.cta}</Pill
+    >
+    <a class="mail" href={`mailto:${site.email}`}>{site.email}</a>
+  </div>
+</section>
+
+<style>
+  .Outro {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: 18rem 16rem;
+    text-align: center;
+  }
+  .art {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(120% 90% at 50% 120%, #312e81 0%, #000 70%);
+  }
+  .inner {
+    display: grid;
+    justify-items: center;
+    gap: 4rem;
+  }
+  h2 {
+    max-width: 90rem;
+    font-size: var(--fs-h1);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  p {
+    max-width: 70rem;
+    font-size: var(--fs-sub);
+    line-height: 1.15;
+  }
+  .mail {
+    font-size: 2rem;
+    border-bottom: 1px solid currentColor;
+  }
+  @media (max-width: 767px) {
+    .Outro {
+      padding-block: 10rem 8rem;
+      text-align: left;
+    }
+    .inner {
+      justify-items: start;
+    }
+  }
+</style>
