@@ -76,6 +76,7 @@ svg {
 .-inverse {
   background: var(--c-ink);
   color: #fff;
+  border-radius: var(--r-top) var(--r-top) 0 0;
 }
 
 .label {

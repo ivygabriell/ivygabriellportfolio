@@ -36,7 +36,8 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding-block: 18rem 16rem;
+    margin-top: calc(-1 * var(--r-top));
+    padding-block: 18rem calc(16rem + var(--r-top));
     text-align: center;
   }
   .art {
@@ -74,7 +75,7 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
   }
   @media (max-width: 767px) {
     .Outro {
-      padding-block: 10rem 8rem;
+      padding-block: 10rem calc(8rem + var(--r-top));
       text-align: left;
     }
     .inner {
