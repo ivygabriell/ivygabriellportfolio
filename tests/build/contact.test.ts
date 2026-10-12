@@ -80,3 +80,15 @@ describe('ícones das redes no footer', () => {
     });
   });
 });
+
+describe('cursor em botões', () => {
+  it.each(['pt', 'en'])('%s: botões (pílulas e círculos das redes) não abrem a bola com seta; links de texto abrem', (lang) => {
+    const html = readDecoded(`${lang}/index.html`);
+    const buttons = [...html.matchAll(/<(?:a|button)\b[^>]*class="[^"]*\b(?:Pill|circle)\b[^"]*"[^>]*>/g)].map((m) => m[0]);
+    expect(buttons.length).toBeGreaterThanOrEqual(5);
+    for (const tag of buttons) expect(tag, tag).not.toContain('data-cursor-icon');
+    const aboutLinks = html.slice(html.indexOf('id="sobre"'), html.indexOf('id="servicos"')).match(/data-cursor-icon="arrow-up-right"/g) ?? [];
+    expect(aboutLinks.length).toBe(site.socials.length);
+  });
+});
+

@@ -20,10 +20,9 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
         type="button"
         data-clipboard-copy={site.email}
         data-copied={t.copied}
-        data-failed={t.copyFailed}
-        data-cursor-icon="arrow-up-right">{t.cta}</Pill
+        data-failed={t.copyFailed}>{t.cta}</Pill
       >
-      <Pill variant="outline" href={whatsapp} target="_blank" rel="noopener" data-cursor-icon="arrow-up-right">{t.whatsappCta}</Pill>
+      <Pill variant="outline" href={whatsapp} target="_blank" rel="noopener">{t.whatsappCta}</Pill>
     </div>
     <a class="mail" href={`mailto:${site.email}`}>{site.email}</a>
   </div>
