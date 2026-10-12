@@ -78,6 +78,11 @@ describe('textos finais', () => {
     expect(en.projects.soon).toHaveLength(2);
   });
 
+  it('o texto do Contato usa a frase aprovada', () => {
+    expect(pt.outro.text).toBe("Me conte como as coisas estão hoje, aonde você quer chegar e o que está te impedindo.");
+    expect(en.outro.text).toBe("Tell me how things are today, where you want to get to and what is holding you back.");
+  });
+
   it('o contato tem o botão e a mensagem de WhatsApp em cada idioma', () => {
     expect(pt.outro.whatsappCta).toBe('Chamar no WhatsApp');
     expect(en.outro.whatsappCta).toBe('Message on WhatsApp');
