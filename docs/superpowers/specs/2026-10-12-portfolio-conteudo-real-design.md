@@ -101,3 +101,13 @@ Vídeo/motion do destaque, currículo, depoimentos, processo, FAQ, formulário, 
 - Fato pessoal opcional para a abertura do Sobre (a usuária ainda pode enviar).
 - Qual vídeo/motion usar no Destaque.
 - Decisão de integração da branch `feat/portfolio` (merge/PR/manter) e hospedagem.
+
+## 9. Vídeos (pedido posterior da usuária)
+
+Seis vídeos da pasta `~/Documents/video-motions` (sem áudio, H.264) entram em `public/media/`, ligados em `src/content/media.ts`:
+
+- **Destaque:** `destaque-16x9` (desktop) e `destaque-4x5` (até 767px) tocam em loop, mudos, dentro do painel, no lugar da arte em código e da frase "Código, movimento e detalhe." (que saiu dos textos). A capa é uma `<picture>` no HTML (`fetchpriority="high"`); o vídeo fica invisível por cima e só aparece quando começa a tocar (fade).
+- **Serviços:** `card-websites`, `card-webapps`, `card-mobile` e `card-automations`, um por cartão, na ordem dos textos, no lugar da arte em SVG (que saiu do código). Com mouse tocam no hover e param ao sair (`card-video.ts`, como no Cuberto); em dispositivos de toque tocam enquanto o cartão está na tela (`card-autoplay.ts`).
+- **Desempenho:** o vídeo do Destaque só começa 3 s depois do `load` ou na primeira interação, e com o painel perto da tela; as capas têm 720px (cartões e 4:5) e 1280px (16:9), de 13 a 50 KB. Lighthouse mobile: desempenho 96, acessibilidade 100, 220 KiB no carregamento inicial.
+- **Movimento reduzido:** só as capas; nenhum vídeo é baixado nem tocado.
+

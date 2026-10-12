@@ -19,7 +19,8 @@ Versões usadas: Astro 7.3.8, GSAP 3.15.0, Lenis 1.3.26, TypeScript 6.0.3 (o `as
 3. `src/content/projects/*.json`: um arquivo por projeto, com o nome igual ao `slug`. Enquanto a pasta estiver vazia, a seção Projetos mostra os cartões "Em breve" (`projects.soon` nos JSONs de texto); ao adicionar o primeiro projeto real, os cartões somem sozinhos. Aponte `cover` e `shots` para imagens em `public/media/projects/<slug>/`. `link` ainda não é exibido em nenhuma página. Para cartão de compartilhamento por projeto, use PNG/JPG (o `og:image` hoje é sempre `public/og-cover.png`).
 4. Cores: edite os tokens em `src/styles/tokens.css` (`--c-accent` é o cobalto dos botões).
 5. Troque `public/og-cover.png` (rode `node scripts/gen-og.mjs` ou ponha sua imagem 1200×630).
-6. No deploy, defina `SITE_URL` e rode `npm test && npm run build`.
+6. Vídeos: ficam em `public/media/` e são ligados em `src/content/media.ts` (Destaque 16:9 e 4:5, e um por serviço). Para trocar um, substitua o `.mp4` (sem áudio, H.264) e gere a capa de novo: `ffmpeg -i novo.mp4 -frames:v 1 -vf scale=720:-2 -q:v 5 public/media/<nome>.jpg` (use `scale=1280` no 16:9). Mantenha as capas pequenas: o navegador as baixa junto com a página. O vídeo do Destaque só começa 3 s depois do carregamento ou na primeira interação, e com movimento reduzido ficam só as capas.
+7. No deploy, defina `SITE_URL` e rode `npm test && npm run build`.
 
 ## Publicar (Vercel ou Netlify)
 

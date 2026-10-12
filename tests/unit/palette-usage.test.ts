@@ -9,7 +9,6 @@ const SCANNED = [
   'components/Work.astro',
   'components/Footer.astro',
   'components/Navbar.astro',
-  'components/GradientArt.astro',
   'components/Highlight.astro',
   'components/Outro.astro',
   'components/ProjectPage.astro',

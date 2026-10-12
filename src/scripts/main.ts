@@ -9,6 +9,8 @@ import './preview';
 import './services';
 import './work-scrub';
 import './divider';
+import './highlight-video';
+import './card-autoplay';
 import './cursor';
 import './card-video';
 import './clipboard-button';

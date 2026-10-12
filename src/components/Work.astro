@@ -1,11 +1,10 @@
 ---
 import { copy } from '../lib/copy';
 import type { Locale } from '../lib/i18n';
-import GradientArt from './GradientArt.astro';
+import { media } from '../content/media';
 
 interface Props { locale: Locale }
 const t = copy[Astro.props.locale].services;
-const variants = ['arch', 'hex', 'tri', 'arch'] as const;
 ---
 
 <section class="Work -inverse" id="servicos">
@@ -17,7 +16,21 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
     {t.items.map((item, i) => (
       <li class="cell">
         <article class="Card" data-reveal="fade-up">
-          <div class="Card__media"><GradientArt variant={variants[i % variants.length]} /></div>
+          <div class="Card__media">
+            <video
+              src={media.services[i].video}
+              poster={media.services[i].poster}
+              width="1080"
+              height="1350"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              disablepictureinpicture
+              disableRemotePlayback
+              aria-hidden="true"
+              tabindex="-1"></video>
+          </div>
           <h3 class="Card__title">{item.title}</h3>
           <p class="Card__text">{item.text}</p>
         </article>
@@ -62,6 +75,12 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
     border-radius: var(--r-card);
     aspect-ratio: 4 / 5;
     background: var(--c-accent);
+  }
+  .Card__media :global(video) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .Card__title {
     margin-top: 3rem;

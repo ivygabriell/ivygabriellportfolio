@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 // SHA-256 dos arquivos de movimento no commit 9ba438a. Mudanças aprovadas pela usuária, normalizadas abaixo:
 // - services.ts: destino da animação '#0b1330' no lugar de '#000' (cor da paleta nova);
-// - main.ts: três imports dos scripts novos (border-reveal, work-scrub, divider).
+// - main.ts: imports dos scripts novos (border-reveal, work-scrub, divider, highlight-video, card-autoplay).
 // Os scripts novos (ADDED) entram na lista de arquivos esperados, mas não têm hash congelado.
 const FROZEN: Record<string, string> = {
   'card-video.ts': '5d627e670cfdee04bcbde9d4f7f6734512d568ca41a952f7003f3a56013a54c3',
@@ -23,11 +23,11 @@ const FROZEN: Record<string, string> = {
   'smooth-scroll.ts': 'b34ada113a2497747bd33600a9c70f8535624a459214384b2c3e7a530a2d68aa',
 };
 
-const ADDED = ['border-reveal.ts', 'divider.ts', 'work-scrub.ts'];
+const ADDED = ['border-reveal.ts', 'card-autoplay.ts', 'divider.ts', 'highlight-video.ts', 'work-scrub.ts'];
 
 function digest(name: string): string {
   let text = readFileSync(`src/scripts/${name}`, 'utf8');
-  if (name === 'main.ts') text = text.replace(/import '\.\/(border-reveal|work-scrub|divider)';\n/g, '');
+  if (name === 'main.ts') text = text.replace(/import '\.\/(border-reveal|work-scrub|divider|highlight-video|card-autoplay)';\n/g, '');
   if (name === 'services.ts') text = text.replaceAll("backgroundColor: '#0b1330'", "backgroundColor: '#000'");
   return createHash('sha256').update(text).digest('hex');
 }
