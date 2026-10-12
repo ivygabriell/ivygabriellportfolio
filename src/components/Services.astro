@@ -64,7 +64,7 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
     position: absolute;
     inset: 0;
     z-index: -2;
-    background: #000;
+    background: var(--c-ink);
   }
   .item__bg {
     position: absolute;
@@ -109,7 +109,7 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
 
   /* Rolagem guiada (desktop): estado inicial claro e fechado; services.ts anima até o preto. */
   .Services:global(.is-scrub) .item:not(:first-child) {
-    color: #000;
+    color: var(--c-ink);
   }
   .Services:global(.is-scrub) .item:not(:first-child) .item__fill {
     background: var(--c-lavender);
@@ -133,7 +133,7 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
 
   /* Acordeão por clique (mobile) */
   .Services:global(.is-accordion) .item {
-    color: #000;
+    color: var(--c-ink);
     cursor: pointer;
     transition: color 0.6s;
   }
@@ -165,7 +165,7 @@ const variants = ['arch', 'hex', 'tri', 'arch'] as const;
     color: #fff;
   }
   .Services:global(.is-accordion) .item:global(.-active) .item__fill {
-    background: #000;
+    background: var(--c-ink);
   }
   .Services:global(.is-accordion) .item:global(.-active) .item__bg,
   .Services:global(.is-accordion) .item:global(.-active) .item__content {

@@ -15,11 +15,11 @@ const Tag = href ? 'a' : 'button';
 
 <style>
   .Pill {
-    --pill-bg: #000;
-    --pill-fg: #fff;
-    --pill-hover-bg: #fff;
-    --pill-hover-fg: #000;
-    --pill-border: #000;
+    --pill-bg: var(--c-accent);
+    --pill-fg: var(--c-bg);
+    --pill-hover-bg: var(--c-bg);
+    --pill-hover-fg: var(--c-accent);
+    --pill-border: var(--c-accent);
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -58,16 +58,16 @@ const Tag = href ? 'a' : 'button';
   .-outline {
     --pill-bg: transparent;
     --pill-fg: currentColor;
-    --pill-hover-bg: #fff;
-    --pill-hover-fg: #000;
+    --pill-hover-bg: var(--c-bg);
+    --pill-hover-fg: var(--c-ink);
     --pill-border: currentColor;
   }
   .-light {
-    --pill-bg: #fff;
-    --pill-fg: #000;
-    --pill-hover-bg: #000;
+    --pill-bg: var(--c-bg);
+    --pill-fg: var(--c-ink);
+    --pill-hover-bg: var(--c-accent);
     --pill-hover-fg: #fff;
-    --pill-border: #fff;
+    --pill-border: var(--c-bg);
   }
   @media (prefers-reduced-motion: reduce) {
     .Pill::before {

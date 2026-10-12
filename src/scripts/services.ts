@@ -29,7 +29,7 @@ register((root, flags) => {
         },
       });
       tl.to(item, { color: '#fff', duration: 1 }, 0);
-      tl.to(q('.item__fill'), { backgroundColor: '#000', duration: 1 }, 0);
+      tl.to(q('.item__fill'), { backgroundColor: '#0b1330', duration: 1 }, 0);
       tl.to(q('.item__bg'), { opacity: 1, duration: 1, ease: 'none' }, 0);
       tl.fromTo(q('.item__accordion'), { gridTemplateRows: '0fr' }, { gridTemplateRows: '1fr', duration: 1, ease: 'none' }, 0);
       tl.to(q('.item__content'), { opacity: 1, duration: 0.6 }, 0.4);
