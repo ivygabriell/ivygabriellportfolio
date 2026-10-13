@@ -79,3 +79,40 @@ describe('mobile: Serviços', () => {
     expect(rule(css(), '.Card__media')).toMatch(/aspect-ratio:\s*365\s*\/\s*420/);
   });
 });
+
+describe('mobile: Contato e footer', () => {
+  it('o Contato continua centralizado no mobile (decisão P5)', () => {
+    const css = mobile('components/Outro.astro');
+    expect(css).not.toMatch(/text-align:\s*left/);
+    expect(css).not.toMatch(/justify-items:\s*start/);
+    expect(css).not.toMatch(/justify-content:\s*flex-start/);
+  });
+
+  it('o título do Contato tem entrelinha 1.1 e o texto 1.3', () => {
+    const css = mobile('components/Outro.astro');
+    expect(rule(css, 'h2')).toMatch(/line-height:\s*1\.1/);
+    expect(rule(css, 'p')).toMatch(/line-height:\s*1\.3/);
+  });
+
+  it('os botões do Contato têm 5.8rem de altura', () => {
+    expect(rule(mobile('components/Outro.astro'), '.actions')).toMatch(/--pill-h:\s*5\.8rem/);
+  });
+
+  it('os botões do Contato entram com fade-up, como o botão do Cuberto', () => {
+    expect(src('components/Outro.astro')).toMatch(/<div class="actions" data-reveal="fade-up">/);
+  });
+
+  it('os links do footer ficam em 2 colunas de 2rem, com 1rem de respiro vertical', () => {
+    const css = mobile('components/Footer.astro');
+    const links = rule(css, '.links');
+    expect(links).toMatch(/grid-template-columns:\s*1fr 1fr/);
+    expect(links).toMatch(/font-size:\s*2rem/);
+    expect(rule(css, '.links a')).toMatch(/padding:\s*1rem 0/);
+  });
+
+  it('as redes do footer se distribuem na largura e o © tem 1.4rem', () => {
+    const css = mobile('components/Footer.astro');
+    expect(rule(css, '.socials')).toMatch(/justify-content:\s*space-between/);
+    expect(rule(css, '.rights')).toMatch(/font-size:\s*1\.4rem/);
+  });
+});
