@@ -111,3 +111,15 @@ Seis vídeos da pasta `~/Documents/video-motions` (sem áudio, H.264) entram em 
 - **Desempenho:** o vídeo do Destaque só começa 3 s depois do `load` ou na primeira interação, e com o painel perto da tela; as capas têm 720px (cartões e 4:5) e 1280px (16:9), de 13 a 50 KB. Lighthouse mobile: desempenho 96, acessibilidade 100, 220 KiB no carregamento inicial.
 - **Movimento reduzido:** só as capas; nenhum vídeo é baixado nem tocado.
 
+## 10. Depoimentos "Trusted by our clients" (pedido posterior da usuária)
+
+Seção que reproduz a `SummarySection -fill` do Cuberto (id `clients`, título "Trusted by our clients"), entre o Sobre e os Serviços, com dados **fictícios** por enquanto. (Uma primeira versão confundiu essa seção com a de logos "Trusted by remarkable global brands"; foi corrigida.)
+
+- **Título (aprovado):** PT "Quem confia no meu trabalho", EN "Trusted by my clients"; centralizado, 8rem no desktop e 4,5rem no celular, revelação por palavras (`data-reveal="words"`).
+- **5 cartões** (como no Cuberto): aspas decorativas, texto entre aspas, linha divisória de 6rem a 20% e o logo do cliente (4rem de altura). Cores alternadas `--c-mint` e `--c-lavender` (o 5º usa o tom de índice par), borda de 4px na cor do fundo.
+- **Leque (≥ 768px):** cartões de 40rem sobrepostos e inclinados (−9°, 0°, 9°, −20°, 20°, com os mesmos deslocamentos do Cuberto) e, ao passar o mouse na área, todos se alinham em uma grade (transição de `transform` de 1s, `cubic-bezier(.25,1,.5,1)`). No celular os cartões ficam empilhados. Com movimento reduzido não há transição.
+- **Sem JavaScript novo:** só a revelação do título, que já existe; o leque é CSS.
+- **Dados:** `src/content/clients.ts` (`testimonials`) + textos em `clients.items`. Os logos de exemplo são gerados por `scripts/gen-client-logos.mjs` (marcas inventadas).
+- **Trava:** com `site.example: false`, os testes falham se houver depoimento com `example: true`.
+- Lighthouse mobile: desempenho 96–97, acessibilidade 100.
+

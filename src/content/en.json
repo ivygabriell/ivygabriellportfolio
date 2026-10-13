@@ -23,6 +23,17 @@
     "text": "I like software that solves real problems. That's why, before I code, I listen: what holds up your day, what could be automatic, what you imagine that doesn't exist yet. I work across every layer, and I explain everything in plain language. You follow each step and know exactly what is being built.",
     "socialLabel": "Social"
   },
+  "clients": {
+    "title": "Trusted by my clients",
+    "logoAlt": "{name} logo",
+    "items": [
+      "Ivy rebuilt our company website from scratch. The quality of the work exceeded my expectations and, since delivery, the new site has stood out and brings in more inquiries every month.",
+      "We worked with Ivy for several months on a complete internal system that included the database, the API and the screens. Several things stood out in our interaction, starting with how clear the communication was.",
+      "Ivy was hired to build our app and a few routine automations. The result was highly satisfactory, and we were impressed with the collaborative way of working.",
+      "I'd like to extend a heartfelt thank you for the exceptional support throughout development. The speed of the responses to our requests was invaluable, and we're thrilled with the end result.",
+      "We had a great experience on our system redesign project. Ivy brought a strong mix of creativity, technical skill and strategic thinking to the work."
+    ]
+  },
   "services": {
     "title": "Services",
     "items": [
