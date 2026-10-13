@@ -2,6 +2,7 @@
 import { copy } from '../lib/copy';
 import type { Locale } from '../lib/i18n';
 import { media } from '../content/media';
+import Divider from './Divider.astro';
 
 interface Props { locale: Locale }
 const t = copy[Astro.props.locale].services;
@@ -10,7 +11,7 @@ const t = copy[Astro.props.locale].services;
 <section class="Work -inverse" id="servicos">
   <div class="container--narrow head">
     <h2 data-reveal="words">{t.title}</h2>
-    <span class="Rule" data-reveal="border"></span>
+    <div class="rule"><Divider /></div>
   </div>
   <ul class="cards container--narrow">
     {t.items.map((item, i) => (
@@ -46,11 +47,8 @@ const t = copy[Astro.props.locale].services;
   .head {
     padding-bottom: 10rem;
   }
-  .Rule {
-    display: block;
-    height: 1px;
+  .rule {
     margin-top: 5rem;
-    background: var(--c-line-inverse);
   }
   h2 {
     font-size: var(--fs-h2);

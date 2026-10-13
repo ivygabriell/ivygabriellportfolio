@@ -31,31 +31,6 @@ async function load(file: string) {
   return mount;
 }
 
-describe('border-reveal', () => {
-  beforeEach(() => {
-    vi.resetModules();
-    create.mockClear();
-    set.mockClear();
-  });
-
-  const lines = [{ dataset: { reveal: 'border' } }, { dataset: { reveal: 'border' } }];
-  const root = { querySelectorAll: () => lines } as unknown as ParentNode;
-
-  it('sem animações não cria nada', async () => {
-    const mount = await load('../../src/scripts/border-reveal');
-    mount(root, off);
-    expect(create).not.toHaveBeenCalled();
-  });
-
-  it('cada linha começa com scaleX 0 e cresce uma vez ao entrar na tela', async () => {
-    const mount = await load('../../src/scripts/border-reveal');
-    mount(root, on);
-    for (const line of lines) expect(set).toHaveBeenCalledWith(line, { scaleX: 0, transformOrigin: 'left center' });
-    expect(create).toHaveBeenCalledTimes(2);
-    expect(create.mock.calls[0][0]).toMatchObject({ once: true });
-  });
-});
-
 describe('work-scrub', () => {
   beforeEach(() => {
     vi.resetModules();
