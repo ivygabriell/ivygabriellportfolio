@@ -1,0 +1,69 @@
+name: Tarefa
+description: Uma tarefa para uma sessão trabalhadora (veja docs/DESENVOLVIMENTO.md)
+title: "[tarefa] "
+labels: ["tarefa"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A sessão **integradora** abre esta tarefa; uma sessão **trabalhadora** a executa e **não** integra na `main`.
+        Regras completas em `docs/DESENVOLVIMENTO.md`.
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: O que precisa ficar pronto, em poucas frases, e por quê.
+    validations:
+      required: true
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Critérios de aceite
+      description: Como a integradora vai saber que está certo. Cite a referência (por exemplo, uma seção do Cuberto) quando houver.
+      placeholder: "- [ ] ...\n- [ ] ..."
+    validations:
+      required: true
+  - type: textarea
+    id: arquivos_permitidos
+    attributes:
+      label: Arquivos que a tarefa PODE tocar
+      placeholder: "src/components/Navbar.astro\nsrc/styles/..."
+    validations:
+      required: true
+  - type: textarea
+    id: arquivos_proibidos
+    attributes:
+      label: Arquivos que a tarefa NÃO pode tocar
+      description: Os que outra tarefa está mexendo ou que são congelados (scripts de movimento).
+      placeholder: "src/scripts/*\nsrc/components/Footer.astro"
+    validations:
+      required: true
+  - type: textarea
+    id: skills
+    attributes:
+      label: Skills obrigatórias
+      description: Valem para todas as sessões.
+      value: "superpowers:brainstorming (se for novo), superpowers:test-driven-development, superpowers:systematic-debugging (se houver bug), superpowers:verification-before-completion"
+    validations:
+      required: true
+  - type: textarea
+    id: testes_micro
+    attributes:
+      label: Testes micro esperados (TDD)
+      description: Os testes pequenos que devem ser escritos antes do código.
+    validations:
+      required: true
+  - type: textarea
+    id: testes_macro
+    attributes:
+      label: Testes macro esperados
+      description: Suíte completa, build, tipos, desempenho e as áreas da página que não podem regredir.
+      value: "npm test, npm run check, npm run test:build; sem regressão nas outras seções, em PT e EN, no desktop, no tablet e no celular, e com movimento reduzido."
+    validations:
+      required: true
+  - type: input
+    id: sessao
+    attributes:
+      label: Sessão e worktree
+      description: Preencha ao começar (branch, pasta e porta que o script mostrou).
+      placeholder: "fix/mobile-menu, ../portfolio-tarefas/fix-mobile-menu, porta 4330"

@@ -1,0 +1,2 @@
+# Toda tarefa entra pelo formulário "Tarefa"; não há issue em branco.
+blank_issues_enabled: false
