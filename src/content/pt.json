@@ -23,6 +23,17 @@
     "text": "Gosto de software que resolve problemas de verdade. Por isso, antes de programar, eu escuto: o que trava o seu dia, o que poderia ser automático, o que você imagina e ainda não existe. Trabalho em todas as camadas, e explico tudo em linguagem simples. Você acompanha cada passo e sabe exatamente o que está sendo construído.",
     "socialLabel": "Redes"
   },
+  "clients": {
+    "title": "Quem confia no meu trabalho",
+    "logoAlt": "Logo de {name}",
+    "items": [
+      "A Ivy refez o site da nossa empresa do zero. A qualidade do trabalho superou as minhas expectativas e, desde a entrega, o novo site ganhou destaque e passou a trazer mais contatos todos os meses.",
+      "Trabalhamos com a Ivy por vários meses em um sistema interno completo, que incluiu banco de dados, API e telas. Várias coisas se destacaram na nossa interação, a começar pela clareza da comunicação.",
+      "A Ivy foi contratada para desenvolver nosso aplicativo e algumas automações de rotina. O resultado foi muito satisfatório, e ficamos impressionados com o jeito colaborativo de trabalhar.",
+      "Quero agradecer de coração pelo suporte excepcional durante todo o desenvolvimento. A rapidez nas respostas aos nossos pedidos foi inestimável, e estamos muito felizes com o resultado final.",
+      "Tivemos uma ótima experiência no projeto de reformulação do nosso sistema. A Ivy trouxe uma mistura forte de criatividade, habilidade técnica e raciocínio estratégico para o trabalho."
+    ]
+  },
   "services": {
     "title": "Serviços",
     "items": [

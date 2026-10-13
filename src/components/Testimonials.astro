@@ -1,0 +1,164 @@
+---
+import { copy } from '../lib/copy';
+import { testimonials } from '../content/clients';
+import type { Locale } from '../lib/i18n';
+
+interface Props { locale: Locale }
+const t = copy[Astro.props.locale].clients;
+const alt = (name: string) => t.logoAlt.replace('{name}', name);
+---
+
+<section class="Testimonials" id="clientes" aria-labelledby="clientes-title">
+  <div class="fill"></div>
+  <div class="container--narrow content">
+    <h2 class="header" id="clientes-title" data-reveal="words">{t.title}</h2>
+    <ul class="testimonials">
+      {testimonials.map((c, i) => (
+        <li class="testimonial">
+          <div class="testimonial__quotes" aria-hidden="true"></div>
+          <blockquote class="testimonial__text">{t.items[i]}</blockquote>
+          <div class="testimonial__divider" aria-hidden="true"></div>
+          <img src={c.logo} alt={alt(c.name)} width="120" height="40" loading="lazy" decoding="async" />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Medidas da seção "Trusted by our clients" do Cuberto (SummarySection -fill + .testimonial). */
+  .Testimonials {
+    position: relative;
+    overflow-x: clip;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+  .fill {
+    position: absolute;
+    inset: 0;
+    background: var(--c-bg);
+  }
+  .content {
+    position: relative;
+  }
+  .header {
+    margin: 0 0 4rem;
+    font-size: 4.5rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+  .testimonials {
+    position: relative;
+    display: grid;
+    gap: 0.8rem;
+  }
+  .testimonial {
+    padding: 3rem;
+    overflow: hidden;
+    border-radius: 0.8rem;
+    background: var(--c-mint);
+  }
+  .testimonial:nth-child(2n) {
+    background: var(--c-lavender);
+  }
+  /* Aspas decorativas: ink a 10% (desenho próprio). */
+  .testimonial__quotes {
+    width: 4rem;
+    height: 2.4rem;
+    margin: 0 0 1.6rem;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 24' fill='%230b1330' fill-opacity='.1'><path d='M0 9.5A9.5 9.5 0 0 1 9.5 0 9.5 9.5 0 0 1 19 9.5C19 18 13.5 22.5 5 24l-.8-2.6C8.4 20 10.6 17.8 11 15.2A9.5 9.5 0 0 1 0 9.5z'/><path d='M21 9.5A9.5 9.5 0 0 1 30.5 0 9.5 9.5 0 0 1 40 9.5C40 18 34.5 22.5 26 24l-.8-2.6C29.4 20 31.6 17.8 32 15.2A9.5 9.5 0 0 1 21 9.5z'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .testimonial__text {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .testimonial__text::before {
+    content: '“';
+  }
+  .testimonial__text::after {
+    content: '”';
+  }
+  .testimonial__divider {
+    width: 6rem;
+    height: 1px;
+    margin: 2.4rem 0;
+    background: currentColor;
+    opacity: 0.2;
+  }
+  .testimonial img {
+    display: block;
+    width: auto;
+    max-width: 12rem;
+    height: 4rem;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  @media (min-width: 768px) {
+    .Testimonials {
+      padding-top: 6rem;
+      padding-bottom: 24rem;
+    }
+    .fill {
+      border-radius: var(--r-top);
+    }
+    .header {
+      margin: 0 0 12rem;
+      font-size: 8rem;
+    }
+    /* O leque: cartões de 40rem sobrepostos e inclinados; com o mouse na área, todos se alinham. */
+    .testimonials {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: start;
+      justify-content: center;
+      margin: 0 -10rem;
+    }
+    .testimonial {
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+      width: 40rem;
+      padding: 5rem;
+      border: 4px solid var(--c-bg);
+      transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .testimonial__quotes {
+      margin-bottom: 3.2rem;
+    }
+    .testimonial__text {
+      font-size: 1.8rem;
+    }
+    .testimonial:first-child {
+      transform: translateY(10rem) translate(28%) rotate(-9deg);
+    }
+    .testimonial:nth-child(2) {
+      z-index: 0;
+      transform: translateY(-2rem);
+    }
+    .testimonial:nth-child(3) {
+      transform: translateY(10rem) translate(-24%) rotate(9deg);
+    }
+    .testimonial:nth-child(4) {
+      transform: translateY(-14rem) translate(16%) rotate(-20deg);
+    }
+    .testimonial:nth-child(5) {
+      background: var(--c-lavender);
+      transform: translateY(-17rem) translate(3%) rotate(20deg);
+    }
+    .testimonials:hover .testimonial {
+      transform: translateY(0) translate(0) rotate(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial {
+      transition: none;
+    }
+  }
+</style>

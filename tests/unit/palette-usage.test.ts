@@ -7,6 +7,7 @@ const LEGACY = ['#4338ca', '#818cf8', '#312e81', '#c7d2fe', '#fde68a', '#fbcfe8'
 const SCANNED = [
   'components/Pill.astro',
   'components/Work.astro',
+  'components/Testimonials.astro',
   'components/Footer.astro',
   'components/Navbar.astro',
   'components/Highlight.astro',
