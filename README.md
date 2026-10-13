@@ -35,3 +35,18 @@ Versões usadas: Astro 7.3.8, GSAP 3.15.0, Lenis 1.3.26, TypeScript 6.0.3 (o `as
 - `prefers-reduced-motion` desliga animações, Lenis, cursor e a transição de página.
 - Cursor e Lenis só rodam com ponteiro fino e sem toque.
 - Sem JavaScript todo o conteúdo continua visível.
+
+## Fluxo de trabalho
+
+Toda mudança entra pela mesma porta, sem commits direto na `main`:
+
+1. Atualize a `main` e crie uma branch com o tipo no nome: `feat/...` (funcionalidade), `fix/...` (correção), `chore/...` (configuração e manutenção) ou `docs/...` (documentação).
+   `git switch main && git pull && git switch -c fix/menu-mobile`
+2. Trabalhe em commits pequenos, no padrão Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`), escrevendo o teste antes do código.
+3. Rode as três verificações: `npm test`, `npm run check` e `npm run test:build`.
+4. **Envie a branch ao GitHub antes de integrar na `main`:** `git push -u origin fix/menu-mobile`. O CI (`.github/workflows/ci.yml`) roda sozinho os mesmos testes, os tipos e o build, e mostra ✓ ou ✗ na branch.
+5. Abra um Pull Request para a `main`; o modelo em `.github/pull_request_template.md` traz o checklist.
+6. Com o CI verde e a revisão feita, integre na `main` (merge), envie a `main` e apague a branch.
+
+Nunca use `git push --force` na `main`. Reescrever histórico é um caso à parte, feito sozinho e com aviso.
+
