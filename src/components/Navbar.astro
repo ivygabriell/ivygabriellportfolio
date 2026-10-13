@@ -89,8 +89,10 @@ const links = [
     transform-origin: left;
     transition: transform 0.6s var(--ease-out);
   }
-  .nav:hover::after {
-    transform: scaleX(1);
+  @media (pointer: fine) {
+    .nav:hover::after {
+      transform: scaleX(1);
+    }
   }
   .lang {
     font-size: 2rem;

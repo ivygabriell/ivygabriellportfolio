@@ -15,7 +15,9 @@ describe('hover dos botões (Pill)', () => {
   });
 
   it('no estado final o preenchimento é reto (border-radius 0) e cobre o botão inteiro, sem "orelhas"', () => {
-    expect(rule('.Pill:hover::before,\n  .Pill:focus-visible::before')).toMatch(/border-radius:\s*0/);
+    // O hover fica dentro de @media (pointer: fine) (mobile-structure.test.ts); o foco por teclado vale sempre.
+    expect(rule('.Pill:hover::before')).toMatch(/border-radius:\s*0/);
+    expect(rule('.Pill:focus-visible::before')).toMatch(/border-radius:\s*0/);
     expect(rule('.Pill::before')).toMatch(/transition:[^;]*border-radius\s+0\.7s\s+var\(--ease-out\)/);
   });
 

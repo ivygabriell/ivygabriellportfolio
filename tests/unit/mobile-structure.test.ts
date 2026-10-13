@@ -116,3 +116,36 @@ describe('mobile: Contato e footer', () => {
     expect(rule(css, '.rights')).toMatch(/font-size:\s*1\.4rem/);
   });
 });
+
+describe('toque: hover só com mouse', () => {
+  // Fora de `@media (pointer: fine)` o hover "gruda" depois do toque (o Cuberto filtra todos os hovers assim).
+  const outsideFine = (text: string) => {
+    const head = '@media (pointer: fine)';
+    let rest = text;
+    for (let i = rest.indexOf(head); i !== -1; i = rest.indexOf(head)) {
+      const open = rest.indexOf('{', i);
+      let depth = 1;
+      let k = open + 1;
+      for (; depth > 0; k++) {
+        if (rest[k] === '{') depth++;
+        else if (rest[k] === '}') depth--;
+      }
+      rest = rest.slice(0, i) + rest.slice(k);
+    }
+    return rest;
+  };
+
+  it.each(['components/Pill.astro', 'components/Footer.astro', 'components/Navbar.astro'])(
+    '%s: todo :hover fica dentro de @media (pointer: fine)',
+    (file) => {
+      const text = src(file);
+      expect(text).toContain(':hover');
+      expect(outsideFine(text)).not.toContain(':hover');
+    },
+  );
+
+  it('o foco por teclado continua mostrando o preenchimento do botão fora do filtro de mouse', () => {
+    const outside = outsideFine(src('components/Pill.astro'));
+    expect(rule(outside, '.Pill:focus-visible::before')).toMatch(/transform:\s*translateY\(0\)/);
+  });
+});

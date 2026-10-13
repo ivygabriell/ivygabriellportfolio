@@ -91,9 +91,11 @@ const links = [
     background: rgb(255 255 255 / 0.12);
     transition: background-color 0.4s;
   }
-  .circle:hover {
-    background: var(--c-bg);
-    color: var(--c-ink);
+  @media (pointer: fine) {
+    .circle:hover {
+      background: var(--c-bg);
+      color: var(--c-ink);
+    }
   }
   @media (max-width: 767px) {
     .Footer {
