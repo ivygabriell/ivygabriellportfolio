@@ -62,3 +62,20 @@ describe('mobile: Hero, Destaque e Sobre', () => {
     expect(lead).toMatch(/line-height:\s*1\.3/);
   });
 });
+
+describe('mobile: Serviços', () => {
+  const css = () => mobile('components/Work.astro');
+
+  it('o título tem 4.5rem', () => {
+    expect(rule(css(), 'h2')).toMatch(/font-size:\s*4\.5rem/);
+  });
+
+  it('a linha do título some abaixo de 768px (decisão P2) e o 1º cartão fica a 4rem do título', () => {
+    expect(rule(css(), '.rule')).toMatch(/display:\s*none/);
+    expect(rule(css(), '.head')).toMatch(/padding-bottom:\s*4rem/);
+  });
+
+  it('a mídia do cartão usa a proporção 365/420', () => {
+    expect(rule(css(), '.Card__media')).toMatch(/aspect-ratio:\s*365\s*\/\s*420/);
+  });
+});

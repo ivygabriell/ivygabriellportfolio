@@ -98,7 +98,17 @@ const t = copy[Astro.props.locale].services;
       padding-block: 8rem calc(10rem + var(--r-top));
     }
     .head {
-      padding-bottom: 5rem;
+      padding-bottom: 4rem;
+    }
+    h2 {
+      font-size: 4.5rem;
+    }
+    /* Como no "Selected work" do Cuberto: sem linha entre o título e os cartões. */
+    .rule {
+      display: none;
+    }
+    .Card__media {
+      aspect-ratio: 365 / 420;
     }
     .cards {
       grid-template-columns: 1fr;
