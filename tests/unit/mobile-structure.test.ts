@@ -40,3 +40,25 @@ describe('mobile: margem lateral', () => {
     expect(root).toMatch(/--narrow:\s*1\.5rem/);
   });
 });
+
+describe('mobile: Hero, Destaque e Sobre', () => {
+  it('o Hero tem 12rem acima do título (a barra fixa ocupa 1rem + 4.8rem)', () => {
+    expect(rule(mobile('components/Hero.astro'), '.Hero')).toMatch(/padding-top:\s*12rem/);
+  });
+
+  it('o subtítulo do Hero tem entrelinha 1.3 e 3.2rem de espaço acima', () => {
+    const p = rule(mobile('components/Hero.astro'), 'p');
+    expect(p).toMatch(/line-height:\s*1\.3/);
+    expect(p).toMatch(/margin-top:\s*3\.2rem/);
+  });
+
+  it('o painel do Destaque usa a proporção 355/400', () => {
+    expect(rule(mobile('components/Panel.astro'), '.main')).toMatch(/aspect-ratio:\s*355\s*\/\s*400/);
+  });
+
+  it('o parágrafo do Sobre tem 2rem com entrelinha 1.3', () => {
+    const lead = rule(mobile('components/About.astro'), '.lead');
+    expect(lead).toMatch(/font-size:\s*2rem/);
+    expect(lead).toMatch(/line-height:\s*1\.3/);
+  });
+});
