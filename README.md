@@ -51,3 +51,7 @@ Toda mudança entra pela mesma porta, sem commits direto na `main`:
 
 Nunca use `git push --force` na `main`. Reescrever histórico é um caso à parte, feito sozinho e com aviso.
 
+## Desenvolvimento em sessões
+
+O projeto também é desenvolvido com várias sessões do Claude Code em paralelo: **uma integradora** (valida e é a única que integra na `main`) e **até duas trabalhadoras**, cada uma numa tarefa (issue), numa branch e numa worktree próprias (`scripts/nova-tarefa.sh`). As Skills do Superpowers e os testes (micro e macro) valem para todas as sessões, e a `main` só recebe PR com o CI verde. Papéis, ciclo, testes, regras de conflito e o prompt para iniciar uma sessão trabalhadora estão em [`docs/DESENVOLVIMENTO.md`](docs/DESENVOLVIMENTO.md).
+
