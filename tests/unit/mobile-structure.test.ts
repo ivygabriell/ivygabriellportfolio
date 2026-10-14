@@ -22,7 +22,12 @@ function media(text: string, query: string): string {
   }
   return parts.join('\n');
 }
-const mobile = (path: string) => media(src(path), MOBILE);
+const mobile = (path: string) => {
+  const css = media(src(path), MOBILE);
+  // Sem isto, um bloco @media renomeado faria os testes negativos passarem sem testar nada.
+  if (!css.trim()) throw new Error(`${path}: bloco ${MOBILE} não encontrado`);
+  return css;
+};
 
 // Declarações das regras cujo seletor é exatamente `selector` (todas as ocorrências, em ordem).
 function rule(css: string, selector: string): string {
@@ -127,7 +132,7 @@ describe('toque: hover só com mouse', () => {
       const open = rest.indexOf('{', i);
       let depth = 1;
       let k = open + 1;
-      for (; depth > 0; k++) {
+      for (; depth > 0 && k < rest.length; k++) {
         if (rest[k] === '{') depth++;
         else if (rest[k] === '}') depth--;
       }
@@ -174,7 +179,18 @@ describe('mobile: barra de vidro fixa', () => {
   });
 
   it('ao rolar a barra não some no mobile: o estado fixo não desloca o header', () => {
-    expect(rule(css(), '.Navbar:global(.-fixed)')).toMatch(/transform:\s*none/);
+    const fixed = rule(css(), '.Navbar:global(.-fixed)');
+    expect(fixed).toMatch(/transform:\s*none/);
+    expect(fixed).toMatch(/position:\s*absolute/);
+  });
+
+  it('o vidro também desfoca no Safari do iOS (prefixo -webkit-)', () => {
+    expect(rule(css(), '.bar::before')).toMatch(/-webkit-backdrop-filter:\s*blur\(8px\)/);
+    expect(rule(css(), '.Navbar:global(.-open) .bar::before')).toMatch(/-webkit-backdrop-filter:\s*blur\(15px\)/);
+  });
+
+  it('as âncoras param abaixo da barra fixa (1rem + 4.8rem + folga)', () => {
+    expect(rule(media(src('styles/global.css'), MOBILE), 'html')).toMatch(/scroll-padding-top:\s*7rem/);
   });
 
   it('ao rolar a barra encolhe para 6.2rem de cada lado em 0.8s, e volta à largura cheia com o menu aberto', () => {
@@ -212,7 +228,16 @@ describe('mobile: menu em gaveta dentro da barra', () => {
     expect(menu).toMatch(/grid-template-rows:\s*0fr/);
     expect(menu).toMatch(/opacity:\s*0/);
     expect(menu).toMatch(/visibility:\s*hidden/);
-    expect(menu).toMatch(/overflow:\s*hidden/);
+  });
+
+  it('ao fechar, a gaveta continua visível durante a animação (visibility só muda depois de 0.5s)', () => {
+    expect(rule(css(), '.menu')).toMatch(/transition:[^;]*visibility 0s 0\.5s/);
+    expect(rule(css(), '.Navbar:global(.-open) .menu')).toMatch(/transition-delay:\s*0s/);
+  });
+
+  it('o contorno de foco dos links não é cortado: só o invólucro corta, a gaveta não', () => {
+    // Revisão: com overflow: hidden no .menu o contorno de "Sobre", "Serviços" e "EN" perdia o lado esquerdo.
+    expect(rule(css(), '.menu')).not.toMatch(/overflow:\s*hidden/);
   });
 
   it('abre a altura em 0.5s cubic-bezier(.2,0,0,1) e a opacidade em 0.4s, como no Cuberto', () => {

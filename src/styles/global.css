@@ -8,6 +8,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Mobile: a barra é fixa (1rem + 4.8rem); as âncoras param logo abaixo dela. */
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 7rem;
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--font);

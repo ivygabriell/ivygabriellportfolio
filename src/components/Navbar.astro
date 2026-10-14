@@ -145,6 +145,7 @@ const links = [
       border: 1px solid var(--c-line);
       border-radius: 2.5rem;
       background: rgb(247 248 252 / 0.7);
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
       transition:
         border-radius 0.4s,
@@ -152,6 +153,7 @@ const links = [
     }
     .Navbar:global(.-open) .bar::before {
       border-radius: 1.6rem;
+      -webkit-backdrop-filter: blur(15px);
       backdrop-filter: blur(15px);
     }
     .Navbar:global(.-fixed:not(.-open)) .bar {
@@ -190,7 +192,6 @@ const links = [
       grid-column: 1 / -1;
       display: grid;
       grid-template-rows: 0fr;
-      overflow: hidden;
       opacity: 0;
       visibility: hidden;
       transition:
@@ -204,8 +205,8 @@ const links = [
       visibility: visible;
       transition-delay: 0s;
     }
-    /* Sem respiro vertical nem borda aqui: eles impediriam a linha 0fr de fechar a gaveta. O respiro lateral
-       (compensado pela margem) evita cortar o contorno de foco dos links. */
+    /* Só o invólucro corta o conteúdo (a gaveta não), e sem respiro vertical nem borda: eles impediriam a
+       linha 0fr de fechar. O respiro lateral (compensado pela margem) deixa o contorno de foco inteiro. */
     .menu__inner {
       display: flex;
       flex-direction: column;
