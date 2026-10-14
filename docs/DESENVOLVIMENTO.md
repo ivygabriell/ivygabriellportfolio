@@ -91,6 +91,8 @@ Se a validação revelar um problema de causa desconhecida, usa `superpowers:sys
 
 A `main` só recebe código por Pull Request com o check **"Testes, tipos e build"** verde. Não há push direto, force push nem exclusão da `main`. A proteção está ativa no GitHub (configurada junto com este documento). Para as tarefas, isso significa: sempre PR, sempre CI verde, e branch atualizada antes do merge.
 
+**Branches integradas ficam no GitHub.** Depois do merge a branch remota **não é apagada** (decisão da Ivy: o histórico das tarefas fica consultável). Integre com `gh pr merge N --merge`, sem `--delete-branch`. Só a worktree local é removida.
+
 ## 10. Consumo e limites
 
 - No máximo 1 integradora e 2 trabalhadoras ao mesmo tempo (conta Pro: paralelo esgota o limite mais rápido).
