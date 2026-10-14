@@ -91,9 +91,11 @@ const links = [
     background: rgb(255 255 255 / 0.12);
     transition: background-color 0.4s;
   }
-  .circle:hover {
-    background: var(--c-bg);
-    color: var(--c-ink);
+  @media (pointer: fine) {
+    .circle:hover {
+      background: var(--c-bg);
+      color: var(--c-ink);
+    }
   }
   @media (max-width: 767px) {
     .Footer {
@@ -113,6 +115,12 @@ const links = [
     .links {
       grid-column: 1;
       grid-row: auto;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      font-size: 2rem;
+    }
+    .links a {
+      padding: 1rem 0;
     }
     .rule {
       margin-top: 3rem;
@@ -122,6 +130,13 @@ const links = [
       align-items: flex-start;
       gap: 2.4rem;
       margin-top: 4rem;
+    }
+    .rights {
+      font-size: 1.4rem;
+    }
+    .socials {
+      align-self: stretch;
+      justify-content: space-between;
     }
   }
 </style>

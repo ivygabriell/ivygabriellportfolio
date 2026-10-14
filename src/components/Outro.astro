@@ -14,7 +14,7 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
   <div class="inner">
     <h2 data-reveal="words">{t.title}</h2>
     <p data-reveal="words">{t.text}</p>
-    <div class="actions">
+    <div class="actions" data-reveal="fade-up">
       <Pill
         variant="light"
         type="button"
@@ -64,15 +64,16 @@ const whatsapp = whatsappUrl(site.whatsapp, t.whatsappMessage);
     font-size: 2rem;
     border-bottom: 1px solid currentColor;
   }
+  /* Mobile: centralizado como no Cuberto, com entrelinhas mais abertas e botões de 5.8rem. */
   @media (max-width: 767px) {
-    .Outro {
-      text-align: left;
+    h2 {
+      line-height: 1.1;
     }
-    .inner {
-      justify-items: start;
+    p {
+      line-height: 1.3;
     }
     .actions {
-      justify-content: flex-start;
+      --pill-h: 5.8rem;
     }
   }
 </style>

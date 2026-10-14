@@ -49,14 +49,22 @@ const Tag = href ? 'a' : 'button';
       transform 0.7s var(--ease-out),
       border-radius 0.7s var(--ease-out);
   }
-  .Pill:hover,
   .Pill:focus-visible {
     color: var(--pill-hover-fg);
   }
-  .Pill:hover::before,
   .Pill:focus-visible::before {
     transform: translateY(0);
     border-radius: 0;
+  }
+  /* Só com mouse: no toque o hover ficaria preso depois do toque. */
+  @media (pointer: fine) {
+    .Pill:hover {
+      color: var(--pill-hover-fg);
+    }
+    .Pill:hover::before {
+      transform: translateY(0);
+      border-radius: 0;
+    }
   }
   .-outline {
     --pill-bg: transparent;

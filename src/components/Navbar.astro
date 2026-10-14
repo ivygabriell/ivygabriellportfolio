@@ -27,18 +27,20 @@ const links = [
       <span></span><span></span>
     </button>
     <nav id="menu" class="menu" aria-label={site.name}>
-      <ul class="navs">
-        {links.map((l) => <li><a class="nav" href={l.href}>{l.label}</a></li>)}
-      </ul>
-      <a
-        class="lang action"
-        href={switchHref}
-        data-lang-switch
-        data-base={switchHref}
-        hreflang={HTML_LANG[other]}
-        aria-label={`${other.toUpperCase()} — ${t.langAria}`}>{other.toUpperCase()}</a
-      >
-      <Pill class="action" href={`${base}#contato`}>{t.contact}</Pill>
+      <div class="menu__inner">
+        <ul class="navs">
+          {links.map((l) => <li><a class="nav" href={l.href}>{l.label}</a></li>)}
+        </ul>
+        <a
+          class="lang action"
+          href={switchHref}
+          data-lang-switch
+          data-base={switchHref}
+          hreflang={HTML_LANG[other]}
+          aria-label={`${other.toUpperCase()} — ${t.langAria}`}>{other.toUpperCase()}</a
+        >
+        <Pill class="action" href={`${base}#contato`}>{t.contact}</Pill>
+      </div>
     </nav>
   </div>
 </header>
@@ -70,6 +72,10 @@ const links = [
     align-items: center;
     gap: 3.6rem;
   }
+  /* No desktop o invólucro não existe para o layout; no mobile é ele que a gaveta abre. */
+  .menu__inner {
+    display: contents;
+  }
   .navs {
     display: flex;
     gap: 3.6rem;
@@ -89,8 +95,10 @@ const links = [
     transform-origin: left;
     transition: transform 0.6s var(--ease-out);
   }
-  .nav:hover::after {
-    transform: scaleX(1);
+  @media (pointer: fine) {
+    .nav:hover::after {
+      transform: scaleX(1);
+    }
   }
   .lang {
     font-size: 2rem;
@@ -112,23 +120,62 @@ const links = [
     transform: none;
   }
 
+  /* Mobile: pílula de vidro fixa (medidas do Cuberto, docs/mobile/AUDITORIA.md). Sempre visível; ao rolar
+     encolhe (navbar.ts põe .-fixed) e o menu abre como uma gaveta dentro dela. */
   @media (max-width: 767px) {
     .bar {
-      margin: 2rem;
-      padding: 0 2.4rem;
-      height: 6.4rem;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: 4.8rem auto;
+      align-items: center;
+      padding: 0 1.5rem;
+      transition:
+        left 0.8s var(--ease-out),
+        right 0.8s var(--ease-out);
+    }
+    .bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
       border: 1px solid var(--c-line);
-      border-radius: var(--r-pill);
-      background: var(--c-bg);
+      border-radius: 2.5rem;
+      background: rgb(247 248 252 / 0.7);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      transition:
+        border-radius 0.4s,
+        backdrop-filter 0.4s;
+    }
+    .Navbar:global(.-open) .bar::before {
+      border-radius: 1.6rem;
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+    }
+    .Navbar:global(.-fixed:not(.-open)) .bar {
+      left: 6.2rem;
+      right: 6.2rem;
     }
     .logo {
-      font-size: 3.2rem;
+      font-size: 2.6rem;
     }
     .toggle {
+      position: relative;
       display: grid;
-      gap: 0.8rem;
-      width: 4rem;
-      padding: 1rem 0.4rem;
+      align-content: center;
+      gap: calc(0.6rem - 2px);
+      width: 2.6rem;
+      height: 2.6rem;
+    }
+    /* Área de toque maior que o desenho. */
+    .toggle::before {
+      content: '';
+      position: absolute;
+      inset: -1rem;
     }
     .toggle span {
       height: 2px;
@@ -136,34 +183,67 @@ const links = [
       transition: transform 0.5s var(--ease-out);
     }
     .Navbar:global(.-open) .toggle span:first-child {
-      transform: translateY(0.5rem) rotate(45deg);
+      transform: translateY(0.3rem) rotate(45deg);
     }
     .Navbar:global(.-open) .toggle span:last-child {
-      transform: translateY(-0.5rem) rotate(-45deg);
+      transform: translateY(-0.3rem) rotate(-45deg);
     }
     .menu {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 3rem;
-      padding: 10rem 3rem 3rem;
-      background: var(--c-bg);
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        grid-template-rows 0.5s cubic-bezier(0.2, 0, 0, 1),
+        opacity 0.4s,
+        visibility 0s 0.5s;
     }
     .Navbar:global(.-open) .menu {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0s;
+    }
+    /* Só o invólucro corta o conteúdo (a gaveta não), e sem respiro vertical nem borda: eles impediriam a
+       linha 0fr de fechar. O respiro lateral (compensado pela margem) deixa o contorno de foco inteiro. */
+    .menu__inner {
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3rem;
+      min-height: 0;
+      overflow: hidden;
+      margin-inline: -0.6rem;
+      padding-inline: 0.6rem;
     }
     .navs {
+      align-self: stretch;
       flex-direction: column;
-      gap: 2rem;
-      font-size: 4.2rem;
+      gap: 1.2rem;
+      padding-top: 2.4rem;
+      border-top: 1px solid var(--c-line);
+      font-size: 3.6rem;
+      line-height: 1.15;
     }
+    .menu__inner > :last-child {
+      margin-bottom: 2.4rem;
+    }
+    /* A barra é fixa por conta própria: o header não desliza nem ganha fundo no estado fixo. */
     .Navbar:global(.-fixed) {
+      position: absolute;
+      transform: none;
+      transition: none;
       background: none;
       backdrop-filter: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bar,
+    .bar::before,
+    .menu,
+    .toggle span {
+      transition: none;
     }
   }
 
@@ -176,25 +256,34 @@ const links = [
       position: relative;
     }
     :global(html:not(.js)) .bar {
-      height: auto;
-      flex-wrap: wrap;
-      padding-block: 1.6rem;
-      border-radius: 3.2rem;
+      position: relative;
+      inset: auto;
+      margin: 1rem;
+      grid-template-rows: 4.8rem auto;
     }
     :global(html:not(.js)) .menu {
-      position: static;
-      z-index: auto;
-      display: flex;
+      grid-template-rows: 1fr;
+      opacity: 1;
+      visibility: visible;
+    }
+    :global(html:not(.js)) .menu__inner {
       flex-direction: row;
       flex-wrap: wrap;
-      width: 100%;
+      align-items: center;
       gap: 1.6rem 2.4rem;
-      padding: 1rem 0 0;
+      padding-block: 1.6rem;
+      border-top: 1px solid var(--c-line);
+    }
+    :global(html:not(.js)) .menu__inner > :last-child {
+      margin-bottom: 0;
     }
     :global(html:not(.js)) .navs {
+      align-self: auto;
       flex-direction: row;
       flex-wrap: wrap;
       gap: 1.6rem 2.4rem;
+      padding-top: 0;
+      border-top: 0;
       font-size: 2rem;
     }
   }
