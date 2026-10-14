@@ -29,7 +29,7 @@ Como o portfólio é desenvolvido com várias sessões do Claude Code ao mesmo t
 4. **Trabalhadora** traz a `main` para dentro da branch (`git fetch origin && git merge origin/main`), roda os testes macro (seção 4) e envia: `git push -u origin <branch>`. Abre o PR com o modelo, marcando "Closes #N", e avisa a integradora.
 5. **O CI** do GitHub roda sozinho na branch.
 6. **Integradora** valida (seção 8). Se achar problema, comenta no PR e a trabalhadora corrige na mesma branch.
-7. **Integradora** integra (merge), confere a `main` e o CI da `main`, e apaga a branch. A trabalhadora remove a worktree: `scripts/remover-tarefa.sh <tipo> <slug> --apagar-branch`.
+7. **Integradora** integra (merge), confere a `main` e o CI da `main`. **As branches integradas ficam no GitHub** (histórico consultável; decisão da Ivy): nunca apagar a branch remota. A trabalhadora remove a worktree: `scripts/remover-tarefa.sh <tipo> <slug>`. (A opção `--apagar-branch` só apaga a branch local; a do GitHub fica.)
 
 ## 4. Testes: micro e macro
 
@@ -90,6 +90,8 @@ Se a validação revelar um problema de causa desconhecida, usa `superpowers:sys
 ## 9. Proteção da main
 
 A `main` só recebe código por Pull Request com o check **"Testes, tipos e build"** verde. Não há push direto, force push nem exclusão da `main`. A proteção está ativa no GitHub (configurada junto com este documento). Para as tarefas, isso significa: sempre PR, sempre CI verde, e branch atualizada antes do merge.
+
+**Branches integradas ficam no GitHub.** Depois do merge a branch remota **não é apagada** (decisão da Ivy: o histórico das tarefas fica consultável). Integre com `gh pr merge N --merge`, sem `--delete-branch`. Só a worktree local é removida.
 
 ## 10. Consumo e limites
 
