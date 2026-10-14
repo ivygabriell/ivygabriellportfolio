@@ -8,10 +8,6 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-html.menu-open {
-  overflow: hidden;
-}
-
 body {
   margin: 0;
   font-family: var(--font);

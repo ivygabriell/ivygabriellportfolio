@@ -27,7 +27,8 @@ const mobile = (path: string) => media(src(path), MOBILE);
 // Declarações das regras cujo seletor é exatamente `selector` (todas as ocorrências, em ordem).
 function rule(css: string, selector: string): string {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\:]/g, '\\$&');
-  const re = new RegExp(`(?:^|[;{}\\s])${escaped}\\s*\\{([^{}]*)\\}`, 'g');
+  // O seletor começa a regra (logo depois de `{`, `}`, `;` ou de um comentário): `.menu` não casa com `html .menu`.
+  const re = new RegExp(`(?:^|[;{}/])\\s*${escaped}\\s*\\{([^{}]*)\\}`, 'g');
   const found = [...css.matchAll(re)].map((m) => m[1]);
   if (!found.length) throw new Error(`regra não encontrada: ${selector}`);
   return found.join('\n');
@@ -147,5 +148,120 @@ describe('toque: hover só com mouse', () => {
   it('o foco por teclado continua mostrando o preenchimento do botão fora do filtro de mouse', () => {
     const outside = outsideFine(src('components/Pill.astro'));
     expect(rule(outside, '.Pill:focus-visible::before')).toMatch(/transform:\s*translateY\(0\)/);
+  });
+});
+
+describe('mobile: barra de vidro fixa', () => {
+  const css = () => mobile('components/Navbar.astro');
+
+  it('a barra é fixa desde o topo, a 1rem do topo e dos lados, com uma linha de 4.8rem', () => {
+    const bar = rule(css(), '.bar');
+    expect(bar).toMatch(/position:\s*fixed/);
+    expect(bar).toMatch(/top:\s*1rem/);
+    expect(bar).toMatch(/left:\s*1rem/);
+    expect(bar).toMatch(/right:\s*1rem/);
+    expect(bar).toMatch(/grid-template-rows:\s*4\.8rem auto/);
+  });
+
+  it('o vidro (::before) é o fundo claro a 70%, com blur de 8px, borda de 1px e raio de 2.5rem', () => {
+    const glass = rule(css(), '.bar::before');
+    expect(glass).toMatch(/content:\s*''/);
+    expect(glass).toMatch(/position:\s*absolute/);
+    expect(glass).toMatch(/background:\s*rgb\(247 248 252 \/ 0\.7\)/);
+    expect(glass).toMatch(/backdrop-filter:\s*blur\(8px\)/);
+    expect(glass).toMatch(/border:\s*1px solid/);
+    expect(glass).toMatch(/border-radius:\s*2\.5rem/);
+  });
+
+  it('ao rolar a barra não some no mobile: o estado fixo não desloca o header', () => {
+    expect(rule(css(), '.Navbar:global(.-fixed)')).toMatch(/transform:\s*none/);
+  });
+
+  it('ao rolar a barra encolhe para 6.2rem de cada lado em 0.8s, e volta à largura cheia com o menu aberto', () => {
+    expect(rule(css(), '.Navbar:global(.-fixed:not(.-open)) .bar')).toMatch(/left:\s*6\.2rem;\s*right:\s*6\.2rem/);
+    expect(rule(css(), '.bar')).toMatch(/transition:[^;]*left 0\.8s var\(--ease-out\)[^;]*right 0\.8s var\(--ease-out\)/);
+  });
+
+  it('logo de 2.6rem e botão do menu de 2.6rem com traços a 0.6rem', () => {
+    expect(rule(css(), '.logo')).toMatch(/font-size:\s*2\.6rem/);
+    const toggle = rule(css(), '.toggle');
+    expect(toggle).toMatch(/width:\s*2\.6rem/);
+    expect(toggle).toMatch(/height:\s*2\.6rem/);
+    expect(toggle).toMatch(/gap:\s*calc\(0\.6rem - 2px\)/);
+    expect(rule(css(), '.Navbar:global(.-open) .toggle span:first-child')).toMatch(/translateY\(0\.3rem\) rotate\(45deg\)/);
+    expect(rule(css(), '.Navbar:global(.-open) .toggle span:last-child')).toMatch(/translateY\(-0\.3rem\) rotate\(-45deg\)/);
+  });
+});
+
+describe('mobile: menu em gaveta dentro da barra', () => {
+  const css = () => mobile('components/Navbar.astro');
+
+  it('o conteúdo do menu fica num invólucro (a gaveta anima a altura dele)', () => {
+    expect(src('components/Navbar.astro')).toMatch(/<nav id="menu" class="menu"[^>]*>\s*<div class="menu__inner">/);
+  });
+
+  it('não é mais tela cheia', () => {
+    const menu = rule(css(), '.menu');
+    expect(menu).not.toMatch(/position:\s*fixed/);
+    expect(menu).not.toMatch(/inset:\s*0/);
+    expect(menu).toMatch(/grid-column:\s*1\s*\/\s*-1/);
+  });
+
+  it('fechada: altura 0 (0fr), invisível e fora do Tab', () => {
+    const menu = rule(css(), '.menu');
+    expect(menu).toMatch(/grid-template-rows:\s*0fr/);
+    expect(menu).toMatch(/opacity:\s*0/);
+    expect(menu).toMatch(/visibility:\s*hidden/);
+    expect(menu).toMatch(/overflow:\s*hidden/);
+  });
+
+  it('abre a altura em 0.5s cubic-bezier(.2,0,0,1) e a opacidade em 0.4s, como no Cuberto', () => {
+    const menu = rule(css(), '.menu');
+    expect(menu).toMatch(/transition:[^;]*grid-template-rows 0\.5s cubic-bezier\(0\.2, 0, 0, 1\)/);
+    expect(menu).toMatch(/transition:[^;]*opacity 0\.4s/);
+  });
+
+  it('aberta: 1fr, visível, e o vidro fica com raio de 1.6rem', () => {
+    const open = rule(css(), '.Navbar:global(.-open) .menu');
+    expect(open).toMatch(/grid-template-rows:\s*1fr/);
+    expect(open).toMatch(/opacity:\s*1/);
+    expect(open).toMatch(/visibility:\s*visible/);
+    expect(rule(css(), '.Navbar:global(.-open) .bar::before')).toMatch(/border-radius:\s*1\.6rem/);
+  });
+
+  it('links a 3.6rem e uma linha de 1px no topo da gaveta (sem rótulo "Menu", decisão P3)', () => {
+    const navs = rule(css(), '.navs');
+    expect(navs).toMatch(/font-size:\s*3\.6rem/);
+    expect(navs).toMatch(/border-top:\s*1px solid var\(--c-line\)/);
+  });
+
+  it('fechada, a gaveta chega a 0 de altura: o invólucro não tem respiro vertical nem borda e corta o conteúdo', () => {
+    // Medido no navegador: com padding e borda no invólucro, a gaveta fechada ficava com 51px.
+    const inner = rule(css(), '.menu__inner');
+    expect(inner).toMatch(/min-height:\s*0/);
+    expect(inner).toMatch(/overflow:\s*hidden/);
+    expect(inner).not.toMatch(/padding(-block|-top|-bottom)?:\s*[1-9]/);
+    expect(inner).not.toMatch(/border/);
+  });
+
+  it('com movimento reduzido a barra, o vidro e a gaveta não têm transição', () => {
+    const reduced = media(src('components/Navbar.astro'), '(prefers-reduced-motion: reduce)');
+    const [selectors, body] = reduced.split('{');
+    expect(body).toMatch(/transition:\s*none/);
+    const list = selectors.split(',').map((x) => x.trim());
+    for (const selector of ['.bar', '.bar::before', '.menu', '.toggle span']) expect(list).toContain(selector);
+  });
+
+  it('sem JavaScript a gaveta fica aberta e navegável', () => {
+    const noJs = rule(css(), ':global(html:not(.js)) .menu');
+    expect(noJs).toMatch(/visibility:\s*visible/);
+    expect(noJs).toMatch(/opacity:\s*1/);
+    expect(rule(css(), ':global(html:not(.js)) .bar')).toMatch(/position:\s*relative/);
+    // O header também volta ao fluxo, senão a barra cobre o título do Hero.
+    expect(rule(css(), ':global(html:not(.js)) .Navbar')).toMatch(/position:\s*relative/);
+  });
+
+  it('a página não trava a rolagem com o menu aberto (decisão P4)', () => {
+    expect(src('styles/global.css')).not.toMatch(/\.menu-open\s*\{[^}]*overflow:\s*hidden/);
   });
 });
