@@ -165,3 +165,34 @@ Todas as regras ficam **dentro de `@media (max-width: 767px)`** (ou de `(pointer
 - [ ] Desktop (1440px) e tablet (820px) sem regressão: mesmas alturas de seção e capturas iguais às da `main`.
 - [ ] Lighthouse mobile em `/pt/` e `/en/`: desempenho ≥ 95 e acessibilidade ≥ 98.
 - [ ] `npm test`, `npm run check` e `npm run test:build` verdes.
+
+## 7. Resultado da Fase B
+
+Decisões aplicadas (comentário da integradora na issue #5): P1 cartões mantidos; P2 sem a linha do título dos Serviços no mobile; P3 gaveta sem rótulo; P4 sem trava de rolagem; P5 Contato centralizado. Todas as regras estão em `@media (max-width: 767px)` (hover em `@media (pointer: fine)`) e cada uma tem teste em `tests/unit/mobile-structure.test.ts`. `src/scripts/**` e o conteúdo não mudaram.
+
+Medido em 13/10/2026 no build de produção da branch, emulando iPhone (390×844, toque), com script fora do repositório (P6):
+
+| Item | Cuberto | Antes | Depois |
+|---|---|---|---|
+| Margem lateral / largura do conteúdo | 15,6px / 359px | 20,8px / 348px | 15,6px / 359px |
+| Barra (topo, esq., largura × altura) | 10, 10, 369×50, fixa | 21, 21, 348×67, some ao descer | 10, 10, 369×50, fixa |
+| Barra ao rolar | 261px, centralizada, visível | escondida | 261px, centralizada, visível |
+| Menu | gaveta, 0,5s | tela cheia, sem animação | gaveta, 0,5s; fechada: 0px e fora do Tab |
+| Título do Hero (topo) | 125px | 166px | 125px |
+| Subtítulo do Hero (topo, entrelinha) | 298px, 27px | 338px, 22,9px | 298px, 27px |
+| Painel do Destaque | 359×404 | 348×436 | 359×404 |
+| Parágrafo do Sobre | 20,8 / 27px | 25 / 27,5px | 20,8 / 27px |
+| Serviços: título → 1º cartão / mídia | 41,6px / 359×413 | 149px / 348×436 | 41,6px / 359×413 |
+| Contato / botão principal | centralizado / 60px | à esquerda / 41,6px | centralizado / 60px |
+| Footer: links | 2 colunas, 20,8px | 1 coluna, 25px | 2 colunas, 20,8px |
+
+Verificações:
+- Sem overflow horizontal em 360, 390 e 430px, em PT e EN, com o menu aberto e fechado (`scrollWidth = innerWidth`).
+- Desktop (1440px) e tablet (820px, com mouse e com toque), PT e EN: capturas de página inteira **idênticas pixel a pixel** às da `main` (movimento reduzido, para as capturas serem determinísticas).
+- Contraste do texto da barra (`--c-ink`) sobre o vidro: pior caso 8,8:1 sobre os Serviços e 10,9:1 sobre o footer (AA pede 4,5:1).
+- Movimento reduzido: 0 de 18 elementos `[data-reveal]` escondidos; barra e gaveta sem transição.
+- Sem JavaScript: a barra volta ao fluxo e a gaveta fica aberta, com os 4 links visíveis.
+- Lighthouse mobile: `/pt/` e `/en/` com desempenho 96 e acessibilidade 100 (a `main` também tem 96 e 100).
+- Âncoras: tocar em "Sobre" no menu para a seção abaixo da barra (`scroll-padding-top: 7rem`).
+
+Mudanças que valem fora do mobile, de propósito: o fade-up nos botões do Contato (pedido no critério; aparece também no desktop) e o hover só com `pointer: fine` (num iPad sem mouse o hover não "gruda"; com mouse continua igual).
